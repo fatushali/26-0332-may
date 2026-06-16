@@ -35,11 +35,12 @@ body{
   color:var(--text);
   font-family:'Barlow',sans-serif;
   line-height:1.7;
+  padding-top:80px; /* FIX: prevents navbar overlap */
 }
 
 /* TYPOGRAPHY */
 h1,h2,h3{
-  font-family:'Cormorant Garamond',serif;
+  font-family:'Cormorant+Garamond',serif;
   color:var(--text);
 }
 
@@ -171,13 +172,6 @@ section{
   padding:90px 0;
 }
 
-.section-label{
-  text-transform:uppercase;
-  letter-spacing:.3em;
-  color:var(--accent);
-  margin-bottom:20px;
-}
-
 /* GRID */
 .two-col{
   display:grid;
@@ -219,46 +213,12 @@ section{
   color:var(--text);
 }
 
-/* MODELS */
-.model-card{
-  position:relative;
-  overflow:hidden;
-}
-
-.model-card img{
-  width:100%;
-  transition:.5s;
-}
-
-.model-card:hover img{
-  transform:scale(1.05);
-}
-
-.model-card-overlay{
-  position:absolute;
-  inset:0;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  padding:25px;
-  background:linear-gradient(to top,rgba(0,0,0,.65),transparent);
-}
-
-.model-price{
-  color:#ffc7dc;
-  font-size:.8rem;
-}
-
-.model-name{
-  color:white;
-  font-size:1.6rem;
-}
-
 /* FOOTER */
 footer{
   background:var(--card);
   padding:60px 0 30px;
   border-top:1px solid #f3c8d8;
+  margin-top:100px;
 }
 
 .footer-bottom{
@@ -297,9 +257,9 @@ footer{
 <nav>
   <div class="nav-logo">LEX<span>U</span>S</div>
   <ul class="nav-links">
-    <li><a class="active" href="#">Home</a></li>
-    <li><a href="#">Gallery</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a class="active" href="index.html">Home</a></li>
+    <li><a href="lexus-gallery.html">Gallery</a></li>
+    <li><a href="lexus-contact.html">Contact</a></li>
   </ul>
 </nav>
 
@@ -309,15 +269,29 @@ footer{
 
   <div class="hero-content">
     <div class="hero-eyebrow">2026 Collection</div>
+
     <h1>Pursuit<br>of<br><span style="color:#d86c9a;">Perfection</span></h1>
-    <p class="hero-sub">Luxury reimagined in soft pink elegance.</p>
+
+    <p class="hero-sub">
+      Luxury reimagined in soft pink elegance.
+    </p>
 
     <div style="display:flex;gap:15px;">
-      <a class="btn-solid" href="#">Explore Models</a>
-      <a class="btn" href="#">View Gallery</a>
+      <a class="btn-solid" href="lexus-gallery.html">Explore Models</a>
+      <a class="btn" href="lexus-gallery.html">View Gallery</a>
     </div>
   </div>
 </div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2026 Lexus — All Rights Reserved.</p>
+      <p style="color:#d86c9a;">The Pursuit of Perfection</p>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
