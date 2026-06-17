@@ -3,25 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Lexus</title>
+<title>LEXUS | Contact</title>
 
 <style>
-body{
+*{
     margin:0;
-    font-family:Arial,sans-serif;
-    background:#fff5f8;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
 }
 
+body{
+    background:#0f0f10;
+    color:white;
+}
+
+/* NAV */
 nav{
-    background:#ffe9ef;
-    padding:20px 40px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    padding:20px 50px;
+    background:#1a1a1d;
 }
 
 .logo{
-    font-size:30px;
+    font-size:28px;
     font-weight:bold;
 }
 
@@ -30,31 +36,47 @@ nav{
 }
 
 .nav-links{
-    list-style:none;
     display:flex;
+    list-style:none;
     gap:20px;
 }
 
 .nav-links a{
+    color:white;
     text-decoration:none;
-    color:#333;
 }
 
-.container{
-    max-width:800px;
-    margin:100px auto;
-    padding:30px;
-    background:white;
-    border-radius:10px;
-    box-shadow:0 0 20px rgba(0,0,0,0.1);
+/* CONTACT */
+.contact{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    height:80vh;
 }
 
-h1{
-    color:#d86c9a;
+.left{
+    background:#d86c9a;
+    padding:60px;
+}
+
+.right{
+    padding:60px;
+}
+
+input,textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+}
+
+button{
+    padding:12px 25px;
+    background:#d86c9a;
+    color:white;
+    border:none;
 }
 </style>
-
 </head>
+
 <body>
 
 <nav>
@@ -62,32 +84,29 @@ h1{
 
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
 </nav>
 
-<div class="container">
-    <h1>Contact Lexus</h1>
+<div class="contact">
 
-    <p>Email: info@lexus.com</p>
-    <p>Phone: +1 (800) 255-3987</p>
-    <p>Address: Lexus Headquarters</p>
+    <div class="left">
+        <h1>Contact Us</h1>
+        <p>Email: info@lexus.com</p>
+        <p>Phone: +1 800 255 3987</p>
+    </div>
 
-    <form>
-        <input type="text" placeholder="Your Name" required
-               style="width:100%;padding:12px;margin:10px 0;">
+    <div class="right">
+        <form>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Message"></textarea>
+            <button>Send</button>
+        </form>
+    </div>
 
-        <input type="email" placeholder="Your Email" required
-               style="width:100%;padding:12px;margin:10px 0;">
-
-        <textarea placeholder="Your Message" rows="5"
-                  style="width:100%;padding:12px;margin:10px 0;"></textarea>
-
-        <button type="submit"
-                style="padding:12px 25px;background:#d86c9a;color:white;border:none;">
-            Send Message
-        </button>
-    </form>
 </div>
 
 </body>
