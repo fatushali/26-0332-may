@@ -4,7 +4,90 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LEXUS | Home</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f0f10;
+    color:white;
+}
+
+/* NAV */
+nav{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:#1a1a1d;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#d86c9a;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:20px;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    overflow:hidden;
+}
+
+.bg-video{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:-1;
+}
+
+.hero-content h1{
+    font-size:70px;
+}
+
+.hero-content p{
+    margin:20px 0;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#d86c9a;
+    color:white;
+    text-decoration:none;
+}
+</style>
 </head>
 
 <body>
@@ -23,7 +106,7 @@
 <section class="hero">
 
     <video autoplay muted loop class="bg-video">
-        <source src="https://cdn.coverr.co/videos/coverr-driving-a-luxury-car-9716/1080p.mp4" type="video/mp4">
+        <source src="https://cdn.coverr.co/videos/coverr-driving-a-luxury-car-9716/1080p.mp4">
     </video>
 
     <div class="overlay"></div>
@@ -31,7 +114,6 @@
     <div class="hero-content">
         <h1>Pursuit of Perfection</h1>
         <p>Luxury redesigned for the future</p>
-
         <a href="models.html" class="btn">Explore Models</a>
     </div>
 
