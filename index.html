@@ -3,295 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS — Home</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<title>LEXUS</title>
 
 <style>
-:root{
-  --bg:#fff5f8;
-  --card:#ffe9ef;
-  --soft:#ffd8e3;
-  --accent:#d86c9a;
-  --accent-light:#f3a8c8;
-  --text:#3f2d33;
-  --muted:#6d5860;
-  --white:#ffffff;
-}
-
-/* RESET */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Barlow',sans-serif;
-  line-height:1.7;
-  padding-top:80px; /* FIX: prevents navbar overlap */
+    margin:0;
+    font-family:Arial,sans-serif;
 }
 
-/* TYPOGRAPHY */
-h1,h2,h3{
-  font-family:'Cormorant+Garamond',serif;
-  color:var(--text);
-}
-
-p{
-  color:var(--muted);
-  max-width:70ch;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 40px;
-}
-
-/* NAV */
 nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  background:rgba(255,245,248,.95);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid #f3c8d8;
+    background:#ffe9ef;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.nav-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;
-  letter-spacing:.2em;
+.logo{
+    font-size:30px;
+    font-weight:bold;
 }
 
-.nav-logo span{
-  color:var(--accent);
+.logo span{
+    color:#d86c9a;
 }
 
 .nav-links{
-  display:flex;
-  list-style:none;
-  gap:30px;
+    list-style:none;
+    display:flex;
+    gap:20px;
 }
 
 .nav-links a{
-  font-family:'Barlow Condensed',sans-serif;
-  text-transform:uppercase;
-  font-size:.85rem;
-  color:var(--muted);
-  transition:.3s;
+    text-decoration:none;
+    color:#333;
 }
 
-.nav-links a:hover,
-.nav-links a.active{
-  color:var(--accent);
-}
-
-/* HERO */
 .hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  position:relative;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#fff5f8;
+    text-align:center;
 }
 
-.hero-bg{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,245,248,.92),
-      rgba(255,220,235,.55)
-    ),
-    url('https://images.unsplash.com/photo-1550355291-bbee04a92027?w=1600&q=80')
-    center/cover no-repeat;
-}
-
-.hero-content{
-  position:relative;
-  padding-left:70px;
-}
-
-.hero-eyebrow{
-  text-transform:uppercase;
-  letter-spacing:.3em;
-  color:var(--accent);
-  margin-bottom:20px;
-}
-
-.hero-sub{
-  color:var(--muted);
-  margin:20px 0 40px;
-  font-size:1.2rem;
-}
-
-/* BUTTONS */
-.btn{
-  display:inline-block;
-  padding:14px 36px;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  transition:.3s;
-}
-
-.btn:hover{
-  background:var(--accent);
-  color:var(--white);
-}
-
-.btn-solid{
-  background:var(--accent);
-  color:var(--white);
-}
-
-.btn-solid:hover{
-  background:var(--accent-light);
-}
-
-/* SECTION */
-section{
-  padding:90px 0;
-}
-
-/* GRID */
-.two-col{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:60px;
-  align-items:center;
-}
-
-/* STATS */
-.spec-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  background:var(--soft);
-  gap:1px;
-}
-
-.spec-item{
-  background:#fffafb;
-  padding:30px;
-  text-align:center;
-}
-
-.spec-number{
-  font-size:2.8rem;
-  color:var(--accent);
-}
-
-.spec-label{
-  color:var(--muted);
-  font-size:.8rem;
-}
-
-/* QUOTE */
-.highlight-para{
-  background:#fff0f5;
-  border:1px solid #f3c8d8;
-  padding:30px;
-  font-style:italic;
-  color:var(--text);
-}
-
-/* FOOTER */
-footer{
-  background:var(--card);
-  padding:60px 0 30px;
-  border-top:1px solid #f3c8d8;
-  margin-top:100px;
-}
-
-.footer-bottom{
-  margin-top:30px;
-  border-top:1px solid #f3c8d8;
-  padding-top:20px;
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .two-col{
-    grid-template-columns:1fr;
-  }
-
-  .spec-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .hero-content{
-    padding-left:20px;
-  }
-
-  .nav-links{
-    gap:15px;
-  }
+.hero h1{
+    font-size:60px;
 }
 </style>
-</head>
 
+</head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-logo">LEX<span>U</span>S</div>
-  <ul class="nav-links">
-    <li><a class="active" href="index.html">Home</a></li>
-    <li><a href="lexus-gallery.html">Gallery</a></li>
-    <li><a href="lexus-contact.html">Contact</a></li>
-  </ul>
+    <div class="logo">LEX<span>U</span>S</div>
+
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">2026 Collection</div>
-
-    <h1>Pursuit<br>of<br><span style="color:#d86c9a;">Perfection</span></h1>
-
-    <p class="hero-sub">
-      Luxury reimagined in soft pink elegance.
-    </p>
-
-    <div style="display:flex;gap:15px;">
-      <a class="btn-solid" href="lexus-gallery.html">Explore Models</a>
-      <a class="btn" href="lexus-gallery.html">View Gallery</a>
+    <div>
+        <h1>Pursuit of Perfection</h1>
+        <p>Luxury redesigned.</p>
     </div>
-  </div>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-bottom">
-      <p>© 2026 Lexus — All Rights Reserved.</p>
-      <p style="color:#d86c9a;">The Pursuit of Perfection</p>
-    </div>
-  </div>
-</footer>
 
 </body>
 </html>
