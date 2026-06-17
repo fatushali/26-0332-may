@@ -3,57 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS</title>
-
-<style>
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-}
-
-nav{
-    background:#ffe9ef;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-size:30px;
-    font-weight:bold;
-}
-
-.logo span{
-    color:#d86c9a;
-}
-
-.nav-links{
-    list-style:none;
-    display:flex;
-    gap:20px;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#333;
-}
-
-.hero{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:#fff5f8;
-    text-align:center;
-}
-
-.hero h1{
-    font-size:60px;
-}
-</style>
-
+<title>LEXUS | Home</title>
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <nav>
@@ -61,16 +14,28 @@ nav{
 
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
 </nav>
 
-<div class="hero">
-    <div>
+<section class="hero">
+
+    <video autoplay muted loop class="bg-video">
+        <source src="https://cdn.coverr.co/videos/coverr-driving-a-luxury-car-9716/1080p.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
         <h1>Pursuit of Perfection</h1>
-        <p>Luxury redesigned.</p>
+        <p>Luxury redesigned for the future</p>
+
+        <a href="models.html" class="btn">Explore Models</a>
     </div>
-</div>
+
+</section>
 
 </body>
 </html>
