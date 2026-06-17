@@ -1,32 +1,42 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Gallery</title>
+<title>LEXUS | Contact</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    background:#fff5f8;
+    background:#0f0f10;
+    color:white;
 }
 
-/* NAV */
+/* NAVBAR */
+
 nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:#1a1a1d;
     display:flex;
     justify-content:space-between;
+    align-items:center;
     padding:20px 50px;
-    background:white;
+    z-index:1000;
 }
 
 .logo{
-    font-size:28px;
+    font-size:30px;
     font-weight:bold;
 }
 
@@ -37,33 +47,110 @@ nav{
 .nav-links{
     display:flex;
     list-style:none;
-    gap:20px;
+    gap:25px;
 }
 
 .nav-links a{
+    color:white;
     text-decoration:none;
-    color:#333;
+    transition:0.3s;
 }
 
-/* TITLE */
-h1{
-    text-align:center;
-    padding:60px;
+.nav-links a:hover{
     color:#d86c9a;
 }
 
-/* GRID */
-.gallery{
+/* CONTACT SECTION */
+
+.contact{
+    min-height:100vh;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-    padding:40px;
+    grid-template-columns:1fr 1fr;
+    margin-top:80px;
 }
 
-.gallery img{
-    width:100%;
-    border-radius:10px;
+.left{
+    background:#d86c9a;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
 }
+
+.left h1{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.left p{
+    margin-bottom:10px;
+    font-size:18px;
+}
+
+.right{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:60px;
+}
+
+form{
+    width:100%;
+    max-width:500px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:15px;
+    margin-bottom:15px;
+    border:none;
+    border-radius:5px;
+    outline:none;
+    font-size:16px;
+}
+
+textarea{
+    height:150px;
+    resize:none;
+}
+
+button{
+    padding:14px 30px;
+    background:#d86c9a;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#c25584;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .contact{
+        grid-template-columns:1fr;
+    }
+
+    .left{
+        text-align:center;
+    }
+
+    .left h1{
+        font-size:36px;
+    }
+}
+
 </style>
 </head>
 
@@ -80,16 +167,26 @@ h1{
     </ul>
 </nav>
 
-<h1>Gallery</h1>
+<section class="contact">
 
-<div class="gallery">
+    <div class="left">
+        <h1>Contact Us</h1>
+        <p>Email: info@lexus.com</p>
+        <p>Phone: +1 800 255 3987</p>
+        <p>Luxury service tailored to your needs.</p>
+    </div>
 
-    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
-    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7">
-    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a">
-    <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d">
+    <div class="right">
+        <form action="#" method="post">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
 
-</div>
+</section>
 
 </body>
 </html>
+```
