@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,18 +21,12 @@ body{
 }
 
 /* NAVBAR */
-
 nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    background:#1a1a1d;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:20px 50px;
-    z-index:1000;
+    background:#1a1a1d;
 }
 
 .logo{
@@ -53,35 +47,30 @@ nav{
 .nav-links a{
     color:white;
     text-decoration:none;
-    transition:0.3s;
 }
 
 .nav-links a:hover{
     color:#d86c9a;
 }
 
-/* PAGE HEADER */
-
-.title{
+/* HEADER */
+.header{
     text-align:center;
-    padding-top:120px;
-    padding-bottom:40px;
+    padding:60px 20px;
 }
 
-.title h1{
+.header h1{
     font-size:50px;
     color:#d86c9a;
     margin-bottom:10px;
 }
 
-.title p{
+.header p{
     color:#ccc;
-    font-size:18px;
 }
 
-/* MODEL GRID */
-
-.grid{
+/* MODELS GRID */
+.models{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:25px;
@@ -92,14 +81,11 @@ nav{
     background:#1a1a1d;
     border-radius:15px;
     overflow:hidden;
-    text-decoration:none;
-    color:white;
-    transition:0.4s;
+    transition:0.3s;
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 0 25px rgba(216,108,154,0.4);
+    transform:translateY(-8px);
 }
 
 .card img{
@@ -113,17 +99,24 @@ nav{
 }
 
 .card h2{
-    margin-bottom:10px;
     color:#d86c9a;
+    margin-bottom:10px;
 }
 
 .card p{
     color:#ccc;
-    line-height:1.5;
+    line-height:1.6;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#1a1a1d;
+    color:#aaa;
 }
 
 /* MOBILE */
-
 @media(max-width:768px){
 
     nav{
@@ -131,18 +124,13 @@ nav{
         gap:15px;
     }
 
-    .title h1{
-        font-size:38px;
-    }
-
-    .grid{
-        padding:20px;
+    .header h1{
+        font-size:36px;
     }
 }
 
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -156,39 +144,85 @@ nav{
     </ul>
 </nav>
 
-<section class="title">
+<section class="header">
     <h1>Our Models</h1>
-    <p>Explore the Lexus range of luxury SUVs and performance vehicles.</p>
+    <p>Explore the Lexus range of luxury vehicles.</p>
 </section>
 
-<section class="grid">
+<section class="models">
 
-    <a class="card" href="rx.html">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Lexus RX">
+    <div class="card">
+        <img src="images/rx.jpg" alt="Lexus RX">
         <div class="card-content">
             <h2>Lexus RX</h2>
-            <p>Premium luxury SUV with advanced technology, comfort, and performance.</p>
+            <p>
+                A premium luxury SUV offering exceptional comfort,
+                advanced technology, and outstanding performance.
+            </p>
         </div>
-    </a>
+    </div>
 
-    <a class="card" href="nx.html">
-        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80" alt="Lexus NX">
+    <div class="card">
+        <img src="images/nx.jpg" alt="Lexus NX">
         <div class="card-content">
             <h2>Lexus NX</h2>
-            <p>Compact luxury crossover designed for modern lifestyles and efficiency.</p>
+            <p>
+                A stylish compact luxury crossover designed for
+                modern drivers who value efficiency and innovation.
+            </p>
         </div>
-    </a>
+    </div>
 
-    <a class="card" href="lx.html">
-        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80" alt="Lexus LX">
+    <div class="card">
+        <img src="images/lx.jpg" alt="Lexus LX">
         <div class="card-content">
             <h2>Lexus LX</h2>
-            <p>Flagship luxury SUV offering exceptional capability and refinement.</p>
+            <p>
+                Lexus' flagship SUV, combining luxury, power,
+                and off-road capability in one remarkable vehicle.
+            </p>
         </div>
-    </a>
+    </div>
+
+    <div class="card">
+        <img src="images/es.jpg" alt="Lexus ES">
+        <div class="card-content">
+            <h2>Lexus ES</h2>
+            <p>
+                A refined luxury sedan known for smooth performance,
+                comfort, and elegant design.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/is.jpg" alt="Lexus IS">
+        <div class="card-content">
+            <h2>Lexus IS</h2>
+            <p>
+                A sporty luxury sedan delivering dynamic handling
+                and an engaging driving experience.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="images/ux.jpg" alt="Lexus UX">
+        <div class="card-content">
+            <h2>Lexus UX</h2>
+            <p>
+                A compact urban crossover blending luxury,
+                efficiency, and modern styling.
+            </p>
+        </div>
+    </div>
 
 </section>
+
+<footer>
+    <p>&copy; 2026 Lexus. All Rights Reserved.</p>
+</footer>
 
 </body>
 </html>
-```
+
