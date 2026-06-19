@@ -21,7 +21,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* 🎥 MOVING LIGHT BACKGROUND */
+/* 🎥 BACKGROUND LIGHTS */
 body::before{
 content:"";
 position:fixed;
@@ -46,7 +46,7 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 40px;
-background:rgba(17,17,17,0.8);
+background:rgba(17,17,17,0.85);
 backdrop-filter:blur(10px);
 position:sticky;
 top:0;
@@ -72,24 +72,15 @@ color:white;
 text-decoration:none;
 }
 
-/* 🎞 HERO BANNER */
-.hero{
-height:300px;
-position:relative;
-overflow:hidden;
+/* HEADER */
+.header{
+text-align:center;
+padding:40px 20px;
 }
 
-.hero img{
-width:100%;
-height:300px;
-object-fit:cover;
-position:absolute;
-opacity:0;
-transition:1s;
-}
-
-.hero img.active{
-opacity:1;
+.header h1{
+font-size:42px;
+color:#d86c9a;
 }
 
 /* GALLERY */
@@ -100,23 +91,22 @@ gap:20px;
 padding:40px;
 }
 
+/* 🚗 3D CARD */
 .card{
 background:#1a1a1d;
 border-radius:15px;
 overflow:hidden;
 cursor:pointer;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-box-shadow:0 10px 25px rgba(216,108,154,0.3);
+transition:0.2s;
+transform-style:preserve-3d;
+position:relative;
 }
 
 .card img{
 width:100%;
 height:180px;
 object-fit:cover;
+pointer-events:none;
 }
 
 .card h3{
@@ -129,17 +119,7 @@ color:#aaa;
 padding:0 10px 10px;
 }
 
-.btn{
-background:#d86c9a;
-border:none;
-color:white;
-padding:8px;
-margin:10px;
-cursor:pointer;
-border-radius:5px;
-}
-
-/* FULL SCREEN VIEWER */
+/* FULLSCREEN VIEW */
 .viewer{
 position:fixed;
 top:0;
@@ -161,8 +141,8 @@ border-radius:10px;
 }
 
 .viewer h2{
-margin-top:10px;
 color:#d86c9a;
+margin-top:10px;
 }
 
 .viewer button{
@@ -174,13 +154,9 @@ color:white;
 cursor:pointer;
 }
 
-/* FOOTER */
-footer{
-text-align:center;
-padding:20px;
-background:#111;
-color:#aaa;
-margin-top:20px;
+/* NAV HOVER */
+.nav-links a:hover{
+color:#d86c9a;
 }
 
 </style>
@@ -191,19 +167,17 @@ margin-top:20px;
 <!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
+
 <ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="models.html">Models</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="3d.html">3D Showroom</a></li>
+<li><a href="#">Home</a></li>
+<li><a href="#">Models</a></li>
+<li><a href="#">Gallery</a></li>
 </ul>
 </nav>
 
-<!-- 🎞 HERO SLIDER -->
-<div class="hero">
-<img src="image/pink-Ic500.jpg" class="active">
-<img src="image/black-Ic500.jpg">
-<img src="image/gx-red-f.jpg">
+<!-- HEADER -->
+<div class="header">
+<h1>Lexus 3D Gallery</h1>
 </div>
 
 <!-- GALLERY -->
@@ -212,63 +186,80 @@ margin-top:20px;
 <div class="card" onclick="openViewer(this)">
 <img src="image/pink-Ic500.jpg">
 <h3>LC500</h3>
-<p>Luxury coupe</p>
-<button class="btn">View / Buy</button>
+<p>Luxury Coupe</p>
 </div>
 
 <div class="card" onclick="openViewer(this)">
 <img src="image/black-Ic500.jpg">
 <h3>Black Edition</h3>
-<p>Premium performance</p>
-<button class="btn">View / Buy</button>
+<p>Performance Build</p>
 </div>
 
 <div class="card" onclick="openViewer(this)">
 <img src="image/gx-red-f.jpg">
 <h3>Lexus GX</h3>
 <p>Luxury SUV</p>
-<button class="btn">View / Buy</button>
+</div>
+
+<div class="card" onclick="openViewer(this)">
+<img src="image/red-rc-f.jpg">
+<h3>RC F</h3>
+<p>Sports Coupe</p>
 </div>
 
 </section>
 
-<!-- FULL VIEWER -->
+<!-- VIEWER -->
 <div class="viewer" id="viewer">
 <img id="viewerImg">
 <h2 id="viewerTitle"></h2>
-<button onclick="buy()">Buy</button>
 <button onclick="closeViewer()">Close</button>
 </div>
 
 <script>
 
-/* HERO SLIDER */
-let heroImages = document.querySelectorAll(".hero img");
-let index = 0;
+/* =========================
+   🖱 3D HOVER EFFECT
+========================= */
+const cards = document.querySelectorAll(".card");
 
-setInterval(()=>{
-heroImages[index].classList.remove("active");
-index = (index + 1) % heroImages.length;
-heroImages[index].classList.add("active");
-},3000);
+cards.forEach(card => {
 
-/* FULL VIEWER */
+card.addEventListener("mousemove", (e) => {
+
+let rect = card.getBoundingClientRect();
+
+let x = e.clientX - rect.left;
+let y = e.clientY - rect.top;
+
+let centerX = rect.width / 2;
+let centerY = rect.height / 2;
+
+let rotateX = (y - centerY) / 15;
+let rotateY = (x - centerX) / 15;
+
+card.style.transform = `
+perspective(1000px)
+rotateX(${-rotateX}deg)
+rotateY(${rotateY}deg)
+scale(1.05)
+`;
+});
+
+card.addEventListener("mouseleave", () => {
+card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+});
+
+
+
 function openViewer(card){
-let img = card.querySelector("img").src;
-let title = card.querySelector("h3").innerText;
-
-document.getElementById("viewerImg").src = img;
-document.getElementById("viewerTitle").innerText = title;
-
 document.getElementById("viewer").style.display="flex";
+document.getElementById("viewerImg").src = card.querySelector("img").src;
+document.getElementById("viewerTitle").innerText = card.querySelector("h3").innerText;
 }
 
 function closeViewer(){
 document.getElementById("viewer").style.display="none";
-}
-
-function buy(){
-alert("Purchase Successful (Demo Mode)");
 }
 
 </script>
