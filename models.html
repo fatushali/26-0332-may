@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lexus 3D Showroom</title>
+<title>Lexus Models - 3D Showroom</title>
 
 <style>
 
@@ -15,21 +15,28 @@ color:white;
 overflow:hidden;
 }
 
-/* NAV */
+/* NAVBAR */
 nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:60px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 30px;
-background:#111;
+padding:0 20px;
+background:rgba(10,10,12,0.9);
+backdrop-filter:blur(10px);
 border-bottom:2px solid #d86c9a;
-position:fixed;
-width:100%;
-top:0;
 z-index:10;
 }
 
-.logo{font-size:24px;font-weight:bold;}
+.logo{
+font-size:20px;
+font-weight:bold;
+}
+
 .logo span{color:#d86c9a;}
 
 .nav a{
@@ -39,47 +46,61 @@ text-decoration:none;
 }
 
 /* LAYOUT */
-.container{
-display:flex;
+#scene{
+width:100%;
 height:100vh;
-padding-top:60px;
 }
 
 /* LEFT PANEL */
 .panel{
-width:30%;
-background:#151518;
-padding:20px;
-overflow:auto;
+position:fixed;
+top:80px;
+left:20px;
+width:220px;
+background:rgba(20,20,22,0.85);
+padding:15px;
+border-radius:12px;
+backdrop-filter:blur(10px);
 }
 
 .car{
 background:#1a1a1d;
-margin-bottom:15px;
 padding:10px;
-border-radius:10px;
+margin:8px 0;
+border-radius:8px;
 cursor:pointer;
+text-align:center;
+transition:0.3s;
 }
 
 .car:hover{
 background:#d86c9a;
 }
 
-/* RIGHT VIEW */
-#viewer{
-width:70%;
+/* BUY BUTTON */
+.buy{
+position:fixed;
+bottom:20px;
+right:20px;
+padding:12px 18px;
+background:#d86c9a;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
 }
 
 /* MODAL */
 .modal{
 position:fixed;
-top:0;left:0;
-width:100%;height:100%;
-background:rgba(0,0,0,0.8);
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
 display:none;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 }
 
 .modal-box{
@@ -90,10 +111,10 @@ text-align:center;
 }
 
 button{
-padding:10px 15px;
 margin-top:10px;
-background:#d86c9a;
+padding:10px;
 border:none;
+background:#d86c9a;
 color:white;
 cursor:pointer;
 }
@@ -103,98 +124,133 @@ cursor:pointer;
 
 <body>
 
+<!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
 <div class="nav">
-<a href="#">Home</a>
-<a href="#">Models</a>
-<a href="#">Contact</a>
+<a href="index.html">Home</a>
+<a href="gallery.html">Gallery</a>
+<a href="models.html">Models</a>
 </div>
 </nav>
 
-<div class="container">
-
+<!-- LEFT PANEL -->
 <div class="panel">
-<div class="car" onclick="selectCar('LC500')">LC500</div>
-<div class="car" onclick="selectCar('GX')">GX SUV</div>
-<div class="car" onclick="selectCar('RCF')">RC F</div>
+<div class="car" onclick="loadCar('LC500')">LC500</div>
+<div class="car" onclick="loadCar('GX')">GX SUV</div>
+<div class="car" onclick="loadCar('RCF')">RC F</div>
 </div>
 
-<div id="viewer"></div>
+<!-- 3D SCENE -->
+<div id="scene"></div>
 
-</div>
+<!-- BUY BUTTON -->
+<button class="buy" onclick="openBuy()">Buy / Details</button>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-box">
-<h2 id="carName"></h2>
+<h2 id="carName">Car</h2>
 <p>Price: KSh 12,000,000</p>
-<button onclick="buy()">Buy Now</button>
+<button onclick="buy()">Checkout</button>
 <button onclick="closeModal()">Close</button>
 </div>
 </div>
 
-<audio id="sound" src="https://www.soundjay.com/mechanical/sounds/car-engine-1.mp3"></audio>
-
+<!-- THREE.JS -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/loaders/GLTFLoader.js"></script>
 
 <script>
 
+/* =====================
+   SCENE SETUP
+===================== */
 let scene = new THREE.Scene();
 scene.background = new THREE.Color("#0b0b0d");
 
-let camera = new THREE.PerspectiveCamera(75, (window.innerWidth*0.7)/window.innerHeight, 0.1, 1000);
+let camera = new THREE.PerspectiveCamera(
+60,
+window.innerWidth/window.innerHeight,
+0.1,
+1000
+);
 
-let renderer = new THREE.WebGLRenderer({ antialias:true });
-renderer.setSize(window.innerWidth*0.7, window.innerHeight);
-document.getElementById("viewer").appendChild(renderer.domElement);
+camera.position.set(0,2,6);
 
-let light = new THREE.AmbientLight(0xffffff, 1);
-scene.add(light);
+let renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.getElementById("scene").appendChild(renderer.domElement);
 
-let car = new THREE.Mesh(
+/* CONTROLS */
+let controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+/* LIGHTS */
+let light1 = new THREE.DirectionalLight(0xffffff, 2);
+light1.position.set(5,5,5);
+scene.add(light1);
+
+let light2 = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(light2);
+
+/* FLOOR */
+let floor = new THREE.Mesh(
+new THREE.PlaneGeometry(20,20),
+new THREE.MeshStandardMaterial({color:0x111111, metalness:0.5, roughness:0.2})
+);
+
+floor.rotation.x = -Math.PI/2;
+floor.position.y = -1;
+scene.add(floor);
+
+/* CAR */
+let car;
+let loader = new THREE.GLTFLoader();
+
+/* LOAD CAR */
+function loadCar(name){
+
+if(car) scene.remove(car);
+
+/* 🔥 TRY LOAD GLB MODEL */
+loader.load(
+"car.glb",
+function(gltf){
+car = gltf.scene;
+car.scale.set(1.5,1.5,1.5);
+scene.add(car);
+},
+undefined,
+function(){
+
+/* FALLBACK CAR */
+car = new THREE.Mesh(
 new THREE.BoxGeometry(2,1,4),
 new THREE.MeshStandardMaterial({color:0xd86c9a})
 );
 
 scene.add(car);
-
-camera.position.z = 6;
-
-/* FIXED ROTATION */
-let isDragging = false;
-let prevX = 0;
-
-renderer.domElement.addEventListener("mousedown",(e)=>{
-isDragging = true;
-prevX = e.clientX;
 });
 
-renderer.domElement.addEventListener("mouseup",()=>{
-isDragging = false;
-});
+document.getElementById("carName").innerText = name;
+}
 
-renderer.domElement.addEventListener("mousemove",(e)=>{
-if(!isDragging) return;
+/* FIRST LOAD */
+loadCar("LC500");
 
-let delta = e.clientX - prevX;
-prevX = e.clientX;
-
-car.rotation.y += delta * 0.01;
-});
-
-/* AUTO ROTATE */
+/* ANIMATION */
 function animate(){
 requestAnimationFrame(animate);
-if(!isDragging) car.rotation.y += 0.005;
+controls.update();
 renderer.render(scene,camera);
 }
 animate();
 
-/* UI */
-function selectCar(name){
-document.getElementById("carName").innerText = name;
+/* BUY SYSTEM */
+function openBuy(){
 document.getElementById("modal").style.display="flex";
-document.getElementById("sound").play();
 }
 
 function closeModal(){
@@ -202,7 +258,7 @@ document.getElementById("modal").style.display="none";
 }
 
 function buy(){
-alert("Purchase Successful (Demo Mode)");
+alert("Checkout Successful (Demo Mode)");
 }
 
 </script>
