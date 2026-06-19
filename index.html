@@ -15,39 +15,18 @@ box-sizing:border-box;
 font-family:Arial, sans-serif;
 }
 
-/* 🌸 FEMININE BACKGROUND */
+/* 🌸 LUXURY FEMININE BACKGROUND */
 body{
 background:
-linear-gradient(135deg, #ffe6f0, #fff7fb, #ffeef6),
+linear-gradient(135deg, #fffafc, #ffffff, #ffe9f2),
 url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80");
 
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
 
-color:#333;
-overflow:hidden;
-}
-
-/* ✨ SOFT FLOATING GLOW */
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 20% 20%, #ff7eb3aa, transparent 45%),
-radial-gradient(circle at 80% 30%, #ffd6e8aa, transparent 50%),
-radial-gradient(circle at 40% 80%, #ffb6d5aa, transparent 55%);
-animation:floatGlow 10s infinite alternate;
-z-index:-1;
-}
-
-@keyframes floatGlow{
-from{transform:scale(1);}
-to{transform:scale(1.1);}
+color:#2b2b2b;
+overflow-x:hidden;
 }
 
 /* NAV */
@@ -56,15 +35,21 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 50px;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(12px);
-border-bottom:2px solid #ff7eb3;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(14px);
+border-bottom:1px solid rgba(255,105,180,0.25);
 position:relative;
 z-index:5;
 }
 
-.logo{font-size:30px;font-weight:bold;}
-.logo span{color:#ff4f9a;}
+.logo{
+font-size:30px;
+font-weight:bold;
+}
+
+.logo span{
+color:#ff3f8e;
+}
 
 .nav-links{
 display:flex;
@@ -75,19 +60,18 @@ gap:25px;
 .nav-links a{
 color:#444;
 text-decoration:none;
-font-weight:bold;
-transition:0.3s;
+font-weight:600;
 }
 
 .nav-links a:hover{
-color:#ff4f9a;
+color:#ff3f8e;
 }
 
 /* HERO */
 .hero{
 height:90vh;
 background:
-linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.6)),
+linear-gradient(rgba(255,255,255,0.55),rgba(255,255,255,0.75)),
 url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80");
 
 background-size:cover;
@@ -96,13 +80,12 @@ display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
+padding:20px;
 }
 
-/* HERO CONTENT */
 .hero-content h1{
 font-size:70px;
-color:#ff4f9a;
-text-shadow:0 5px 20px rgba(255,105,180,0.2);
+color:#ff3f8e;
 }
 
 .hero-content p{
@@ -111,110 +94,73 @@ margin-top:10px;
 color:#555;
 }
 
-/* BUTTON */
 .btn{
 display:inline-block;
 margin-top:20px;
 padding:14px 35px;
-background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
+background:linear-gradient(90deg,#ff5fa2,#ff3f8e);
 color:white;
 text-decoration:none;
-border-radius:30px;
-box-shadow:0 10px 25px rgba(255,105,180,0.3);
+border-radius:40px;
+}
+
+/* 🚗 CAR DESCRIPTION SECTION */
+.cars{
+padding:70px 30px;
+background:rgba(255,255,255,0.85);
+backdrop-filter:blur(12px);
+text-align:center;
+}
+
+.cars h2{
+font-size:40px;
+color:#ff3f8e;
+margin-bottom:30px;
+}
+
+.car-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.car-card{
+background:white;
+border-radius:15px;
+padding:25px;
+box-shadow:0 10px 25px rgba(255,105,180,0.15);
 transition:0.3s;
 }
 
-.btn:hover{
+.car-card:hover{
 transform:scale(1.05);
-box-shadow:0 15px 35px rgba(255,105,180,0.5);
+box-shadow:0 15px 35px rgba(255,105,180,0.25);
+}
+
+.car-card h3{
+color:#ff3f8e;
+margin-bottom:10px;
+}
+
+.car-card p{
+color:#555;
+font-size:14px;
+line-height:1.5;
 }
 
 /* ABOUT */
 .about{
 padding:80px 50px;
-background:rgba(255,255,255,0.7);
-backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.8);
 text-align:center;
 }
 
 .about h2{
-color:#ff4f9a;
+color:#ff3f8e;
 }
 
 .about p{
-color:#666;
-}
-
-/* INTRO */
-#intro{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(255,240,245,0.95);
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:9999;
-overflow:hidden;
-}
-
-/* SOFT PINK PULSE */
-#intro::before{
-content:"";
-position:absolute;
-width:200%;
-height:200%;
-background:
-radial-gradient(circle,#ff7eb355,transparent 50%),
-radial-gradient(circle,#ffd6e855,transparent 60%);
-animation:pulse 2.5s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(0.9);}
-50%{transform:scale(1.2);}
-100%{transform:scale(0.9);}
-}
-
-/* TEXT */
-.intro-text{
-z-index:2;
-text-align:center;
-animation:fadeIn 1s ease-in-out;
-}
-
-.intro-text h1{
-font-size:48px;
-color:#ff4f9a;
-letter-spacing:4px;
-}
-
-.intro-text h2{
-font-size:24px;
-margin-top:10px;
-color:#444;
-}
-
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
-}
-
-/* EXIT */
-#intro{
-animation:exit 3.5s forwards;
-}
-
-@keyframes exit{
-0%{opacity:1;}
-80%{opacity:1;}
-100%{
-opacity:0;
-visibility:hidden;
-}
+color:#555;
 }
 
 /* MOBILE */
@@ -227,38 +173,61 @@ visibility:hidden;
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">
-    <div class="intro-text">
-        <h1>LET THE GAME BEGIN</h1>
-        <h2>QUE COMIENCE EL JUEGO</h2>
-    </div>
-</div>
-
 <!-- NAV -->
 <nav>
-    <div class="logo">LEX<span>U</span>S</div>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="models.html">Models</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+<div class="logo">LEX<span>U</span>S</div>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="models.html">Models</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-content">
-        <h1>Pursuit of Perfection</h1>
-        <p>Luxury reimagined with elegance and softness.</p>
-        <a href="models.html" class="btn">Explore Models</a>
-    </div>
+<div class="hero-content">
+<h1>Pursuit of Perfection</h1>
+<p>Luxury reimagined with elegance and feminine energy.</p>
+<a href="models.html" class="btn">Explore Models</a>
+</div>
+</section>
+
+<!-- 🚗 CAR DESCRIPTIONS -->
+<section class="cars">
+
+<h2>Our Lexus Collection</h2>
+
+<div class="car-grid">
+
+<div class="car-card">
+<h3>LC 500</h3>
+<p>A bold luxury coupe with a powerful V8 engine, sculpted design, and smooth high-performance driving experience.</p>
+</div>
+
+<div class="car-card">
+<h3>GX SUV</h3>
+<p>A refined off-road luxury SUV that blends strength, comfort, and premium interior craftsmanship.</p>
+</div>
+
+<div class="car-card">
+<h3>RC F</h3>
+<p>A performance-focused sports coupe built for speed, precision handling, and thrilling driving energy.</p>
+</div>
+
+<div class="car-card">
+<h3>LX 570</h3>
+<p>The flagship luxury SUV offering ultimate comfort, space, advanced tech, and executive-level elegance.</p>
+</div>
+
+</div>
+
 </section>
 
 <!-- ABOUT -->
 <section class="about">
-    <h2>About Lexus</h2>
-    <p>Where performance meets elegance and modern feminine luxury.</p>
+<h2>About Lexus</h2>
+<p>Where performance meets elegance, innovation, and modern feminine luxury design.</p>
 </section>
 
 </body>
