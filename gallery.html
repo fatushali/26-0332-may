@@ -3,160 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lexus Premium Gallery</title>
+<title>Lexus Image 3D Showroom</title>
 
 <style>
 
-/* RESET */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
 body{
+margin:0;
+overflow:hidden;
+font-family:Arial;
 background:#0b0b0d;
 color:white;
-overflow-x:hidden;
 }
 
-/* 🎥 BACKGROUND LIGHTS */
-body::before{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-background:
-radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
-radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
-radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
-animation:lights 8s infinite alternate;
-z-index:-1;
-}
-
-@keyframes lights{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
-}
-
-/* NAVBAR */
+/* NAV */
 nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:60px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 40px;
-background:rgba(17,17,17,0.85);
+padding:0 20px;
+background:rgba(0,0,0,0.7);
 backdrop-filter:blur(10px);
-position:sticky;
-top:0;
-z-index:1000;
+z-index:10;
 border-bottom:2px solid #d86c9a;
 }
 
 .logo{
-font-size:28px;
 font-weight:bold;
+font-size:20px;
 }
-
 .logo span{color:#d86c9a;}
 
-.nav-links{
-display:flex;
-gap:20px;
-list-style:none;
-}
-
-.nav-links a{
+.nav a{
 color:white;
+margin-left:15px;
 text-decoration:none;
 }
 
-/* HEADER */
-.header{
-text-align:center;
-padding:40px 20px;
-}
-
-.header h1{
-font-size:42px;
-color:#d86c9a;
-}
-
-/* GALLERY */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:40px;
-}
-
-/* 🚗 3D CARD */
-.card{
-background:#1a1a1d;
-border-radius:15px;
-overflow:hidden;
-cursor:pointer;
-transition:0.2s;
-transform-style:preserve-3d;
-position:relative;
-}
-
-.card img{
+/* 3D SCENE */
+#scene{
 width:100%;
-height:180px;
+height:100vh;
+perspective:1200px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* SHOWROOM WRAPPER */
+.room{
+position:relative;
+width:400px;
+height:250px;
+transform-style:preserve-3d;
+animation:rotateRoom 12s linear infinite;
+}
+
+@keyframes rotateRoom{
+0%{transform:rotateY(0deg);}
+100%{transform:rotateY(360deg);}
+}
+
+/* 🚗 CAR CARD (UPDATED) */
+.car{
+position:absolute;
+width:220px;
+height:140px;
+background:#1a1a1d;
+border-radius:12px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,0.5);
+cursor:pointer;
+transition:0.4s ease;
+transform-style:preserve-3d;
+}
+
+/* ✨ IMAGE */
+.car img{
+width:100%;
+height:100%;
 object-fit:cover;
-pointer-events:none;
+transition:0.4s ease;
 }
 
-.card h3{
-color:#d86c9a;
-padding:10px;
+/* 🚗 ULTRA SHOWROOM HOVER */
+.car:hover{
+transform:scale(1.15) translateZ(60px);
+box-shadow:
+0 20px 40px rgba(216,108,154,0.6),
+0 0 25px rgba(216,108,154,0.4);
+z-index:10;
+filter:brightness(1.2);
 }
 
-.card p{
-color:#aaa;
-padding:0 10px 10px;
+/* ✨ GLOW LAYER */
+.car::before{
+content:"";
+position:absolute;
+top:-50%;
+left:-50%;
+width:200%;
+height:200%;
+background:radial-gradient(circle, rgba(216,108,154,0.25), transparent 60%);
+opacity:0;
+transition:0.4s;
 }
 
-/* FULLSCREEN VIEW */
-.viewer{
+.car:hover::before{
+opacity:1;
+}
+
+/* POSITION IN 3D CIRCLE */
+.car:nth-child(1){transform:rotateY(0deg) translateZ(350px);}
+.car:nth-child(2){transform:rotateY(90deg) translateZ(350px);}
+.car:nth-child(3){transform:rotateY(180deg) translateZ(350px);}
+.car:nth-child(4){transform:rotateY(270deg) translateZ(350px);}
+
+/* MODAL */
+.modal{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.95);
+background:rgba(0,0,0,0.85);
 display:none;
-flex-direction:column;
-align-items:center;
 justify-content:center;
-z-index:2000;
+align-items:center;
 }
 
-.viewer img{
-width:80%;
-max-width:700px;
+.box{
+background:#1a1a1d;
+padding:20px;
 border-radius:10px;
+text-align:center;
 }
 
-.viewer h2{
-color:#d86c9a;
+button{
 margin-top:10px;
-}
-
-.viewer button{
-margin-top:15px;
-padding:10px 15px;
+padding:10px;
 background:#d86c9a;
 border:none;
 color:white;
 cursor:pointer;
-}
-
-/* NAV HOVER */
-.nav-links a:hover{
-color:#d86c9a;
 }
 
 </style>
@@ -167,99 +160,88 @@ color:#d86c9a;
 <!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
-
-<ul class="nav-links">
-<li><a href="#">Home</a></li>
-<li><a href="#">Models</a></li>
-<li><a href="#">Gallery</a></li>
-</ul>
+<div class="nav">
+<a href="#">Home</a>
+<a href="#">Models</a>
+<a href="#">Gallery</a>
+</div>
 </nav>
 
-<!-- HEADER -->
-<div class="header">
-<h1>Lexus 3D Gallery</h1>
-</div>
+<!-- 3D ROOM -->
+<div id="scene">
 
-<!-- GALLERY -->
-<section class="gallery">
+<div class="room" id="room">
 
-<div class="card" onclick="openViewer(this)">
+<div class="car" onclick="openCar('LC500','image/pink-Ic500.jpg')">
 <img src="image/pink-Ic500.jpg">
-<h3>LC500</h3>
-<p>Luxury Coupe</p>
 </div>
 
-<div class="card" onclick="openViewer(this)">
-<img src="image/black-Ic500.jpg">
-<h3>Black Edition</h3>
-<p>Performance Build</p>
-</div>
-
-<div class="card" onclick="openViewer(this)">
+<div class="car" onclick="openCar('GX SUV','image/gx-red-f.jpg')">
 <img src="image/gx-red-f.jpg">
-<h3>Lexus GX</h3>
-<p>Luxury SUV</p>
 </div>
 
-<div class="card" onclick="openViewer(this)">
+<div class="car" onclick="openCar('RC F','image/red-rc-f.jpg')">
 <img src="image/red-rc-f.jpg">
-<h3>RC F</h3>
-<p>Sports Coupe</p>
 </div>
 
-</section>
+<div class="car" onclick="openCar('LX 570','image/beig-Ix570.jpg')">
+<img src="image/beig-Ix570.jpg">
+</div>
 
-<!-- VIEWER -->
-<div class="viewer" id="viewer">
-<img id="viewerImg">
-<h2 id="viewerTitle"></h2>
-<button onclick="closeViewer()">Close</button>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="box">
+<h2 id="title"></h2>
+<img id="bigImg" style="width:250px;border-radius:10px;">
+<p>Luxury Lexus Model</p>
+<button onclick="buy()">Buy</button>
+<button onclick="closeModal()">Close</button>
+</div>
 </div>
 
 <script>
 
-/* =========================
-   🖱 3D HOVER EFFECT
-========================= */
-const cards = document.querySelectorAll(".card");
+/* ROTATION CONTROL */
+let room = document.getElementById("room");
+let isDown = false;
+let startX;
+let rotation = 0;
 
-cards.forEach(card => {
-
-card.addEventListener("mousemove", (e) => {
-
-let rect = card.getBoundingClientRect();
-
-let x = e.clientX - rect.left;
-let y = e.clientY - rect.top;
-
-let centerX = rect.width / 2;
-let centerY = rect.height / 2;
-
-let rotateX = (y - centerY) / 15;
-let rotateY = (x - centerX) / 15;
-
-card.style.transform = `
-perspective(1000px)
-rotateX(${-rotateX}deg)
-rotateY(${rotateY}deg)
-scale(1.05)
-`;
+document.addEventListener("mousedown",(e)=>{
+isDown = true;
+startX = e.clientX;
 });
 
-card.addEventListener("mouseleave", () => {
-card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+document.addEventListener("mouseup",()=>{
+isDown = false;
 });
 
+document.addEventListener("mousemove",(e)=>{
+if(!isDown) return;
 
+let move = e.clientX - startX;
+rotation += move * 0.2;
+room.style.transform = `rotateY(${rotation}deg)`;
+startX = e.clientX;
+});
 
-function openViewer(card){
-document.getElementById("viewer").style.display="flex";
-document.getElementById("viewerImg").src = card.querySelector("img").src;
-document.getElementById("viewerTitle").innerText = card.querySelector("h3").innerText;
+/* MODAL */
+function openCar(name,img){
+document.getElementById("title").innerText = name;
+document.getElementById("bigImg").src = img;
+document.getElementById("modal").style.display="flex";
 }
 
-function closeViewer(){
-document.getElementById("viewer").style.display="none";
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+function buy(){
+alert("Purchase Successful (Demo Mode)");
 }
 
 </script>
