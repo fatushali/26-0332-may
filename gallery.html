@@ -15,21 +15,21 @@ box-sizing:border-box;
 font-family:Arial, sans-serif;
 }
 
-/* 🌌 BACKGROUND IMAGE ADDED */
+/* 🌸 BRIGHT FEMININE BACKGROUND */
 body{
 background:
-linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.88)),
+linear-gradient(135deg, #ffe6f0, #fff7fb, #ffeef6),
 url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80");
 
 background-size:cover;
 background-position:center;
 background-attachment:fixed;
 
-color:white;
+color:#333;
 overflow-x:hidden;
 }
 
-/* 🎥 BACKGROUND LIGHT EFFECT */
+/* ✨ SOFT GLOW EFFECT */
 body::before{
 content:"";
 position:fixed;
@@ -38,16 +38,16 @@ left:0;
 width:100%;
 height:100%;
 background:
-radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
-radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
-radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
+radial-gradient(circle at 20% 20%, #ff7eb3aa, transparent 45%),
+radial-gradient(circle at 80% 30%, #ffd6e8aa, transparent 50%),
+radial-gradient(circle at 40% 80%, #ffb6d5aa, transparent 55%);
 animation:moveLights 10s infinite alternate;
 z-index:-1;
 }
 
 @keyframes moveLights{
 from{transform:scale(1);}
-to{transform:scale(1.2);}
+to{transform:scale(1.1);}
 }
 
 /* NAV */
@@ -56,19 +56,20 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:15px 30px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
-border-bottom:2px solid #d86c9a;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(12px);
+border-bottom:2px solid #ff7eb3;
 position:sticky;
 top:0;
 }
 
-.logo span{color:#d86c9a;}
+.logo span{color:#ff4f9a;}
 
 nav a{
-color:white;
+color:#444;
 text-decoration:none;
 margin-left:15px;
+font-weight:bold;
 }
 
 /* HEADER */
@@ -78,12 +79,12 @@ padding:40px 20px;
 }
 
 .header h1{
-font-size:40px;
-color:#d86c9a;
+font-size:42px;
+color:#ff4f9a;
 }
 
 .header p{
-color:#aaa;
+color:#666;
 }
 
 /* GRID */
@@ -96,12 +97,13 @@ padding:20px;
 
 /* CARD */
 .card{
-background:#1a1a1d;
-border-radius:12px;
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(10px);
+border-radius:15px;
 overflow:hidden;
 cursor:pointer;
 transition:0.4s;
-box-shadow:0 10px 20px rgba(0,0,0,0.4);
+box-shadow:0 10px 25px rgba(255,105,180,0.2);
 }
 
 .card img{
@@ -114,22 +116,22 @@ transition:0.4s;
 /* ✨ HOVER EFFECT */
 .card:hover{
 transform:scale(1.05);
-box-shadow:0 15px 30px rgba(216,108,154,0.5);
+box-shadow:0 15px 35px rgba(255,105,180,0.35);
 }
 
 .card:hover img{
-transform:scale(1.1);
-filter:brightness(1.2);
+transform:scale(1.08);
+filter:brightness(1.1);
 }
 
 .card h3{
 padding:10px;
-color:#d86c9a;
+color:#ff4f9a;
 }
 
 .card p{
 padding:0 10px 10px;
-color:#aaa;
+color:#666;
 }
 
 /* FULL SCREEN VIEWER */
@@ -139,7 +141,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.95);
+background:rgba(255,255,255,0.92);
 display:none;
 justify-content:center;
 align-items:center;
@@ -150,23 +152,29 @@ z-index:1000;
 .viewer img{
 width:80%;
 max-width:600px;
-border-radius:10px;
-box-shadow:0 20px 50px rgba(0,0,0,0.7);
+border-radius:12px;
+box-shadow:0 20px 50px rgba(255,105,180,0.25);
 }
 
 .viewer h2{
 margin-top:10px;
-color:#d86c9a;
+color:#ff4f9a;
 }
 
 button{
 margin-top:15px;
 padding:10px 15px;
-background:#d86c9a;
+background:#ff4f9a;
 border:none;
 color:white;
 cursor:pointer;
-border-radius:5px;
+border-radius:8px;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff2f88;
+transform:scale(1.05);
 }
 
 </style>
@@ -185,7 +193,7 @@ border-radius:5px;
 <!-- HEADER -->
 <div class="header">
 <h1>Lexus Gallery</h1>
-<p>Browse luxury Lexus models</p>
+<p>Soft luxury • Feminine elegance • Modern performance</p>
 </div>
 
 <!-- GRID -->
