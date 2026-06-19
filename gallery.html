@@ -3,153 +3,162 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lexus Image 3D Showroom</title>
+<title>Lexus Gallery</title>
 
 <style>
 
-body{
+/* RESET */
+*{
 margin:0;
-overflow:hidden;
-font-family:Arial;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
 background:#0b0b0d;
 color:white;
+overflow-x:hidden;
+}
+
+/* 🎥 BACKGROUND LIGHT EFFECT */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
+radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
+radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
+animation:moveLights 10s infinite alternate;
+z-index:-1;
+}
+
+@keyframes moveLights{
+from{transform:scale(1);}
+to{transform:scale(1.2);}
 }
 
 /* NAV */
 nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:60px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:0 20px;
-background:rgba(0,0,0,0.7);
+padding:15px 30px;
+background:rgba(0,0,0,0.6);
 backdrop-filter:blur(10px);
-z-index:10;
 border-bottom:2px solid #d86c9a;
+position:sticky;
+top:0;
 }
 
-.logo{
-font-weight:bold;
-font-size:20px;
-}
 .logo span{color:#d86c9a;}
 
-.nav a{
+nav a{
 color:white;
-margin-left:15px;
 text-decoration:none;
+margin-left:15px;
 }
 
-/* 3D SCENE */
-#scene{
-width:100%;
-height:100vh;
-perspective:1200px;
-display:flex;
-justify-content:center;
-align-items:center;
+/* HEADER */
+.header{
+text-align:center;
+padding:40px 20px;
 }
 
-/* SHOWROOM WRAPPER */
-.room{
-position:relative;
-width:400px;
-height:250px;
-transform-style:preserve-3d;
-animation:rotateRoom 12s linear infinite;
+.header h1{
+font-size:40px;
+color:#d86c9a;
 }
 
-@keyframes rotateRoom{
-0%{transform:rotateY(0deg);}
-100%{transform:rotateY(360deg);}
+.header p{
+color:#aaa;
 }
 
-/* 🚗 CAR CARD (UPDATED) */
-.car{
-position:absolute;
-width:220px;
-height:140px;
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+/* CARD */
+.card{
 background:#1a1a1d;
 border-radius:12px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
 cursor:pointer;
-transition:0.4s ease;
-transform-style:preserve-3d;
+transition:0.4s;
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
 }
 
-/* ✨ IMAGE */
-.car img{
+.card img{
 width:100%;
-height:100%;
+height:180px;
 object-fit:cover;
-transition:0.4s ease;
-}
-
-/* 🚗 ULTRA SHOWROOM HOVER */
-.car:hover{
-transform:scale(1.15) translateZ(60px);
-box-shadow:
-0 20px 40px rgba(216,108,154,0.6),
-0 0 25px rgba(216,108,154,0.4);
-z-index:10;
-filter:brightness(1.2);
-}
-
-/* ✨ GLOW LAYER */
-.car::before{
-content:"";
-position:absolute;
-top:-50%;
-left:-50%;
-width:200%;
-height:200%;
-background:radial-gradient(circle, rgba(216,108,154,0.25), transparent 60%);
-opacity:0;
 transition:0.4s;
 }
 
-.car:hover::before{
-opacity:1;
+/* ✨ HOVER EFFECT */
+.card:hover{
+transform:scale(1.05);
+box-shadow:0 15px 30px rgba(216,108,154,0.5);
 }
 
-/* POSITION IN 3D CIRCLE */
-.car:nth-child(1){transform:rotateY(0deg) translateZ(350px);}
-.car:nth-child(2){transform:rotateY(90deg) translateZ(350px);}
-.car:nth-child(3){transform:rotateY(180deg) translateZ(350px);}
-.car:nth-child(4){transform:rotateY(270deg) translateZ(350px);}
+.card:hover img{
+transform:scale(1.1);
+filter:brightness(1.2);
+}
 
-/* MODAL */
-.modal{
+.card h3{
+padding:10px;
+color:#d86c9a;
+}
+
+.card p{
+padding:0 10px 10px;
+color:#aaa;
+}
+
+/* FULL SCREEN VIEWER */
+.viewer{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.85);
+background:rgba(0,0,0,0.95);
 display:none;
 justify-content:center;
 align-items:center;
+flex-direction:column;
+z-index:1000;
 }
 
-.box{
-background:#1a1a1d;
-padding:20px;
+.viewer img{
+width:80%;
+max-width:600px;
 border-radius:10px;
-text-align:center;
+box-shadow:0 20px 50px rgba(0,0,0,0.7);
+}
+
+.viewer h2{
+margin-top:10px;
+color:#d86c9a;
 }
 
 button{
-margin-top:10px;
-padding:10px;
+margin-top:15px;
+padding:10px 15px;
 background:#d86c9a;
 border:none;
 color:white;
 cursor:pointer;
+border-radius:5px;
 }
 
 </style>
@@ -160,88 +169,63 @@ cursor:pointer;
 <!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
-<div class="nav">
-<a href="#">Home</a>
-<a href="#">Models</a>
-<a href="#">Gallery</a>
+<div>
+<a href="models.html">3D Showroom</a>
 </div>
 </nav>
 
-<!-- 3D ROOM -->
-<div id="scene">
+<!-- HEADER -->
+<div class="header">
+<h1>Lexus Gallery</h1>
+<p>Browse luxury Lexus models</p>
+</div>
 
-<div class="room" id="room">
+<!-- GRID -->
+<div class="grid">
 
-<div class="car" onclick="openCar('LC500','image/pink-Ic500.jpg')">
+<div class="card" onclick="openView('LC500','image/pink-Ic500.jpg')">
 <img src="image/pink-Ic500.jpg">
+<h3>LC500</h3>
+<p>Luxury Coupe</p>
 </div>
 
-<div class="car" onclick="openCar('GX SUV','image/gx-red-f.jpg')">
+<div class="card" onclick="openView('GX SUV','image/gx-red-f.jpg')">
 <img src="image/gx-red-f.jpg">
+<h3>GX SUV</h3>
+<p>Off-road Luxury</p>
 </div>
 
-<div class="car" onclick="openCar('RC F','image/red-rc-f.jpg')">
+<div class="card" onclick="openView('RC F','image/red-rc-f.jpg')">
 <img src="image/red-rc-f.jpg">
+<h3>RC F</h3>
+<p>Sport Performance</p>
 </div>
 
-<div class="car" onclick="openCar('LX 570','image/beig-Ix570.jpg')">
+<div class="card" onclick="openView('LX 570','image/beig-Ix570.jpg')">
 <img src="image/beig-Ix570.jpg">
+<h3>LX 570</h3>
+<p>Flagship SUV</p>
 </div>
 
 </div>
 
-</div>
-
-<!-- MODAL -->
-<div class="modal" id="modal">
-<div class="box">
-<h2 id="title"></h2>
-<img id="bigImg" style="width:250px;border-radius:10px;">
-<p>Luxury Lexus Model</p>
-<button onclick="buy()">Buy</button>
-<button onclick="closeModal()">Close</button>
-</div>
+<!-- VIEWER -->
+<div class="viewer" id="viewer">
+<img id="vimg">
+<h2 id="vtitle"></h2>
+<button onclick="closeView()">Close</button>
 </div>
 
 <script>
 
-/* ROTATION CONTROL */
-let room = document.getElementById("room");
-let isDown = false;
-let startX;
-let rotation = 0;
-
-document.addEventListener("mousedown",(e)=>{
-isDown = true;
-startX = e.clientX;
-});
-
-document.addEventListener("mouseup",()=>{
-isDown = false;
-});
-
-document.addEventListener("mousemove",(e)=>{
-if(!isDown) return;
-
-let move = e.clientX - startX;
-rotation += move * 0.2;
-room.style.transform = `rotateY(${rotation}deg)`;
-startX = e.clientX;
-});
-
-/* MODAL */
-function openCar(name,img){
-document.getElementById("title").innerText = name;
-document.getElementById("bigImg").src = img;
-document.getElementById("modal").style.display="flex";
+function openView(name,img){
+document.getElementById("viewer").style.display="flex";
+document.getElementById("vimg").src=img;
+document.getElementById("vtitle").innerText=name;
 }
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
-}
-
-function buy(){
-alert("Purchase Successful (Demo Mode)");
+function closeView(){
+document.getElementById("viewer").style.display="none";
 }
 
 </script>
