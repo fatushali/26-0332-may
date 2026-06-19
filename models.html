@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Gallery</title>
+<title>LEXUS | Models</title>
 
 <style>
 
@@ -68,34 +68,42 @@ nav{
     color:#ccc;
 }
 
-/* GALLERY */
-.gallery{
+/* MODELS GRID */
+.models{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
     gap:20px;
     padding:40px;
 }
 
-.gallery-item{
+/* MODEL CARD */
+.model-card{
     background:#1a1a1d;
     border-radius:15px;
     overflow:hidden;
+    text-align:center;
 }
 
-.gallery-item img{
+.model-card img{
     width:100%;
-    height:250px;
+    height:220px;
     object-fit:cover;
 }
 
-.gallery-item h3{
-    padding:15px;
+.model-card h3{
+    padding:10px;
     color:#d86c9a;
 }
 
-.gallery-item p{
-    padding:0 15px 15px;
+.model-card p{
+    padding:0 15px 10px;
     color:#ccc;
+}
+
+.price{
+    padding-bottom:15px;
+    font-size:18px;
+    color:#fff;
 }
 
 /* FOOTER */
@@ -106,6 +114,7 @@ footer{
     color:#aaa;
 }
 
+/* RESPONSIVE */
 @media(max-width:768px){
     nav{
         flex-direction:column;
@@ -136,51 +145,58 @@ footer{
 
 <!-- HEADER -->
 <section class="header">
-    <h1>Lexus Gallery</h1>
-    <p>Showcasing luxury, performance, and innovation.</p>
+    <h1>Lexus Models</h1>
+    <p>Explore performance, luxury, and pricing</p>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery">
+<!-- MODELS -->
+<section class="models">
 
-    <div class="gallery-item">
-        <img src="image/pink-Ic500.jpg" alt="Pink Lexus LC500">
+    <div class="model-card">
+        <img src="image/pink-Ic500.jpg" alt="Lexus LC500">
         <h3>Lexus LC500</h3>
-        <p>Custom luxury coupe with an aggressive stance and premium styling.</p>
+        <p>Luxury performance coupe</p>
+        <div class="price">KSh 12,000,000</div>
     </div>
 
-    <div class="gallery-item">
-        <img src="image/black-Ic500.jpg" alt="Black Lexus LC500">
-        <h3>Black Edition LC500</h3>
-        <p>Matte-black performance build showcasing modern Lexus design.</p>
+    <div class="model-card">
+        <img src="image/black-Ic500.jpg" alt="LC500 Black Edition">
+        <h3>LC500 Black Edition</h3>
+        <p>Premium matte performance build</p>
+        <div class="price">KSh 13,500,000</div>
     </div>
 
-    <div class="gallery-item">
+    <div class="model-card">
         <img src="image/gx-red-f.jpg" alt="Lexus GX">
         <h3>Lexus GX</h3>
-        <p>Luxury SUV engineered for adventure, comfort, and capability.</p>
+        <p>Luxury off-road SUV</p>
+        <div class="price">KSh 11,000,000</div>
     </div>
 
-    <div class="gallery-item">
+    <div class="model-card">
         <img src="image/red-rc-f.jpg" alt="Lexus RC F">
         <h3>Lexus RC F</h3>
-        <p>High-performance sports coupe featuring bold styling and precision handling.</p>
+        <p>High-performance sports coupe</p>
+        <div class="price">KSh 10,500,000</div>
     </div>
 
-    <div class="gallery-item">
+    <div class="model-card">
         <img src="image/beig-Ix570.jpg" alt="Lexus LX570">
         <h3>Lexus LX570</h3>
-        <p>Flagship luxury SUV offering premium comfort and prestige.</p>
+        <p>Flagship luxury SUV</p>
+        <div class="price">KSh 18,000,000</div>
     </div>
 
-    <div class="gallery-item">
+    <div class="model-card">
         <img src="image/white-Ifa.jpg" alt="Lexus LFA">
         <h3>Lexus LFA</h3>
-        <p>Legendary Lexus supercar powered by a world-famous V10 engine.</p>
+        <p>Legendary V10 supercar</p>
+        <div class="price">KSh 40,000,000</div>
     </div>
 
 </section>
 
+<!-- FOOTER -->
 <footer>
     <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
