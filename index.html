@@ -9,197 +9,198 @@
 
 /* RESET */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    background:#0f0f10;
-    color:white;
+background:#0f0f10;
+color:white;
+overflow:hidden;
 }
 
-/* NAVIGATION */
+/* NAV */
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 50px;
-    background:#1a1a1d;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+background:#1a1a1d;
+position:relative;
+z-index:5;
 }
 
-.logo{
-    font-size:30px;
-    font-weight:bold;
-}
-
-.logo span{
-    color:#d86c9a;
-}
+.logo{font-size:30px;font-weight:bold;}
+.logo span{color:#d86c9a;}
 
 .nav-links{
-    display:flex;
-    list-style:none;
-    gap:25px;
+display:flex;
+list-style:none;
+gap:25px;
 }
 
 .nav-links a{
-    color:white;
-    text-decoration:none;
-    transition:0.3s;
+color:white;
+text-decoration:none;
 }
 
-.nav-links a:hover{
-    color:#d86c9a;
-}
-
-/* HERO SECTION */
+/* HERO */
 .hero{
-    height:90vh;
-    background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80");
-
-    background-size:cover;
-    background-position:center;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
-
-.hero-content{
-    max-width:800px;
-    padding:20px;
+height:90vh;
+background:
+linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
 }
 
 .hero-content h1{
-    font-size:70px;
-    margin-bottom:20px;
+font-size:70px;
 }
 
 .hero-content p{
-    font-size:22px;
-    margin-bottom:30px;
+font-size:22px;
+margin-top:10px;
 }
 
 .btn{
-    display:inline-block;
-    padding:14px 35px;
-    background:#d86c9a;
-    color:white;
-    text-decoration:none;
-    border-radius:5px;
+display:inline-block;
+margin-top:20px;
+padding:14px 35px;
+background:#d86c9a;
+color:white;
+text-decoration:none;
+border-radius:5px;
 }
 
-.btn:hover{
-    background:#c25584;
-}
-
-/* ABOUT SECTION */
+/* ABOUT */
 .about{
-    padding:80px 50px;
-    text-align:center;
-    background:#1a1a1d;
-}
-
-.about h2{
-    font-size:40px;
-    color:#d86c9a;
-    margin-bottom:25px;
-}
-
-.about p{
-    max-width:900px;
-    margin:auto;
-    line-height:1.8;
-    color:#ddd;
-    font-size:18px;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:20px;
-    background:#0a0a0b;
-    color:#aaa;
+padding:80px 50px;
+background:#1a1a1d;
+text-align:center;
 }
 
 /* =========================
-   🎬 INTRO SCREEN
+   🔥 DRAMATIC INTRO
 ========================= */
+
 #intro{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:9999;
-    animation:fadeOut 2.8s forwards;
-    animation-delay:2.5s;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:9999;
+overflow:hidden;
 }
 
-#intro h1{
-    font-size:42px;
-    color:#d86c9a;
-    letter-spacing:3px;
-    animation:glow 1.5s ease-in-out infinite alternate;
+/* ENERGY PULSE BACKGROUND */
+#intro::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#d86c9a33,transparent 40%),
+radial-gradient(circle,#ffffff10,transparent 50%);
+animation:pulse 2s infinite;
 }
 
-#intro h2{
-    font-size:26px;
-    color:#ffffffcc;
-    margin-top:10px;
-    animation:glow2 1.5s ease-in-out infinite alternate;
+@keyframes pulse{
+0%{transform:scale(0.8);}
+50%{transform:scale(1.2);}
+100%{transform:scale(0.8);}
 }
 
-@keyframes glow{
-    from{text-shadow:0 0 10px #d86c9a;}
-    to{text-shadow:0 0 30px #d86c9a;}
+/* FLASH OVERLAY */
+#intro::after{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:white;
+opacity:0;
+animation:flash 1.2s ease-out 1;
 }
 
-@keyframes glow2{
-    from{text-shadow:0 0 5px #fff;}
-    to{text-shadow:0 0 18px #fff;}
+@keyframes flash{
+0%{opacity:0;}
+10%{opacity:1;}
+100%{opacity:0;}
 }
 
-@keyframes fadeOut{
-    to{
-        opacity:0;
-        visibility:hidden;
-    }
+/* TEXT */
+.intro-text{
+z-index:2;
+text-align:center;
+animation:shake 0.6s ease-in-out 1;
+}
+
+@keyframes shake{
+0%{transform:translateX(0);}
+25%{transform:translateX(-5px);}
+50%{transform:translateX(5px);}
+75%{transform:translateX(-3px);}
+100%{transform:translateX(0);}
+}
+
+.intro-text h1{
+font-size:48px;
+color:#d86c9a;
+letter-spacing:4px;
+opacity:0;
+animation:fadeIn 1s forwards;
+}
+
+.intro-text h2{
+font-size:24px;
+margin-top:10px;
+opacity:0;
+color:#fff;
+animation:fadeIn 1s forwards;
+animation-delay:0.6s;
+}
+
+/* fade in */
+@keyframes fadeIn{
+to{
+opacity:1;
+transform:translateY(0);
+}
+from{
+opacity:0;
+transform:translateY(20px);
+}
+}
+
+/* EXIT */
+#intro{
+animation:exit 3.5s forwards;
+}
+
+@keyframes exit{
+0%{opacity:1;}
+80%{opacity:1;}
+100%{
+opacity:0;
+visibility:hidden;
+}
 }
 
 /* MOBILE */
 @media(max-width:768px){
-
-    nav{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .hero-content h1{
-        font-size:42px;
-    }
-
-    .hero-content p{
-        font-size:18px;
-    }
-
-    .about{
-        padding:50px 20px;
-    }
-
-    .about h2{
-        font-size:30px;
-    }
+.hero-content h1{font-size:40px;}
 }
 
 </style>
@@ -207,21 +208,21 @@ footer{
 
 <body>
 
-<!-- 🎬 INTRO SCREEN -->
+<!-- 🔥 INTRO -->
 <div id="intro">
-    <h1>LET THE GAME BEGIN</h1>
-    <h2>QUE COMIENCE EL JUEGO</h2>
+    <div class="intro-text">
+        <h1>LET THE GAME BEGIN</h1>
+        <h2>QUE COMIENCE EL JUEGO</h2>
+    </div>
 </div>
 
 <!-- NAV -->
 <nav>
     <div class="logo">LEX<span>U</span>S</div>
-
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
     </ul>
 </nav>
 
@@ -236,32 +237,9 @@ footer{
 
 <!-- ABOUT -->
 <section class="about">
-    <h2>About Lexus</h2>
-
-    <p>
-        Lexus is the luxury vehicle division of Toyota and is recognized
-        worldwide for its commitment to quality, innovation, and premium
-        craftsmanship.
-    </p>
-
-    <br><br>
-
-    <p>
-        Lexus offers sedans, SUVs, and performance vehicles designed for
-        comfort, reliability, and advanced technology.
-    </p>
-
-    <br><br>
-
-    <p>
-        Guided by “Pursuit of Perfection,” Lexus continues to redefine luxury mobility.
-    </p>
+    <h2 style="color:#d86c9a;">About Lexus</h2>
+    <p>Luxury automotive excellence since 1989.</p>
 </section>
-
-<!-- FOOTER -->
-<footer>
-    <p>&copy; 2026 Lexus. All Rights Reserved.</p>
-</footer>
 
 </body>
 </html>
