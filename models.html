@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Models</title>
+<title>LEXUS | Gallery</title>
 
 <style>
 
@@ -69,50 +68,34 @@ nav{
     color:#ccc;
 }
 
-/* MODELS GRID */
-.models{
+/* GALLERY */
+.gallery{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:25px;
+    gap:20px;
     padding:40px;
 }
 
-.card{
+.gallery-item{
     background:#1a1a1d;
     border-radius:15px;
     overflow:hidden;
-    transition:0.3s;
 }
 
-.card:hover{
-    transform:translateY(-8px);
-}
-
-.card img{
+.gallery-item img{
     width:100%;
-    height:220px;
+    height:250px;
     object-fit:cover;
 }
 
-.card-content{
-    padding:20px;
-}
-
-.card h2{
+.gallery-item h3{
+    padding:15px;
     color:#d86c9a;
-    margin-bottom:10px;
 }
 
-.card p{
+.gallery-item p{
+    padding:0 15px 15px;
     color:#ccc;
-    line-height:1.6;
-}
-
-.card h3{
-    margin-top:15px;
-    color:#d86c9a;
-    font-size:24px;
-    font-weight:bold;
 }
 
 /* FOOTER */
@@ -123,9 +106,7 @@ footer{
     color:#aaa;
 }
 
-/* MOBILE */
 @media(max-width:768px){
-
     nav{
         flex-direction:column;
         gap:15px;
@@ -138,8 +119,10 @@ footer{
 
 </style>
 </head>
+
 <body>
 
+<!-- NAVBAR -->
 <nav>
     <div class="logo">LEX<span>U</span>S</div>
 
@@ -151,68 +134,53 @@ footer{
     </ul>
 </nav>
 
+<!-- HEADER -->
 <section class="header">
-    <h1>Our Models</h1>
-    <p>Explore the Lexus range of luxury vehicles.</p>
+    <h1>Lexus Gallery</h1>
+    <p>Showcasing luxury, performance, and innovation.</p>
 </section>
 
-<section class="models">
+<!-- GALLERY -->
+<section class="gallery">
 
-    <div class="card">
-        <img src="images/pink-lc500.jpg" alt="Lexus LC500">
-        <div class="card-content">
-            <h2>Lexus LC500</h2>
-            <p>Luxury performance coupe with stunning design and exceptional road presence.</p>
-            <h3>$99,800</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/pink-lc500.jpg" alt="Pink Lexus LC500">
+        <h3>Lexus LC500</h3>
+        <p>Custom luxury coupe with an aggressive stance and premium styling.</p>
     </div>
 
-    <div class="card">
-        <img src="images/black-lc500.jpg" alt="Black Lexus LC500">
-        <div class="card-content">
-            <h2>LC500 Black Edition</h2>
-            <p>Exclusive black edition featuring premium finishes and sporty styling.</p>
-            <h3>$105,500</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/black-lc500.jpg" alt="Black Lexus LC500">
+        <h3>Black Edition LC500</h3>
+        <p>Matte-black performance build showcasing modern Lexus design.</p>
     </div>
 
-    <div class="card">
-        <img src="images/gx-red-suv.jpg" alt="Lexus GX">
-        <div class="card-content">
-            <h2>Lexus GX</h2>
-            <p>Luxury SUV built for adventure, comfort and off-road capability.</p>
-            <h3>$68,500</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/gx-red-suv.jpg" alt="Lexus GX">
+        <h3>Lexus GX</h3>
+        <p>Luxury SUV engineered for adventure, comfort, and capability.</p>
     </div>
 
-    <div class="card">
-        <img src="images/red-rc-f.jpg" alt="Lexus RC F">
-        <div class="card-content">
-            <h2>Lexus RC F</h2>
-            <p>High-performance sports coupe with aggressive styling and power.</p>
-            <h3>$94,000</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/red-rc-f.jpg" alt="Lexus RC F">
+        <h3>Lexus RC F</h3>
+        <p>High-performance sports coupe featuring bold styling and precision handling.</p>
     </div>
 
-    <div class="card">
-        <img src="images/beige-lx570.jpg" alt="Lexus LX570">
-        <div class="card-content">
-            <h2>Lexus LX570</h2>
-            <p>Premium luxury SUV offering comfort, prestige and versatility.</p>
-            <h3>$92,000</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/beige-lx570.jpg" alt="Lexus LX570">
+        <h3>Lexus LX570</h3>
+        <p>Flagship luxury SUV offering premium comfort and prestige.</p>
     </div>
 
-    <div class="card">
-        <img src="images/white-lfa.jpg" alt="Lexus LFA">
-        <div class="card-content">
-            <h2>Lexus LFA</h2>
-            <p>Legendary Lexus supercar featuring a world-famous V10 engine.</p>
-            <h3>$375,000</h3>
-        </div>
+    <div class="gallery-item">
+        <img src="image/white-lfa.jpg" alt="Lexus LFA">
+        <h3>Lexus LFA</h3>
+        <p>Legendary Lexus supercar powered by a world-famous V10 engine.</p>
     </div>
 
 </section>
+
 
 <footer>
     <p>&copy; 2026 Lexus. All Rights Reserved.</p>
@@ -220,4 +188,3 @@ footer{
 
 </body>
 </html>
-
