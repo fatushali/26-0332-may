@@ -66,7 +66,7 @@ transition:0.3s;
 background:#d86c9a;
 }
 
-/* 3D VIEW */
+/* RIGHT VIEW */
 #viewer{
 width:70%;
 }
@@ -99,6 +99,15 @@ color:white;
 cursor:pointer;
 }
 
+/* HELP TEXT */
+.hint{
+position:absolute;
+bottom:10px;
+left:10px;
+color:#aaa;
+font-size:12px;
+}
+
 </style>
 </head>
 
@@ -117,19 +126,17 @@ cursor:pointer;
 
 <!-- LEFT -->
 <div class="panel">
-
 <div class="car" onclick="selectCar('LC500')">LC500</div>
 <div class="car" onclick="selectCar('GX')">GX SUV</div>
 <div class="car" onclick="selectCar('RCF')">RC F</div>
-
 </div>
 
-<!-- RIGHT 3D VIEW -->
+<!-- RIGHT 3D -->
 <div id="viewer"></div>
 
 </div>
 
-<!-- CHECKOUT MODAL -->
+<!-- MODAL -->
 <div class="modal" id="modal">
 <div class="modal-box">
 <h2 id="carName"></h2>
@@ -139,28 +146,33 @@ cursor:pointer;
 </div>
 </div>
 
-<!-- ENGINE SOUND -->
+<!-- SOUND -->
 <audio id="sound" src="https://www.soundjay.com/mechanical/sounds/car-engine-1.mp3"></audio>
 
-<!-- THREE.JS -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
 
 <script>
 
+  
 let scene = new THREE.Scene();
 scene.background = new THREE.Color("#0b0b0d");
 
-let camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+let camera = new THREE.PerspectiveCamera(
+75,
+window.innerWidth * 0.7 / window.innerHeight,
+0.1,
+1000
+);
 
-let renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth*0.7, window.innerHeight);
+let renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setSize(window.innerWidth * 0.7, window.innerHeight);
 document.getElementById("viewer").appendChild(renderer.domElement);
 
-// LIGHT
+/* LIGHT */
 let light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 
-// SIMPLE CAR (placeholder 3D box)
+/* CAR (placeholder model) */
 let geometry = new THREE.BoxGeometry(2,1,4);
 let material = new THREE.MeshStandardMaterial({color:0xd86c9a});
 let car = new THREE.Mesh(geometry, material);
@@ -168,46 +180,60 @@ scene.add(car);
 
 camera.position.z = 6;
 
-// ROTATION WITH MOUSE
+
 let isDragging = false;
 let prevX = 0;
+let rotationSpeed = 0;
 
-renderer.domElement.addEventListener("mousedown", (e)=>{
+renderer.domElement.addEventListener("mousedown", (e) => {
 isDragging = true;
-});
-
-renderer.domElement.addEventListener("mouseup", ()=>{
-isDragging = false;
-});
-
-renderer.domElement.addEventListener("mousemove", (e)=>{
-if(isDragging){
-car.rotation.y += (e.clientX - prevX) * 0.01;
-}
 prevX = e.clientX;
 });
 
-// ANIMATE
+renderer.domElement.addEventListener("mouseup", () => {
+isDragging = false;
+});
+
+renderer.domElement.addEventListener("mouseleave", () => {
+isDragging = false;
+});
+
+renderer.domElement.addEventListener("mousemove", (e) => {
+
+if(!isDragging) return;
+
+let delta = e.clientX - prevX;
+prevX = e.clientX;
+
+rotationSpeed = delta * 0.01;
+
+car.rotation.y += rotationSpeed;
+
+});
+
+/* AUTO ROTATE WHEN NOT DRAGGING */
 function animate(){
 requestAnimationFrame(animate);
+
+if(!isDragging){
 car.rotation.y += 0.005;
-renderer.render(scene,camera);
+}
+
+renderer.render(scene, camera);
 }
 animate();
-
-// CAR SELECT
+  
 function selectCar(name){
 document.getElementById("carName").innerText = name;
 document.getElementById("modal").style.display="flex";
 document.getElementById("sound").play();
 }
 
-// CLOSE
 function closeModal(){
 document.getElementById("modal").style.display="none";
 }
 
-// BUY
+
 function buy(){
 alert("Purchase Successful (Demo Mode)");
 }
