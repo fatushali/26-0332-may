@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Gallery</title>
+<title>Lexus Premium Gallery</title>
 
 <style>
 
+/* RESET */
 *{
 margin:0;
 padding:0;
@@ -17,6 +18,26 @@ font-family:Arial, sans-serif;
 body{
 background:#0b0b0d;
 color:white;
+overflow-x:hidden;
+}
+
+/* 🎥 MOVING LIGHT BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
+radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
+radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
+animation:lights 8s infinite alternate;
+z-index:-1;
+}
+
+@keyframes lights{
+from{transform:scale(1);}
+to{transform:scale(1.2);}
 }
 
 /* NAVBAR */
@@ -25,11 +46,12 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 40px;
-background:#111;
-border-bottom:2px solid #d86c9a;
+background:rgba(17,17,17,0.8);
+backdrop-filter:blur(10px);
 position:sticky;
 top:0;
 z-index:1000;
+border-bottom:2px solid #d86c9a;
 }
 
 .logo{
@@ -48,83 +70,108 @@ list-style:none;
 .nav-links a{
 color:white;
 text-decoration:none;
-transition:0.3s;
 }
 
-.nav-links a:hover{
-color:#d86c9a;
+/* 🎞 HERO BANNER */
+.hero{
+height:300px;
+position:relative;
+overflow:hidden;
 }
 
-/* HEADER */
-.header{
-text-align:center;
-padding:50px 20px;
+.hero img{
+width:100%;
+height:300px;
+object-fit:cover;
+position:absolute;
+opacity:0;
+transition:1s;
 }
 
-.header h1{
-font-size:45px;
-color:#d86c9a;
-letter-spacing:2px;
+.hero img.active{
+opacity:1;
 }
 
-.header p{
-color:#aaa;
-margin-top:10px;
-}
-
-/* GALLERY GRID */
+/* GALLERY */
 .gallery{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 padding:40px;
 }
 
-/* CARD */
 .card{
 background:#1a1a1d;
 border-radius:15px;
 overflow:hidden;
-position:relative;
 cursor:pointer;
-transition:0.4s;
-box-shadow:0 5px 15px rgba(0,0,0,0.5);
-animation:fadeIn 0.6s ease-in-out;
+transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.03);
-box-shadow:0 15px 35px rgba(216,108,154,0.3);
+transform:scale(1.05);
+box-shadow:0 10px 25px rgba(216,108,154,0.3);
 }
 
-/* IMAGE */
 .card img{
 width:100%;
-height:220px;
+height:180px;
 object-fit:cover;
-transition:0.4s;
 }
 
-.card:hover img{
-transform:scale(1.1);
-filter:brightness(1.1);
-}
-
-/* TEXT */
 .card h3{
-padding:12px;
 color:#d86c9a;
+padding:10px;
 }
 
 .card p{
-padding:0 12px 15px;
-color:#bbb;
+color:#aaa;
+padding:0 10px 10px;
 }
 
-/* ANIMATION */
-@keyframes fadeIn{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
+.btn{
+background:#d86c9a;
+border:none;
+color:white;
+padding:8px;
+margin:10px;
+cursor:pointer;
+border-radius:5px;
+}
+
+/* FULL SCREEN VIEWER */
+.viewer{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+display:none;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:2000;
+}
+
+.viewer img{
+width:80%;
+max-width:700px;
+border-radius:10px;
+}
+
+.viewer h2{
+margin-top:10px;
+color:#d86c9a;
+}
+
+.viewer button{
+margin-top:15px;
+padding:10px 15px;
+background:#d86c9a;
+border:none;
+color:white;
+cursor:pointer;
 }
 
 /* FOOTER */
@@ -132,17 +179,8 @@ footer{
 text-align:center;
 padding:20px;
 background:#111;
-color:#888;
-margin-top:30px;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-.header h1{font-size:32px;}
-nav{
-flex-direction:column;
-gap:10px;
-}
+color:#aaa;
+margin-top:20px;
 }
 
 </style>
@@ -150,69 +188,90 @@ gap:10px;
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
-
 <ul class="nav-links">
 <li><a href="index.html">Home</a></li>
 <li><a href="models.html">Models</a></li>
 <li><a href="gallery.html">Gallery</a></li>
-<li><a href="contact.html">Contact</a></li>
+<li><a href="3d.html">3D Showroom</a></li>
 </ul>
 </nav>
 
-<!-- HEADER -->
-<div class="header">
-<h1>Lexus Gallery</h1>
-<p>Luxury. Performance. Innovation.</p>
+<!-- 🎞 HERO SLIDER -->
+<div class="hero">
+<img src="image/pink-Ic500.jpg" class="active">
+<img src="image/black-Ic500.jpg">
+<img src="image/gx-red-f.jpg">
 </div>
 
 <!-- GALLERY -->
 <section class="gallery">
 
-<div class="card">
+<div class="card" onclick="openViewer(this)">
 <img src="image/pink-Ic500.jpg">
-<h3>Lexus LC500</h3>
-<p>Luxury coupe with aggressive styling</p>
+<h3>LC500</h3>
+<p>Luxury coupe</p>
+<button class="btn">View / Buy</button>
 </div>
 
-<div class="card">
+<div class="card" onclick="openViewer(this)">
 <img src="image/black-Ic500.jpg">
-<h3>Black Edition LC500</h3>
-<p>Premium matte performance build</p>
+<h3>Black Edition</h3>
+<p>Premium performance</p>
+<button class="btn">View / Buy</button>
 </div>
 
-<div class="card">
+<div class="card" onclick="openViewer(this)">
 <img src="image/gx-red-f.jpg">
 <h3>Lexus GX</h3>
-<p>Luxury off-road SUV</p>
-</div>
-
-<div class="card">
-<img src="image/red-rc-f.jpg">
-<h3>RC F</h3>
-<p>High-performance sports coupe</p>
-</div>
-
-<div class="card">
-<img src="image/beig-Ix570.jpg">
-<h3>LX570</h3>
-<p>Flagship luxury SUV</p>
-</div>
-
-<div class="card">
-<img src="image/white-Ifa.jpg">
-<h3>LFA</h3>
-<p>Legendary V10 supercar</p>
+<p>Luxury SUV</p>
+<button class="btn">View / Buy</button>
 </div>
 
 </section>
 
-<!-- FOOTER -->
-<footer>
-<p>&copy; 2026 Lexus Showroom</p>
-</footer>
+<!-- FULL VIEWER -->
+<div class="viewer" id="viewer">
+<img id="viewerImg">
+<h2 id="viewerTitle"></h2>
+<button onclick="buy()">Buy</button>
+<button onclick="closeViewer()">Close</button>
+</div>
+
+<script>
+
+/* HERO SLIDER */
+let heroImages = document.querySelectorAll(".hero img");
+let index = 0;
+
+setInterval(()=>{
+heroImages[index].classList.remove("active");
+index = (index + 1) % heroImages.length;
+heroImages[index].classList.add("active");
+},3000);
+
+/* FULL VIEWER */
+function openViewer(card){
+let img = card.querySelector("img").src;
+let title = card.querySelector("h3").innerText;
+
+document.getElementById("viewerImg").src = img;
+document.getElementById("viewerTitle").innerText = title;
+
+document.getElementById("viewer").style.display="flex";
+}
+
+function closeViewer(){
+document.getElementById("viewer").style.display="none";
+}
+
+function buy(){
+alert("Purchase Successful (Demo Mode)");
+}
+
+</script>
 
 </body>
 </html>
