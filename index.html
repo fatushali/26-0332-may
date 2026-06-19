@@ -86,10 +86,7 @@ background:#1a1a1d;
 text-align:center;
 }
 
-/* =========================
-   🔥 DRAMATIC INTRO
-========================= */
-
+/* INTRO */
 #intro{
 position:fixed;
 top:0;
@@ -105,7 +102,7 @@ z-index:9999;
 overflow:hidden;
 }
 
-/* ENERGY PULSE BACKGROUND */
+/* ENERGY BACKGROUND */
 #intro::before{
 content:"";
 position:absolute;
@@ -123,7 +120,7 @@ animation:pulse 2s infinite;
 100%{transform:scale(0.8);}
 }
 
-/* FLASH OVERLAY */
+/* FLASH */
 #intro::after{
 content:"";
 position:absolute;
@@ -172,16 +169,9 @@ animation:fadeIn 1s forwards;
 animation-delay:0.6s;
 }
 
-/* fade in */
 @keyframes fadeIn{
-to{
-opacity:1;
-transform:translateY(0);
-}
-from{
-opacity:0;
-transform:translateY(20px);
-}
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 /* EXIT */
@@ -208,7 +198,7 @@ visibility:hidden;
 
 <body>
 
-<!-- 🔥 INTRO -->
+<!-- INTRO -->
 <div id="intro">
     <div class="intro-text">
         <h1>LET THE GAME BEGIN</h1>
@@ -216,13 +206,14 @@ visibility:hidden;
     </div>
 </div>
 
-<!-- NAV -->
+<!-- NAV (FIXED) -->
 <nav>
     <div class="logo">LEX<span>U</span>S</div>
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
     </ul>
 </nav>
 
