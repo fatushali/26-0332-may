@@ -51,30 +51,20 @@ nav{
     color:white;
     text-decoration:none;
     font-weight:bold;
-    transition:0.3s;
-}
-
-.nav-links a:hover{
-    color:#d86c9a;
 }
 
 /* HEADER */
 .header{
     text-align:center;
-    padding:60px 20px;
+    padding:40px 20px;
 }
 
 .header h1{
     font-size:50px;
     color:#d86c9a;
-    margin-bottom:10px;
 }
 
-.header p{
-    color:#ccc;
-}
-
-/* MODELS GRID */
+/* GALLERY */
 .models{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -82,39 +72,34 @@ nav{
     padding:40px;
 }
 
-/* MODEL CARD */
 .model-card{
     background:#1a1a1d;
     border-radius:15px;
     overflow:hidden;
     text-align:center;
-    transition:0.3s;
+    cursor:grab;
+    position:relative;
 }
 
-.model-card:hover{
-    transform:scale(1.03);
+.model-card:active{
+    cursor:grabbing;
 }
 
 .model-card img{
     width:100%;
     height:220px;
     object-fit:cover;
+    pointer-events:none;
 }
 
 .model-card h3{
-    padding:10px;
     color:#d86c9a;
-}
-
-.model-card p{
-    padding:0 15px 10px;
-    color:#ccc;
+    padding:10px;
 }
 
 .price{
+    color:white;
     padding-bottom:15px;
-    font-size:18px;
-    color:#fff;
 }
 
 /* FOOTER */
@@ -125,24 +110,12 @@ footer{
     color:#aaa;
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    nav{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .header h1{
-        font-size:36px;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR (FIXED & CLEAR) -->
+<!-- NAVBAR -->
 <nav>
     <div class="logo">LEX<span>U</span>S</div>
 
@@ -157,52 +130,27 @@ footer{
 <!-- HEADER -->
 <section class="header">
     <h1>Lexus Models</h1>
-    <p>Explore performance, luxury, and pricing</p>
 </section>
 
 <!-- MODELS -->
 <section class="models">
 
     <div class="model-card">
-        <img src="image/pink-Ic500.jpg" alt="Lexus LC500">
+        <img src="image/pink-Ic500.jpg">
         <h3>Lexus LC500</h3>
-        <p>Luxury performance coupe</p>
         <div class="price">KSh 12,000,000</div>
     </div>
 
     <div class="model-card">
-        <img src="image/black-Ic500.jpg" alt="LC500 Black Edition">
+        <img src="image/black-Ic500.jpg">
         <h3>LC500 Black Edition</h3>
-        <p>Premium matte performance build</p>
         <div class="price">KSh 13,500,000</div>
     </div>
 
     <div class="model-card">
-        <img src="image/gx-red-f.jpg" alt="Lexus GX">
+        <img src="image/gx-red-f.jpg">
         <h3>Lexus GX</h3>
-        <p>Luxury off-road SUV</p>
         <div class="price">KSh 11,000,000</div>
-    </div>
-
-    <div class="model-card">
-        <img src="image/red-rc-f.jpg" alt="Lexus RC F">
-        <h3>Lexus RC F</h3>
-        <p>High-performance sports coupe</p>
-        <div class="price">KSh 10,500,000</div>
-    </div>
-
-    <div class="model-card">
-        <img src="image/beig-Ix570.jpg" alt="Lexus LX570">
-        <h3>Lexus LX570</h3>
-        <p>Flagship luxury SUV</p>
-        <div class="price">KSh 18,000,000</div>
-    </div>
-
-    <div class="model-card">
-        <img src="image/white-Ifa.jpg" alt="Lexus LFA">
-        <h3>Lexus LFA</h3>
-        <p>Legendary V10 supercar</p>
-        <div class="price">KSh 40,000,000</div>
     </div>
 
 </section>
@@ -211,6 +159,34 @@ footer{
 <footer>
     <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
+
+<!-- ✅ DRAG SCRIPT -->
+<script>
+let cards = document.querySelectorAll(".model-card");
+
+cards.forEach(card => {
+    let isDown = false;
+    let offsetX, offsetY;
+
+    card.addEventListener("mousedown", (e) => {
+        isDown = true;
+        card.style.position = "absolute";
+        offsetX = e.clientX - card.offsetLeft;
+        offsetY = e.clientY - card.offsetTop;
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+
+        card.style.left = (e.clientX - offsetX) + "px";
+        card.style.top = (e.clientY - offsetY) + "px";
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDown = false;
+    });
+});
+</script>
 
 </body>
 </html>
