@@ -3,111 +3,215 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Models</title>
+<title>Lexus 3D Showroom</title>
 
 <style>
 
+/* RESET */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    background:#0f0f10;
-    color:white;
+background:#0b0b0d;
+color:white;
+overflow-x:hidden;
+}
+
+/* 🎥 SHOWROOM LIGHT BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
+radial-gradient(circle at 80% 60%, #ffffff10, transparent 40%),
+radial-gradient(circle at 50% 90%, #d86c9a22, transparent 50%);
+animation:lights 6s infinite alternate;
+z-index:-1;
+}
+
+@keyframes lights{
+from{filter:hue-rotate(0deg);}
+to{filter:hue-rotate(25deg);}
 }
 
 /* NAVBAR */
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 50px;
-    background:#111;
-    border-bottom:3px solid #d86c9a;
-    position:sticky;
-    top:0;
-    z-index:1000;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 40px;
+background:rgba(17,17,17,0.8);
+backdrop-filter:blur(10px);
+position:sticky;
+top:0;
+z-index:1000;
+border-bottom:2px solid #d86c9a;
 }
 
 .logo{
-    font-size:30px;
-    font-weight:bold;
+font-size:28px;
+font-weight:bold;
 }
 
-.logo span{
-    color:#d86c9a;
-}
+.logo span{color:#d86c9a;}
 
 .nav-links{
-    display:flex;
-    list-style:none;
-    gap:25px;
+display:flex;
+gap:20px;
+list-style:none;
 }
 
 .nav-links a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
+color:white;
+text-decoration:none;
+}
+
+.nav-links a:hover{
+color:#d86c9a;
 }
 
 /* HEADER */
 .header{
-    text-align:center;
-    padding:40px 20px;
+text-align:center;
+padding:40px 20px;
 }
 
 .header h1{
-    font-size:50px;
-    color:#d86c9a;
+font-size:42px;
+color:#d86c9a;
 }
 
-/* GALLERY */
-.models{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
-    padding:40px;
+/* 🚗 3D SHOWROOM */
+.showroom{
+display:flex;
+justify-content:center;
+perspective:1200px;
+margin-top:30px;
 }
 
-.model-card{
-    background:#1a1a1d;
-    border-radius:15px;
-    overflow:hidden;
-    text-align:center;
-    cursor:grab;
-    position:relative;
+.cube{
+position:relative;
+width:300px;
+height:200px;
+transform-style:preserve-3d;
+animation:rotate 10s infinite linear;
 }
 
-.model-card:active{
-    cursor:grabbing;
+@keyframes rotate{
+from{transform:rotateY(0deg);}
+to{transform:rotateY(360deg);}
 }
 
-.model-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    pointer-events:none;
+.face{
+position:absolute;
+width:300px;
+height:200px;
+background:#1a1a1d;
+border:2px solid #d86c9a;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+cursor:pointer;
+backface-visibility:hidden;
 }
 
-.model-card h3{
-    color:#d86c9a;
-    padding:10px;
+.face img{
+width:100%;
+height:140px;
+object-fit:cover;
 }
 
-.price{
-    color:white;
-    padding-bottom:15px;
+.face:nth-child(1){transform:rotateY(0deg) translateZ(150px);}
+.face:nth-child(2){transform:rotateY(90deg) translateZ(150px);}
+.face:nth-child(3){transform:rotateY(180deg) translateZ(150px);}
+.face:nth-child(4){transform:rotateY(270deg) translateZ(150px);}
+
+/* GRID BELOW */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:40px;
 }
 
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:20px;
-    background:#1a1a1d;
-    color:#aaa;
+.card{
+background:#1a1a1d;
+border-radius:15px;
+overflow:hidden;
+cursor:pointer;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:180px;
+object-fit:cover;
+}
+
+.card h3{
+color:#d86c9a;
+padding:10px;
+}
+
+.card p{
+padding:0 10px 10px;
+color:#ccc;
+}
+
+/* ✨ MODAL (FULL SCREEN VIEW) */
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+z-index:2000;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.modal img{
+width:80%;
+max-width:600px;
+border-radius:10px;
+}
+
+.modal button{
+margin-top:20px;
+padding:10px 20px;
+background:#d86c9a;
+border:none;
+color:white;
+cursor:pointer;
+}
+
+/* 🛒 BUTTONS */
+.btn{
+background:#d86c9a;
+border:none;
+padding:8px 12px;
+margin:10px;
+cursor:pointer;
+color:white;
+border-radius:5px;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+.cube{transform:scale(0.8);}
 }
 
 </style>
@@ -115,77 +219,90 @@ footer{
 
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
-    <div class="logo">LEX<span>U</span>S</div>
-
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="models.html">Models</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+<div class="logo">LEX<span>US</span></div>
+<ul class="nav-links">
+<li><a href="#">Home</a></li>
+<li><a href="#">Models</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
 </nav>
 
 <!-- HEADER -->
-<section class="header">
-    <h1>Lexus Models</h1>
-</section>
+<div class="header">
+<h1>Lexus 3D Showroom</h1>
+</div>
 
-<!-- MODELS -->
-<section class="models">
+<!-- 🚗 3D ROTATING SHOWROOM -->
+<div class="showroom">
+<div class="cube">
 
-    <div class="model-card">
-        <img src="image/pink-Ic500.jpg">
-        <h3>Lexus LC500</h3>
-        <div class="price">KSh 12,000,000</div>
-    </div>
+<div class="face" onclick="openModal(this)">
+<img src="image/pink-Ic500.jpg">
+<h3>LC500</h3>
+</div>
 
-    <div class="model-card">
-        <img src="image/black-Ic500.jpg">
-        <h3>LC500 Black Edition</h3>
-        <div class="price">KSh 13,500,000</div>
-    </div>
+<div class="face" onclick="openModal(this)">
+<img src="image/black-Ic500.jpg">
+<h3>Black LC500</h3>
+</div>
 
-    <div class="model-card">
-        <img src="image/gx-red-f.jpg">
-        <h3>Lexus GX</h3>
-        <div class="price">KSh 11,000,000</div>
-    </div>
+<div class="face" onclick="openModal(this)">
+<img src="image/gx-red-f.jpg">
+<h3>Lexus GX</h3>
+</div>
 
-</section>
+<div class="face" onclick="openModal(this)">
+<img src="image/red-rc-f.jpg">
+<h3>RC F</h3>
+</div>
 
-<!-- FOOTER -->
-<footer>
-    <p>&copy; 2026 Lexus. All Rights Reserved.</p>
-</footer>
+</div>
+</div>
 
-<!-- ✅ DRAG SCRIPT -->
+<!-- GRID -->
+<div class="grid">
+
+<div class="card" onclick="openModal(this)">
+<img src="image/pink-Ic500.jpg">
+<h3>LC500</h3>
+<p>Luxury coupe</p>
+<button class="btn">Buy</button>
+</div>
+
+<div class="card" onclick="openModal(this)">
+<img src="image/black-Ic500.jpg">
+<h3>Black Edition</h3>
+<p>Premium build</p>
+<button class="btn">Buy</button>
+</div>
+
+</div>
+
+<!-- ✨ MODAL -->
+<div class="modal" id="modal">
+<img id="modalImg">
+<h3 id="modalTitle"></h3>
+<button onclick="closeModal()">Close</button>
+</div>
+
 <script>
-let cards = document.querySelectorAll(".model-card");
 
-cards.forEach(card => {
-    let isDown = false;
-    let offsetX, offsetY;
+function openModal(el){
+let img = el.querySelector("img").src;
+let title = el.querySelector("h3").innerText;
 
-    card.addEventListener("mousedown", (e) => {
-        isDown = true;
-        card.style.position = "absolute";
-        offsetX = e.clientX - card.offsetLeft;
-        offsetY = e.clientY - card.offsetTop;
-    });
+document.getElementById("modalImg").src = img;
+document.getElementById("modalTitle").innerText = title;
 
-    document.addEventListener("mousemove", (e) => {
-        if (!isDown) return;
+document.getElementById("modal").style.display="flex";
+}
 
-        card.style.left = (e.clientX - offsetX) + "px";
-        card.style.top = (e.clientY - offsetY) + "px";
-    });
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
 
-    document.addEventListener("mouseup", () => {
-        isDown = false;
-    });
-});
 </script>
 
 </body>
