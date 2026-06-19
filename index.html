@@ -15,10 +15,39 @@ box-sizing:border-box;
 font-family:Arial, sans-serif;
 }
 
+/* 🌸 FEMININE BACKGROUND */
 body{
-background:#0f0f10;
-color:white;
+background:
+linear-gradient(135deg, #ffe6f0, #fff7fb, #ffeef6),
+url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+color:#333;
 overflow:hidden;
+}
+
+/* ✨ SOFT FLOATING GLOW */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%, #ff7eb3aa, transparent 45%),
+radial-gradient(circle at 80% 30%, #ffd6e8aa, transparent 50%),
+radial-gradient(circle at 40% 80%, #ffb6d5aa, transparent 55%);
+animation:floatGlow 10s infinite alternate;
+z-index:-1;
+}
+
+@keyframes floatGlow{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
 }
 
 /* NAV */
@@ -27,13 +56,15 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 50px;
-background:#1a1a1d;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(12px);
+border-bottom:2px solid #ff7eb3;
 position:relative;
 z-index:5;
 }
 
 .logo{font-size:30px;font-weight:bold;}
-.logo span{color:#d86c9a;}
+.logo span{color:#ff4f9a;}
 
 .nav-links{
 display:flex;
@@ -42,16 +73,23 @@ gap:25px;
 }
 
 .nav-links a{
-color:white;
+color:#444;
 text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:#ff4f9a;
 }
 
 /* HERO */
 .hero{
 height:90vh;
 background:
-linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.6)),
 url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1600&q=80");
+
 background-size:cover;
 background-position:center;
 display:flex;
@@ -60,30 +98,51 @@ justify-content:center;
 text-align:center;
 }
 
+/* HERO CONTENT */
 .hero-content h1{
 font-size:70px;
+color:#ff4f9a;
+text-shadow:0 5px 20px rgba(255,105,180,0.2);
 }
 
 .hero-content p{
 font-size:22px;
 margin-top:10px;
+color:#555;
 }
 
+/* BUTTON */
 .btn{
 display:inline-block;
 margin-top:20px;
 padding:14px 35px;
-background:#d86c9a;
+background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
 color:white;
 text-decoration:none;
-border-radius:5px;
+border-radius:30px;
+box-shadow:0 10px 25px rgba(255,105,180,0.3);
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 15px 35px rgba(255,105,180,0.5);
 }
 
 /* ABOUT */
 .about{
 padding:80px 50px;
-background:#1a1a1d;
+background:rgba(255,255,255,0.7);
+backdrop-filter:blur(10px);
 text-align:center;
+}
+
+.about h2{
+color:#ff4f9a;
+}
+
+.about p{
+color:#666;
 }
 
 /* INTRO */
@@ -93,7 +152,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:#000;
+background:rgba(255,240,245,0.95);
 display:flex;
 align-items:center;
 justify-content:center;
@@ -102,71 +161,41 @@ z-index:9999;
 overflow:hidden;
 }
 
-/* ENERGY BACKGROUND */
+/* SOFT PINK PULSE */
 #intro::before{
 content:"";
 position:absolute;
 width:200%;
 height:200%;
 background:
-radial-gradient(circle,#d86c9a33,transparent 40%),
-radial-gradient(circle,#ffffff10,transparent 50%);
-animation:pulse 2s infinite;
+radial-gradient(circle,#ff7eb355,transparent 50%),
+radial-gradient(circle,#ffd6e855,transparent 60%);
+animation:pulse 2.5s infinite;
 }
 
 @keyframes pulse{
-0%{transform:scale(0.8);}
+0%{transform:scale(0.9);}
 50%{transform:scale(1.2);}
-100%{transform:scale(0.8);}
-}
-
-/* FLASH */
-#intro::after{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:white;
-opacity:0;
-animation:flash 1.2s ease-out 1;
-}
-
-@keyframes flash{
-0%{opacity:0;}
-10%{opacity:1;}
-100%{opacity:0;}
+100%{transform:scale(0.9);}
 }
 
 /* TEXT */
 .intro-text{
 z-index:2;
 text-align:center;
-animation:shake 0.6s ease-in-out 1;
-}
-
-@keyframes shake{
-0%{transform:translateX(0);}
-25%{transform:translateX(-5px);}
-50%{transform:translateX(5px);}
-75%{transform:translateX(-3px);}
-100%{transform:translateX(0);}
+animation:fadeIn 1s ease-in-out;
 }
 
 .intro-text h1{
 font-size:48px;
-color:#d86c9a;
+color:#ff4f9a;
 letter-spacing:4px;
-opacity:0;
-animation:fadeIn 1s forwards;
 }
 
 .intro-text h2{
 font-size:24px;
 margin-top:10px;
-opacity:0;
-color:#fff;
-animation:fadeIn 1s forwards;
-animation-delay:0.6s;
+color:#444;
 }
 
 @keyframes fadeIn{
@@ -206,7 +235,7 @@ visibility:hidden;
     </div>
 </div>
 
-<!-- NAV (FIXED) -->
+<!-- NAV -->
 <nav>
     <div class="logo">LEX<span>U</span>S</div>
     <ul class="nav-links">
@@ -221,15 +250,15 @@ visibility:hidden;
 <section class="hero">
     <div class="hero-content">
         <h1>Pursuit of Perfection</h1>
-        <p>Luxury, innovation, and performance in every drive.</p>
+        <p>Luxury reimagined with elegance and softness.</p>
         <a href="models.html" class="btn">Explore Models</a>
     </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about">
-    <h2 style="color:#d86c9a;">About Lexus</h2>
-    <p>Luxury automotive excellence since 1989.</p>
+    <h2>About Lexus</h2>
+    <p>Where performance meets elegance and modern feminine luxury.</p>
 </section>
 
 </body>
