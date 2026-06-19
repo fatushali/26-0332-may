@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,231 +6,279 @@
 <title>LEXUS | Contact Us</title>
 
 <style>
+
+/* RESET */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    background:#0f0f10;
-    color:white;
+background:#0f0f10;
+color:white;
+overflow-x:hidden;
+}
+
+/* 🌌 ANIMATED LUXURY BACKGROUND */
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
+radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
+radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
+animation:moveBg 8s infinite alternate;
+z-index:-1;
+}
+
+@keyframes moveBg{
+from{transform:scale(1);}
+to{transform:scale(1.2);}
 }
 
 /* NAVBAR */
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 50px;
-    background:#1a1a1d;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 50px;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+border-bottom:2px solid #d86c9a;
+position:sticky;
+top:0;
 }
 
 .logo{
-    font-size:30px;
-    font-weight:bold;
+font-size:30px;
+font-weight:bold;
 }
 
-.logo span{
-    color:#d86c9a;
-}
+.logo span{color:#d86c9a;}
 
 .nav-links{
-    display:flex;
-    list-style:none;
-    gap:25px;
+display:flex;
+list-style:none;
+gap:25px;
 }
 
 .nav-links a{
-    color:white;
-    text-decoration:none;
-    transition:0.3s;
+color:white;
+text-decoration:none;
+transition:0.3s;
 }
 
 .nav-links a:hover{
-    color:#d86c9a;
+color:#d86c9a;
 }
 
-/* PAGE TITLE */
+/* HEADER */
 .header{
-    text-align:center;
-    padding:60px 20px;
+text-align:center;
+padding:60px 20px;
 }
 
 .header h1{
-    font-size:50px;
-    color:#d86c9a;
-    margin-bottom:10px;
+font-size:50px;
+color:#d86c9a;
+text-shadow:0 0 20px #d86c9a55;
 }
 
 .header p{
-    color:#ccc;
+color:#ccc;
 }
 
-/* CONTACT SECTION */
+/* CONTACT LAYOUT */
 .contact-container{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    padding:50px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+padding:50px;
 }
 
+/* 💎 INFO CARD */
 .contact-info{
-    background:#1a1a1d;
-    padding:40px;
-    border-radius:15px;
+background:rgba(26,26,29,0.9);
+padding:40px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.contact-info:hover{
+transform:translateY(-5px);
+box-shadow:0 15px 40px rgba(216,108,154,0.3);
 }
 
 .contact-info h2{
-    color:#d86c9a;
-    margin-bottom:20px;
+color:#d86c9a;
+margin-bottom:20px;
 }
 
-.contact-info p{
-    margin-bottom:15px;
-    line-height:1.7;
-    color:#ddd;
-}
-
-/* FORM */
+/* FORM CARD */
 .contact-form{
-    background:#1a1a1d;
-    padding:40px;
-    border-radius:15px;
+background:rgba(26,26,29,0.9);
+padding:40px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+transition:0.3s;
 }
 
-.contact-form h2{
-    color:#d86c9a;
-    margin-bottom:20px;
+.contact-form:hover{
+transform:translateY(-5px);
 }
 
-input,
-textarea{
-    width:100%;
-    padding:15px;
-    margin-bottom:15px;
-    border:none;
-    border-radius:5px;
-    font-size:16px;
+/* INPUTS */
+input, textarea{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+background:#111;
+color:white;
+outline:none;
+transition:0.3s;
 }
 
-textarea{
-    height:150px;
-    resize:none;
+input:focus, textarea:focus{
+box-shadow:0 0 15px #d86c9a;
 }
 
+/* BUTTON */
 button{
-    background:#d86c9a;
-    color:white;
-    border:none;
-    padding:15px 30px;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:16px;
+background:#d86c9a;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+width:100%;
+font-size:16px;
 }
 
 button:hover{
-    background:#c25584;
+background:#c25584;
+transform:scale(1.05);
+}
+
+/* 🎉 SUCCESS POPUP */
+.popup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#1a1a1d;
+padding:30px;
+border-radius:15px;
+text-align:center;
+display:none;
+box-shadow:0 0 40px #d86c9a55;
+}
+
+.popup h2{
+color:#d86c9a;
+margin-bottom:10px;
 }
 
 /* FOOTER */
 footer{
-    text-align:center;
-    padding:20px;
-    background:#1a1a1d;
-    color:#aaa;
-    margin-top:50px;
+text-align:center;
+padding:20px;
+background:#1a1a1d;
+color:#aaa;
+margin-top:50px;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-
-    nav{
-        flex-direction:column;
-        gap:15px;
-    }
-
-    .contact-container{
-        grid-template-columns:1fr;
-        padding:20px;
-    }
-
-    .header h1{
-        font-size:36px;
-    }
+.contact-container{
+grid-template-columns:1fr;
+padding:20px;
+}
 }
 
 </style>
 </head>
+
 <body>
 
+<!-- NAV -->
 <nav>
-    <div class="logo">LEX<span>U</span>S</div>
+<div class="logo">LEX<span>U</span>S</div>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="models.html">Models</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="contact.html">Contact</a></li>
-    </ul>
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="models.html">Models</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
 </nav>
 
+<!-- HEADER -->
 <section class="header">
-    <h1>Contact Lexus</h1>
-    <p>We're here to assist you with all your luxury vehicle needs.</p>
+<h1>Contact Lexus</h1>
+<p>Luxury support, anytime you need it.</p>
 </section>
 
+<!-- CONTACT -->
 <section class="contact-container">
 
-    <div class="contact-info">
-        <h2>Get In Touch</h2>
+<div class="contact-info">
+<h2>Get In Touch</h2>
 
-        <p><strong>Email:</strong> info@lexus.com</p>
+<p><strong>Email:</strong> info@lexus.com</p>
+<p><strong>Phone:</strong> +1 (800) 255-3987</p>
 
-        <p><strong>Customer Support:</strong> +1 (800) 255-3987</p>
+<p><strong>Address:</strong><br>
+Lexus Headquarters, Texas, USA</p>
 
-        <p><strong>Address:</strong><br>
-        Lexus Headquarters<br>
-        6565 Headquarters Drive<br>
-        Plano, Texas 75024<br>
-        United States</p>
+<p><strong>Hours:</strong><br>
+Mon–Fri: 8AM – 6PM</p>
+</div>
 
-        <p><strong>Business Hours:</strong><br>
-        Monday - Friday: 8:00 AM - 6:00 PM<br>
-        Saturday: 9:00 AM - 4:00 PM<br>
-        Sunday: Closed</p>
+<div class="contact-form">
 
-        <p>
-        Our dedicated team is available to answer questions about
-        Lexus vehicles, financing options, service appointments,
-        and dealership locations.
-        </p>
-    </div>
+<h2>Send Message</h2>
 
-    <div class="contact-form">
+<form onsubmit="sendForm(event)">
+<input type="text" placeholder="Full Name" required>
+<input type="email" placeholder="Email Address" required>
+<textarea placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
 
-        <h2>Send Us a Message</h2>
-
-        <form>
-            <input type="text" placeholder="Full Name" required>
-
-            <input type="email" placeholder="Email Address" required>
-
-            <input type="tel" placeholder="Phone Number">
-
-            <textarea placeholder="Your Message" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
-
-    </div>
+</div>
 
 </section>
 
+<!-- POPUP -->
+<div class="popup" id="popup">
+<h2>Message Sent ✅</h2>
+<p>We will contact you shortly.</p>
+</div>
+
 <footer>
-    <p>&copy; 2026 Lexus. All Rights Reserved.</p>
+<p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
 
+<script>
+function sendForm(e){
+e.preventDefault();
+
+let popup = document.getElementById("popup");
+popup.style.display = "block";
+
+setTimeout(()=>{
+popup.style.display = "none";
+}, 2500);
+}
+</script>
+
 </body>
-</html> 
+</html>
