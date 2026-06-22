@@ -61,17 +61,9 @@ backdrop-filter:blur(12px);
 border-bottom:2px solid #ff7eb3;
 position:sticky;
 top:0;
-z-index:100;
 }
 
-.logo{
-font-size:28px;
-font-weight:bold;
-}
-
-.logo span{
-color:#ff4f9a;
-}
+.logo span{color:#ff4f9a;}
 
 nav a{
 color:#444;
@@ -89,12 +81,10 @@ padding:40px 20px;
 .header h1{
 font-size:42px;
 color:#ff4f9a;
-margin-bottom:10px;
 }
 
 .header p{
 color:#666;
-font-size:18px;
 }
 
 /* GRID */
@@ -123,6 +113,7 @@ object-fit:cover;
 transition:0.4s;
 }
 
+/* ✨ HOVER EFFECT */
 .card:hover{
 transform:scale(1.05);
 box-shadow:0 15px 35px rgba(255,105,180,0.35);
@@ -143,21 +134,14 @@ padding:0 10px 10px;
 color:#666;
 }
 
-.price{
-color:#ff2f88;
-font-size:18px;
-font-weight:bold;
-padding-bottom:15px;
-}
-
-/* VIEWER */
+/* FULL SCREEN VIEWER */
 .viewer{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(255,255,255,0.95);
+background:rgba(255,255,255,0.92);
 display:none;
 justify-content:center;
 align-items:center;
@@ -167,32 +151,24 @@ z-index:1000;
 
 .viewer img{
 width:80%;
-max-width:650px;
+max-width:600px;
 border-radius:12px;
 box-shadow:0 20px 50px rgba(255,105,180,0.25);
 }
 
 .viewer h2{
-margin-top:15px;
+margin-top:10px;
 color:#ff4f9a;
 }
 
-.viewer p{
-font-size:22px;
-font-weight:bold;
-color:#ff2f88;
-margin-top:10px;
-}
-
 button{
-margin-top:20px;
-padding:12px 20px;
+margin-top:15px;
+padding:10px 15px;
 background:#ff4f9a;
 border:none;
 color:white;
 cursor:pointer;
 border-radius:8px;
-font-size:16px;
 transition:0.3s;
 }
 
@@ -209,7 +185,6 @@ transform:scale(1.05);
 <!-- NAV -->
 <nav>
 <div class="logo">LEX<span>US</span></div>
-
 <div>
 <a href="models.html">3D Showroom</a>
 </div>
@@ -218,76 +193,58 @@ transform:scale(1.05);
 <!-- HEADER -->
 <div class="header">
 <h1>Lexus Gallery</h1>
-<p>Soft Luxury • Feminine Elegance • Modern Performance</p>
+<p>Soft luxury • Feminine elegance • Modern performance</p>
 </div>
 
-<!-- GALLERY -->
+<!-- GRID -->
 <div class="grid">
 
-<div class="card" onclick="openView('LC500','image/pink-lc500.jpg','KSh 18,500,000')">
-<img src="image/pink-lc500.jpg" alt="LC500">
+<div class="card" onclick="openView('LC500','image/pink-Ic500.jpg')">
+<img src="image/pink-Ic500.jpg">
 <h3>LC500</h3>
 <p>Luxury Coupe</p>
-<p class="price">KSh 18,500,000</p>
 </div>
 
-<div class="card" onclick="openView('GX SUV','image/gx-red-f.jpg','KSh 14,800,000')">
-<img src="image/gx-red-f.jpg" alt="GX SUV">
+<div class="card" onclick="openView('GX SUV','image/gx-red-f.jpg')">
+<img src="image/gx-red-f.jpg">
 <h3>GX SUV</h3>
 <p>Off-road Luxury</p>
-<p class="price">KSh 14,800,000</p>
 </div>
 
-<div class="card" onclick="openView('RC F','image/red-rc-f.jpg','KSh 12,900,000')">
-<img src="image/red-rc-f.jpg" alt="RC F">
+<div class="card" onclick="openView('RC F','image/red-rc-f.jpg')">
+<img src="image/red-rc-f.jpg">
 <h3>RC F</h3>
 <p>Sport Performance</p>
-<p class="price">KSh 12,900,000</p>
 </div>
 
-<div class="card" onclick="openView('LX 570','image/beig-lx570.jpg','KSh 22,500,000')">
-<img src="image/beig-lx570.jpg" alt="LX570">
+<div class="card" onclick="openView('LX 570','image/beig-Ix570.jpg')">
+<img src="image/beig-Ix570.jpg">
 <h3>LX 570</h3>
 <p>Flagship SUV</p>
-<p class="price">KSh 22,500,000</p>
 </div>
 
 </div>
 
-<!-- FULL SCREEN VIEWER -->
+<!-- VIEWER -->
 <div class="viewer" id="viewer">
-
 <img id="vimg">
-
 <h2 id="vtitle"></h2>
-
-<p id="vprice"></p>
-
 <button onclick="closeView()">Close</button>
-
 </div>
 
 <script>
 
-function openView(name,img,price){
-
+function openView(name,img){
 document.getElementById("viewer").style.display="flex";
-
 document.getElementById("vimg").src=img;
-
 document.getElementById("vtitle").innerText=name;
-
-document.getElementById("vprice").innerText=price;
-
 }
 
 function closeView(){
-
 document.getElementById("viewer").style.display="none";
-
 }
 
 </script>
 
 </body>
-</html>
+</html> 
