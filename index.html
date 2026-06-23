@@ -17,8 +17,7 @@ font-family:Arial,sans-serif;
 
 /* BODY */
 body{
-background:
-linear-gradient(135deg,#ffe6f0,#fff7fb,#ffeef6);
+background:linear-gradient(135deg,#ffe6f0,#fff7fb,#ffeef6);
 color:#333;
 overflow-x:hidden;
 }
@@ -59,9 +58,7 @@ align-items:center;
 z-index:9999;
 }
 
-#registerPopup{
-display:none;
-}
+#registerPopup{display:none;}
 
 .popup-content{
 background:white;
@@ -88,7 +85,6 @@ margin-bottom:15px;
 .popup-content p{
 font-size:18px;
 color:#666;
-line-height:1.7;
 margin-bottom:20px;
 }
 
@@ -100,15 +96,8 @@ padding:14px 35px;
 font-size:16px;
 border-radius:30px;
 cursor:pointer;
-transition:.3s;
-box-shadow:0 10px 25px rgba(255,105,180,.3);
 }
 
-.popup-btn:hover{
-transform:scale(1.05);
-}
-
-/* FORM */
 #registerForm{
 display:flex;
 flex-direction:column;
@@ -119,12 +108,7 @@ gap:15px;
 padding:14px;
 border:2px solid #ffd6e8;
 border-radius:10px;
-font-size:16px;
 outline:none;
-}
-
-#registerForm input:focus{
-border-color:#ff4f9a;
 }
 
 #message{
@@ -132,7 +116,7 @@ margin-top:15px;
 font-weight:bold;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
 display:flex;
 justify-content:space-between;
@@ -162,21 +146,18 @@ color:#444;
 font-weight:bold;
 }
 
-.nav-links a:hover{color:#ff4f9a;}
-
 /* HERO */
 .hero{
 height:90vh;
-background:
-linear-gradient(rgba(255,255,255,.25),rgba(255,255,255,.4)),
-url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
-background-size:cover;
-background-position:center;
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:20px;
+background:
+linear-gradient(rgba(255,255,255,.3),rgba(255,255,255,.5)),
+url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
 }
 
 .hero-content h1{
@@ -186,7 +167,6 @@ color:#ff4f9a;
 
 .hero-content p{
 font-size:22px;
-margin-top:10px;
 color:#555;
 }
 
@@ -196,23 +176,23 @@ margin-top:25px;
 padding:14px 35px;
 background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
 color:white;
-text-decoration:none;
 border-radius:30px;
+text-decoration:none;
 }
 
-/* CARS */
-.cars{
+/* SECTIONS */
+.cars,.about,.bottom-register{
 padding:80px 40px;
 text-align:center;
-background:rgba(255,255,255,.7);
 }
 
-.cars h2{
-font-size:42px;
+.cars h2,.about h2,.bottom-register h2{
 color:#ff4f9a;
-margin-bottom:40px;
+font-size:40px;
+margin-bottom:20px;
 }
 
+/* CARDS */
 .car-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -221,44 +201,14 @@ gap:25px;
 
 .car-card{
 background:white;
-border-radius:15px;
 padding:25px;
+border-radius:15px;
 box-shadow:0 10px 25px rgba(255,105,180,.2);
 }
 
-/* ABOUT */
-.about{
-padding:80px 40px;
-text-align:center;
-background:white;
-}
-
-/* FOOTER */
-footer{
-background:#ff4f9a;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-/* BOTTOM REGISTER */
+/* BOTTOM FORM */
 .bottom-register{
-padding:80px 40px;
 background:linear-gradient(135deg,#fff0f7,#ffe6f0);
-text-align:center;
-}
-
-.bottom-register h2{
-font-size:42px;
-color:#ff4f9a;
-margin-bottom:15px;
-}
-
-.bottom-register p{
-color:#666;
-max-width:700px;
-margin:0 auto 25px;
-line-height:1.8;
 }
 
 .bottom-register-form{
@@ -278,15 +228,17 @@ border-radius:10px;
 .bottom-register-form button{
 background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
 color:white;
-border:none;
 padding:14px;
+border:none;
 border-radius:30px;
 cursor:pointer;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-.hero-content h1{font-size:45px;}
+footer{
+background:#ff4f9a;
+color:white;
+padding:20px;
+text-align:center;
 }
 
 </style>
@@ -294,11 +246,11 @@ cursor:pointer;
 
 <body>
 
-<!-- WELCOME POPUP -->
+<!-- WELCOME -->
 <div id="welcomePopup">
 <div class="popup-content">
 <h1>Welcome to Lexus</h1>
-<p>The Pursuit of Perfection begins here.</p>
+<p>Pursuit of Perfection</p>
 <button class="popup-btn" onclick="showRegister()">Continue</button>
 </div>
 </div>
@@ -306,6 +258,7 @@ cursor:pointer;
 <!-- REGISTER POPUP -->
 <div id="registerPopup">
 <div class="popup-content">
+
 <h1>Create Account</h1>
 
 <form id="registerForm">
@@ -317,6 +270,7 @@ cursor:pointer;
 </form>
 
 <p id="message"></p>
+
 </div>
 </div>
 
@@ -335,34 +289,32 @@ cursor:pointer;
 <section class="hero">
 <div class="hero-content">
 <h1>Pursuit of Perfection</h1>
-<p>Luxury, elegance and performance in every drive.</p>
-<a href="#" class="btn">Explore Models</a>
+<p>Luxury and performance combined.</p>
+<a class="btn" href="#">Explore Models</a>
 </div>
 </section>
 
 <!-- CARS -->
 <section class="cars">
-<h2>Our Lexus Collection</h2>
+<h2>Our Collection</h2>
 <div class="car-grid">
-
-<div class="car-card"><h3>LC 500</h3><p>Luxury grand touring coupe.</p></div>
-<div class="car-card"><h3>GX SUV</h3><p>Premium off-road SUV.</p></div>
-<div class="car-card"><h3>RC F</h3><p>High-performance sports coupe.</p></div>
-<div class="car-card"><h3>LX 570</h3><p>Flagship luxury SUV.</p></div>
-
+<div class="car-card"><h3>LC 500</h3></div>
+<div class="car-card"><h3>GX SUV</h3></div>
+<div class="car-card"><h3>RC F</h3></div>
+<div class="car-card"><h3>LX 570</h3></div>
 </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about">
 <h2>About Lexus</h2>
-<p>Since 1989, Lexus has defined luxury and innovation.</p>
+<p>Luxury redefined since 1989.</p>
 </section>
 
 <!-- BOTTOM REGISTER -->
 <section class="bottom-register">
-<h2>Create Your Lexus Account</h2>
-<p>Join for exclusive updates and offers.</p>
+<h2>Create Account</h2>
+<p>Join Lexus for updates and offers.</p>
 
 <form class="bottom-register-form">
 <input type="text" placeholder="Full Name" required>
@@ -372,41 +324,72 @@ cursor:pointer;
 <button type="submit">Register Now</button>
 </form>
 
-<p id="bottomMessage"></p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-<p>© 2026 Lexus Luxury Experience</p>
+<p>© 2026 Lexus</p>
 </footer>
 
 <script>
 
+/* OPEN REGISTER */
 function showRegister(){
 document.getElementById("welcomePopup").style.display="none";
 document.getElementById("registerPopup").style.display="flex";
 }
 
+/* POPUP VALIDATION */
 document.getElementById("registerForm").addEventListener("submit",function(e){
 e.preventDefault();
 
-let p=document.getElementById("message");
+let fullname=document.getElementById("fullname").value.trim();
+let email=document.getElementById("email").value.trim();
+let password=document.getElementById("password").value;
+let confirmPassword=document.getElementById("confirmPassword").value;
+let message=document.getElementById("message");
 
-p.style.color="green";
-p.innerHTML="Registration Successful!";
+/* NAME CHECK */
+if(fullname===""){
+message.style.color="red";
+message.innerHTML="Please enter your full name.";
+return;
+}
+
+if(fullname.length<3){
+message.style.color="red";
+message.innerHTML="Name must be at least 3 characters.";
+return;
+}
+
+/* EMAIL CHECK */
+if(email===""){
+message.style.color="red";
+message.innerHTML="Enter email address.";
+return;
+}
+
+/* PASSWORD */
+if(password.length<6){
+message.style.color="red";
+message.innerHTML="Password too short.";
+return;
+}
+
+/* CONFIRM */
+if(password!==confirmPassword){
+message.style.color="red";
+message.innerHTML="Passwords do not match.";
+return;
+}
+
+/* SUCCESS */
+message.style.color="green";
+message.innerHTML="Registration Successful!";
 
 setTimeout(()=>{
 document.getElementById("registerPopup").style.display="none";
 },1500);
-});
 
-document.querySelector(".bottom-register-form")
-.addEventListener("submit",function(e){
-e.preventDefault();
-
-document.getElementById("bottomMessage").style.color="green";
-document.getElementById("bottomMessage").innerHTML="Registration Successful!";
-this.reset();
 });
 
 </script>
