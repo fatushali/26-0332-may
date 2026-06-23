@@ -98,24 +98,6 @@ border-radius:30px;
 cursor:pointer;
 }
 
-#registerForm{
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-
-#registerForm input{
-padding:14px;
-border:2px solid #ffd6e8;
-border-radius:10px;
-outline:none;
-}
-
-#message{
-margin-top:15px;
-font-weight:bold;
-}
-
 /* NAV */
 nav{
 display:flex;
@@ -125,6 +107,9 @@ padding:20px 50px;
 background:rgba(255,255,255,.8);
 backdrop-filter:blur(12px);
 border-bottom:2px solid #ff7eb3;
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .logo{
@@ -181,12 +166,13 @@ text-decoration:none;
 }
 
 /* SECTIONS */
-.cars,.about,.bottom-register{
+section{
 padding:80px 40px;
 text-align:center;
+scroll-margin-top:100px;
 }
 
-.cars h2,.about h2,.bottom-register h2{
+h2{
 color:#ff4f9a;
 font-size:40px;
 margin-bottom:20px;
@@ -246,7 +232,7 @@ text-align:center;
 
 <body>
 
-<!-- WELCOME -->
+<!-- WELCOME POPUP -->
 <div id="welcomePopup">
 <div class="popup-content">
 <h1>Welcome to Lexus</h1>
@@ -258,7 +244,6 @@ text-align:center;
 <!-- REGISTER POPUP -->
 <div id="registerPopup">
 <div class="popup-content">
-
 <h1>Create Account</h1>
 
 <form id="registerForm">
@@ -270,7 +255,6 @@ text-align:center;
 </form>
 
 <p id="message"></p>
-
 </div>
 </div>
 
@@ -278,24 +262,25 @@ text-align:center;
 <nav>
 <div class="logo">LEX<span>U</span>S</div>
 <ul class="nav-links">
-<li><a href="#">Home</a></li>
-<li><a href="#">Models</a></li>
-<li><a href="#">Gallery</a></li>
-<li><a href="#">Contact</a></li>
+<li><a href="#home">Home</a></li>
+<li><a href="#models">Models</a></li>
+<li><a href="#gallery">Gallery</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#register">Register</a></li>
 </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="home">
 <div class="hero-content">
 <h1>Pursuit of Perfection</h1>
 <p>Luxury and performance combined.</p>
-<a class="btn" href="#">Explore Models</a>
+<a class="btn" href="#models">Explore Models</a>
 </div>
 </section>
 
 <!-- CARS -->
-<section class="cars">
+<section id="models">
 <h2>Our Collection</h2>
 <div class="car-grid">
 <div class="car-card"><h3>LC 500</h3></div>
@@ -306,13 +291,13 @@ text-align:center;
 </section>
 
 <!-- ABOUT -->
-<section class="about">
+<section id="about">
 <h2>About Lexus</h2>
 <p>Luxury redefined since 1989.</p>
 </section>
 
-<!-- BOTTOM REGISTER -->
-<section class="bottom-register">
+<!-- REGISTER SECTION -->
+<section id="register" class="bottom-register">
 <h2>Create Account</h2>
 <p>Join Lexus for updates and offers.</p>
 
@@ -323,7 +308,6 @@ text-align:center;
 <input type="password" placeholder="Confirm Password" required>
 <button type="submit">Register Now</button>
 </form>
-
 </section>
 
 <footer>
@@ -332,13 +316,13 @@ text-align:center;
 
 <script>
 
-/* OPEN REGISTER */
+/* SHOW REGISTER POPUP */
 function showRegister(){
 document.getElementById("welcomePopup").style.display="none";
 document.getElementById("registerPopup").style.display="flex";
 }
 
-/* POPUP VALIDATION */
+/* VALIDATION */
 document.getElementById("registerForm").addEventListener("submit",function(e){
 e.preventDefault();
 
@@ -348,41 +332,24 @@ let password=document.getElementById("password").value;
 let confirmPassword=document.getElementById("confirmPassword").value;
 let message=document.getElementById("message");
 
-/* NAME CHECK */
-if(fullname===""){
-message.style.color="red";
-message.innerHTML="Please enter your full name.";
-return;
-}
-
 if(fullname.length<3){
 message.style.color="red";
-message.innerHTML="Name must be at least 3 characters.";
+message.innerHTML="Enter valid name";
 return;
 }
 
-/* EMAIL CHECK */
-if(email===""){
-message.style.color="red";
-message.innerHTML="Enter email address.";
-return;
-}
-
-/* PASSWORD */
 if(password.length<6){
 message.style.color="red";
-message.innerHTML="Password too short.";
+message.innerHTML="Password too short";
 return;
 }
 
-/* CONFIRM */
 if(password!==confirmPassword){
 message.style.color="red";
-message.innerHTML="Passwords do not match.";
+message.innerHTML="Passwords do not match";
 return;
 }
 
-/* SUCCESS */
 message.style.color="green";
 message.innerHTML="Registration Successful!";
 
