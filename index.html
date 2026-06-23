@@ -23,7 +23,7 @@ color:#333;
 overflow-x:hidden;
 }
 
-/* SOFT GLOW */
+/* BACKGROUND GLOW */
 body::before{
 content:"";
 position:fixed;
@@ -44,8 +44,9 @@ from{transform:scale(1);}
 to{transform:scale(1.1);}
 }
 
-/* WELCOME POPUP */
-#welcomePopup{
+/* POPUPS */
+#welcomePopup,
+#registerPopup{
 position:fixed;
 top:0;
 left:0;
@@ -56,6 +57,10 @@ display:flex;
 justify-content:center;
 align-items:center;
 z-index:9999;
+}
+
+#registerPopup{
+display:none;
 }
 
 .popup-content{
@@ -69,8 +74,19 @@ box-shadow:0 20px 50px rgba(0,0,0,0.3);
 animation:popupShow .7s ease;
 }
 
+@keyframes popupShow{
+from{
+opacity:0;
+transform:scale(.7);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
+}
+
 .popup-content h1{
-font-size:45px;
+font-size:40px;
 color:#ff4f9a;
 margin-bottom:15px;
 }
@@ -79,7 +95,7 @@ margin-bottom:15px;
 font-size:18px;
 color:#666;
 line-height:1.7;
-margin-bottom:25px;
+margin-bottom:20px;
 }
 
 .popup-btn{
@@ -87,7 +103,7 @@ background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
 color:white;
 border:none;
 padding:14px 35px;
-font-size:17px;
+font-size:16px;
 border-radius:30px;
 cursor:pointer;
 transition:.3s;
@@ -98,15 +114,28 @@ box-shadow:0 10px 25px rgba(255,105,180,.3);
 transform:scale(1.05);
 }
 
-@keyframes popupShow{
-from{
-opacity:0;
-transform:scale(.7);
+/* FORM */
+#registerForm{
+display:flex;
+flex-direction:column;
+gap:15px;
 }
-to{
-opacity:1;
-transform:scale(1);
+
+#registerForm input{
+padding:14px;
+border:2px solid #ffd6e8;
+border-radius:10px;
+font-size:16px;
+outline:none;
 }
+
+#registerForm input:focus{
+border-color:#ff4f9a;
+}
+
+#message{
+margin-top:15px;
+font-weight:bold;
 }
 
 /* NAVBAR */
@@ -181,7 +210,6 @@ background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
 color:white;
 text-decoration:none;
 border-radius:30px;
-box-shadow:0 10px 25px rgba(255,105,180,.3);
 transition:.3s;
 }
 
@@ -194,7 +222,6 @@ transform:scale(1.05);
 padding:80px 40px;
 text-align:center;
 background:rgba(255,255,255,.7);
-backdrop-filter:blur(10px);
 }
 
 .cars h2{
@@ -239,16 +266,16 @@ background:white;
 }
 
 .about h2{
+font-size:40px;
 color:#ff4f9a;
 margin-bottom:15px;
-font-size:40px;
 }
 
 .about p{
-color:#666;
 max-width:700px;
 margin:auto;
 line-height:1.8;
+color:#666;
 }
 
 /* FOOTER */
@@ -263,21 +290,17 @@ padding:20px;
 @media(max-width:768px){
 
 nav{
-padding:15px;
 flex-direction:column;
 gap:15px;
+padding:15px;
 }
 
 .hero-content h1{
-font-size:42px;
+font-size:45px;
 }
 
 .hero-content p{
 font-size:18px;
-}
-
-.popup-content h1{
-font-size:34px;
 }
 
 }
@@ -299,9 +322,38 @@ The Pursuit of Perfection begins here.
 Discover luxury, innovation and performance.
 </p>
 
-<button class="popup-btn" onclick="closePopup()">
-Enter Showroom
+<button class="popup-btn" onclick="showRegister()">
+Continue
 </button>
+
+</div>
+
+</div>
+
+<!-- REGISTRATION FORM -->
+<div id="registerPopup">
+
+<div class="popup-content">
+
+<h1>Create Account</h1>
+
+<form id="registerForm">
+
+<input type="text" id="fullname" placeholder="Full Name">
+
+<input type="email" id="email" placeholder="Email Address">
+
+<input type="password" id="password" placeholder="Password">
+
+<input type="password" id="confirmPassword" placeholder="Confirm Password">
+
+<button type="submit" class="popup-btn">
+Register
+</button>
+
+</form>
+
+<p id="message"></p>
 
 </div>
 
@@ -398,16 +450,59 @@ to deliver comfort, elegance and confidence on every journey.
 
 </section>
 
-<!-- FOOTER -->
 <footer>
 <p>© 2026 Lexus Luxury Experience. All Rights Reserved.</p>
 </footer>
 
 <script>
 
-function closePopup(){
+function showRegister(){
 document.getElementById("welcomePopup").style.display = "none";
+document.getElementById("registerPopup").style.display = "flex";
 }
+
+document.getElementById("registerForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+let fullname = document.getElementById("fullname").value;
+let email = document.getElementById("email").value;
+let password = document.getElementById("password").value;
+let confirmPassword = document.getElementById("confirmPassword").value;
+let message = document.getElementById("message");
+
+if(fullname.length < 3){
+message.style.color = "red";
+message.innerHTML = "Full name must be at least 3 characters.";
+return;
+}
+
+if(email === ""){
+message.style.color = "red";
+message.innerHTML = "Please enter an email address.";
+return;
+}
+
+if(password.length < 6){
+message.style.color = "red";
+message.innerHTML = "Password must be at least 6 characters.";
+return;
+}
+
+if(password !== confirmPassword){
+message.style.color = "red";
+message.innerHTML = "Passwords do not match.";
+return;
+}
+
+message.style.color = "green";
+message.innerHTML = "Registration Successful! Welcome to Lexus.";
+
+setTimeout(function(){
+document.getElementById("registerPopup").style.display = "none";
+},1500);
+
+});
 
 </script>
 
