@@ -773,6 +773,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 });
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
+const supabaseKey = "YOUR_ACTUAL_ANON_KEY_HERE";
+
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+</script>
 
 </body>
 </html>
