@@ -43,22 +43,20 @@ from{transform:scale(1);}
 to{transform:scale(1.1);}
 }
 
-/* POPUPS */
-#welcomePopup,
-#registerPopup{
+/* WELCOME POPUP */
+
+#welcomePopup{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.65);
+background:rgba(0,0,0,.65);
 display:flex;
 justify-content:center;
 align-items:center;
 z-index:9999;
 }
-
-#registerPopup{display:none;}
 
 .popup-content{
 background:white;
@@ -67,13 +65,19 @@ max-width:500px;
 padding:40px;
 border-radius:25px;
 text-align:center;
-box-shadow:0 20px 50px rgba(0,0,0,0.3);
+box-shadow:0 20px 50px rgba(0,0,0,.3);
 animation:popupShow .7s ease;
 }
 
 @keyframes popupShow{
-from{opacity:0;transform:scale(.7);}
-to{opacity:1;transform:scale(1);}
+from{
+opacity:0;
+transform:scale(.7);
+}
+to{
+opacity:1;
+transform:scale(1);
+}
 }
 
 .popup-content h1{
@@ -98,7 +102,8 @@ border-radius:30px;
 cursor:pointer;
 }
 
-/* NAV */
+/* NAVIGATION */
+
 nav{
 display:flex;
 justify-content:space-between;
@@ -117,22 +122,29 @@ font-size:30px;
 font-weight:bold;
 }
 
-.logo span{color:#ff4f9a;}
-
-.nav-links{.nav-links{
-    display:flex;
-    list-style:none;
-    gap:25px;
+.logo span{
+color:#ff4f9a;
 }
-</nav>
+
+.nav-links{
+display:flex;
+list-style:none;
+gap:25px;
+}
 
 .nav-links a{
 text-decoration:none;
 color:#444;
 font-weight:bold;
+transition:.3s;
+}
+
+.nav-links a:hover{
+color:#ff4f9a;
 }
 
 /* HERO */
+
 .hero{
 height:90vh;
 display:flex;
@@ -167,6 +179,7 @@ text-decoration:none;
 }
 
 /* SECTIONS */
+
 section{
 padding:80px 40px;
 text-align:center;
@@ -180,6 +193,7 @@ margin-bottom:20px;
 }
 
 /* CARDS */
+
 .car-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -193,34 +207,6 @@ border-radius:15px;
 box-shadow:0 10px 25px rgba(255,105,180,.2);
 }
 
-/* BOTTOM FORM */
-.bottom-register{
-background:linear-gradient(135deg,#fff0f7,#ffe6f0);
-}
-
-.bottom-register-form{
-max-width:500px;
-margin:auto;
-display:flex;
-flex-direction:column;
-gap:15px;
-}
-
-.bottom-register-form input{
-padding:14px;
-border:2px solid #ffd6e8;
-border-radius:10px;
-}
-
-.bottom-register-form button{
-background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
-color:white;
-padding:14px;
-border:none;
-border-radius:30px;
-cursor:pointer;
-}
-
 footer{
 background:#ff4f9a;
 color:white;
@@ -229,137 +215,123 @@ text-align:center;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <!-- WELCOME POPUP -->
+
 <div id="welcomePopup">
+
 <div class="popup-content">
+
 <h1>Welcome to Lexus</h1>
+
 <p>Pursuit of Perfection</p>
-<button class="popup-btn" onclick="showRegister()">Continue</button>
-</div>
-</div>
 
-<!-- REGISTER POPUP -->
-<div id="registerPopup">
-<div class="popup-content">
-<h1>Create Account</h1>
+<button class="popup-btn" onclick="closeWelcome()">Enter Website</button>
 
-<form id="registerForm">
-<input type="text" id="fullname" placeholder="Full Name">
-<input type="email" id="email" placeholder="Email">
-<input type="password" id="password" placeholder="Password">
-<input type="password" id="confirmPassword" placeholder="Confirm Password">
-<button type="submit" class="popup-btn">Register</button>
-</form>
-
-<p id="message"></p>
-</div>
 </div>
 
-<!-- NAV -->
+</div>
+
+<!-- NAVIGATION -->
 
 <nav>
-    <div class="logo">LEX<span>U</span>S</div>
 
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="models.html">Models</a></li>
-        <li><a href="gallery.html">Gallery</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="register.html">Register</a></li>
-    </ul>
-</nav>
+<div class="logo">
+LEX<span>U</span>S
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="models.html">Models</a></li>
+
+<li><a href="gallery.html">Gallery</a></li>
+
+</ul>
+
 </nav>
 
 <!-- HERO -->
+
 <section class="hero" id="home">
+
 <div class="hero-content">
+
 <h1>Pursuit of Perfection</h1>
+
 <p>Luxury and performance combined.</p>
+
 <a class="btn" href="#models">Explore Models</a>
+
 </div>
+
 </section>
 
-<!-- CARS -->
+<!-- MODELS -->
+
 <section id="models">
+
 <h2>Our Collection</h2>
+
 <div class="car-grid">
-<div class="car-card"><h3>LC 500</h3></div>
-<div class="car-card"><h3>GX SUV</h3></div>
-<div class="car-card"><h3>RC F</h3></div>
-<div class="car-card"><h3>LX 570</h3></div>
+
+<div class="car-card">
+<h3>LC 500</h3>
 </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-<h2>About Lexus</h2>
-<p>Luxury redefined since 1989.</p>
-</section>
+<div class="car-card">
+<h3>GX SUV</h3>
+</div>
 
-<!-- REGISTER SECTION -->
-<section id="register" class="bottom-register">
-<h2>Create Account</h2>
-<p>Join Lexus for updates and offers.</p>
+<div class="car-card">
+<h3>RC F</h3>
+</div>
 
-<form class="bottom-register-form">
-<input type="text" placeholder="Full Name" required>
-<input type="email" placeholder="Email" required>
-<input type="password" placeholder="Password" required>
-<input type="password" placeholder="Confirm Password" required>
-<button type="submit">Register Now</button>
-</form>
+<div class="car-card">
+<h3>LX 570</h3>
+</div>
+
+</div>
+
 </section>
+<!-- FOOTER -->
 
 <footer>
-<p>© 2026 Lexus</p>
+    <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
+
+<!-- JAVASCRIPT -->
 
 <script>
 
-/* SHOW REGISTER POPUP */
-function showRegister(){
-document.getElementById("welcomePopup").style.display="none";
-document.getElementById("registerPopup").style.display="flex";
+// Close the welcome popup
+function closeWelcome(){
+    document.getElementById("welcomePopup").style.display = "none";
 }
 
-/* VALIDATION */
-document.getElementById("registerForm").addEventListener("submit",function(e){
-e.preventDefault();
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
-let fullname=document.getElementById("fullname").value.trim();
-let email=document.getElementById("email").value.trim();
-let password=document.getElementById("password").value;
-let confirmPassword=document.getElementById("confirmPassword").value;
-let message=document.getElementById("message");
+    anchor.addEventListener("click", function(e){
 
-if(fullname.length<3){
-message.style.color="red";
-message.innerHTML="Enter valid name";
-return;
-}
+        e.preventDefault();
 
-if(password.length<6){
-message.style.color="red";
-message.innerHTML="Password too short";
-return;
-}
+        const target = document.querySelector(this.getAttribute("href"));
 
-if(password!==confirmPassword){
-message.style.color="red";
-message.innerHTML="Passwords do not match";
-return;
-}
+        if(target){
 
-message.style.color="green";
-message.innerHTML="Registration Successful!";
+            target.scrollIntoView({
+                behavior: "smooth"
+            });
 
-setTimeout(()=>{
-document.getElementById("registerPopup").style.display="none";
-},1500);
+        }
+
+    });
 
 });
 
