@@ -748,18 +748,17 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         ]);
 
     if(error){
-        message.style.color = "red";
-        message.innerHTML = error.message;
-        console.log(error);
-    }else{
-        message.style.color = "green";
-        message.innerHTML = "Registration Successful!";
+    console.log(error);
+    alert(error.message);
 
-        document.getElementById("registerForm").reset();
+    message.style.color = "red";
+    message.innerHTML = error.message;
+}else{
 
-        setTimeout(function(){
-            document.getElementById("registerPopup").style.display = "none";
-        },2000);
+    alert("Registration Successful!");
+
+    message.style.color = "green";
+    message.innerHTML = "Registration Successful!";
     }
 
 });
