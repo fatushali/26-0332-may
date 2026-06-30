@@ -196,7 +196,16 @@ transition:.3s;
 
 transform:scale(1.05);
 
-}
+} <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
+const supabaseKey = "YOUR_PUBLISHABLE_KEY";
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+</script>
 
 /* Registration Form */
 
@@ -776,18 +785,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
 });
 
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script>
-const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
-
-const supabaseKey = "sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
-
-const supabase = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
 </script>
 
 </body>
