@@ -108,7 +108,14 @@ z-index:9999;
 
 #registerPopup{
 
-display:none;
+setTimeout(function(){
+
+    document.getElementById("registerPopup").style.display = "none";
+
+    // Go to the website homepage
+    window.location.href = "index.html";
+
+},2000);
 
 }
 
@@ -703,67 +710,14 @@ function showRegister(){
 // ===============================
 // REGISTRATION FORM VALIDATION
 // ===============================
-document.getElementById("registerForm").addEventListener("submit", async function(e){
+setTimeout(function(){
 
-    e.preventDefault();
+    document.getElementById("registerPopup").style.display = "none";
 
-    let fullname = document.getElementById("fullname").value.trim();
-    let email = document.getElementById("email").value.trim();
-    let password = document.getElementById("password").value;
-    let confirmPassword = document.getElementById("confirmPassword").value;
-    let message = document.getElementById("message");
+    // Show the website
+    document.body.style.overflow = "auto";
 
-    if(fullname.length < 3){
-        message.style.color = "red";
-        message.innerHTML = "Please enter your full name.";
-        return;
-    }
-
-    if(email == ""){
-        message.style.color = "red";
-        message.innerHTML = "Please enter your email.";
-        return;
-    }
-
-    if(password.length < 6){
-        message.style.color = "red";
-        message.innerHTML = "Password must be at least 6 characters.";
-        return;
-    }
-
-    if(password !== confirmPassword){
-        message.style.color = "red";
-        message.innerHTML = "Passwords do not match.";
-        return;
-    }
-
-    const { data, error } = await supabase
-        .from("users")
-        .insert([
-            {
-                fullname: fullname,
-                email: email,
-                password: password
-            }
-        ]);
-
-    if(error){
-    console.log(error);
-    alert(error.message);
-
-    message.style.color = "red";
-    message.innerHTML = error.message;
-}else{
-
-    alert("Registration Successful!");
-
-    message.style.color = "green";
-    message.innerHTML = "Registration Successful!";
-    }
-
-});
-
-
+},2000);
 
 
 // ===============================
