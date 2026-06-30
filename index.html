@@ -689,62 +689,66 @@ function showRegister(){
 // ===============================
 // REGISTRATION FORM VALIDATION
 // ===============================
-
-document.getElementById("registerForm").addEventListener("submit", function(e){
+document.getElementById("registerForm").addEventListener("submit", async function(e){
 
     e.preventDefault();
 
     let fullname = document.getElementById("fullname").value.trim();
-
     let email = document.getElementById("email").value.trim();
-
     let password = document.getElementById("password").value;
-
     let confirmPassword = document.getElementById("confirmPassword").value;
-
     let message = document.getElementById("message");
 
     if(fullname.length < 3){
-
         message.style.color = "red";
         message.innerHTML = "Please enter your full name.";
         return;
-
     }
 
-    if(email === ""){
-
+    if(email == ""){
         message.style.color = "red";
         message.innerHTML = "Please enter your email.";
         return;
-
     }
 
     if(password.length < 6){
-
         message.style.color = "red";
         message.innerHTML = "Password must be at least 6 characters.";
         return;
-
     }
 
     if(password !== confirmPassword){
-
         message.style.color = "red";
         message.innerHTML = "Passwords do not match.";
         return;
-
     }
 
-    message.style.color = "green";
-    message.innerHTML = "Registration Successful!";
+    const { data, error } = await supabase
+        .from("users")
+        .insert([
+            {
+                fullname: fullname,
+                email: email,
+                password: password
+            }
+        ]);
 
-    // Close popup after 2 seconds
-    setTimeout(function(){
+    if(error){
+        message.style.color = "red";
+        message.innerHTML = error.message;
+        console.log(error);
+    }else{
+        message.style.color = "green";
+        message.innerHTML = "Registration Successful!";
 
-        document.getElementById("registerPopup").style.display = "none";
+        document.getElementById("registerForm").reset();
 
-    },2000);
+        setTimeout(function(){
+            document.getElementById("registerPopup").style.display = "none";
+        },2000);
+    }
+
+});
 
 });
 
