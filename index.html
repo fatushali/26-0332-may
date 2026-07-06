@@ -414,7 +414,9 @@ margin-top:60px;
 
 const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
 const supabaseKey = "sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey, {
+    auth: { persistSession: false }
+});
 
 // ===============================
 // SHOW REGISTRATION POPUP
@@ -459,7 +461,7 @@ registerForm.addEventListener("submit", async function(e){
     registerBtn.disabled = true;
     registerBtn.textContent = "Registering...";
 
-    const { data, error } = await supabase.auth.signUp({
+    const { data, error } = await supabaseClient.auth.signUp({
         email: email,
         password: password,
         options: {
