@@ -9,9 +9,6 @@
 
 <style>
 
-/* =========================
-        RESET
-========================= */
 
 *{
 margin:0;
@@ -21,9 +18,7 @@ font-family:Arial,sans-serif;
 scroll-behavior:smooth;
 }
 
-/* =========================
-        BODY
-========================= */
+
 
 body{
 background:linear-gradient(135deg,#ffe6f0,#fff7fb,#ffeef6);
@@ -32,7 +27,7 @@ overflow-x:hidden;
 overflow:hidden; /* locked while popups are open, released by JS */
 }
 
-/* Animated Background */
+
 
 body::before{
 content:"";
@@ -53,10 +48,6 @@ animation:glow 10s infinite alternate;
 from{ transform:scale(1); }
 to{ transform:scale(1.1); }
 }
-
-/* =========================
-      POPUPS
-========================= */
 
 #welcomePopup,
 #registerPopup,
@@ -151,7 +142,6 @@ cursor:not-allowed;
 transform:none;
 }
 
-/* Registration Form */
 
 #registerForm input{
 width:100%;
@@ -171,10 +161,6 @@ min-height:20px;
 
 #message.error{ color:#d6336c; }
 #message.success{ color:#2f9e44; }
-
-/* =========================
-        NAVBAR
-========================= */
 
 nav{
 display:flex;
@@ -215,9 +201,6 @@ transition:.3s;
 color:#ff4f9a;
 }
 
-/* =========================
-        HERO
-========================= */
 
 .hero{
 height:90vh;
@@ -265,9 +248,6 @@ transform:translateY(-5px);
 box-shadow:0 10px 20px rgba(255,105,180,.3);
 }
 
-/* =========================
-        SECTIONS
-========================= */
 
 section{
 padding:80px 40px;
@@ -280,9 +260,6 @@ color:#ff4f9a;
 margin-bottom:40px;
 }
 
-/* =========================
-      CAR COLLECTION
-========================= */
 
 .car-grid{
 display:grid;
@@ -319,9 +296,6 @@ margin-bottom:10px;
 color:#555;
 }
 
-/* =========================
-        FOOTER
-========================= */
 
 footer{
 background:#ff4f9a;
@@ -337,9 +311,6 @@ margin-top:60px;
 
 <body>
 
-<!-- =========================
-     WELCOME POPUP
-========================= -->
 
 <div id="welcomePopup">
 <div class="popup-content">
@@ -352,9 +323,6 @@ margin-top:60px;
 </div>
 </div>
 
-<!-- =========================
-    REGISTRATION POPUP
-========================= -->
 
 <div id="registerPopup">
 <div class="popup-content">
@@ -371,9 +339,6 @@ margin-top:60px;
 </div>
 </div>
 
-<!-- =========================
-        LOGIN POPUP
-========================= -->
 
 <div id="loginPopup">
 <div class="popup-content">
@@ -388,9 +353,7 @@ margin-top:60px;
 </div>
 </div>
 
-<!-- =========================
-        NAVIGATION
-========================= -->
+
 
 <nav>
 <div class="logo">LEX<span>U</span>S</div>
@@ -401,9 +364,6 @@ margin-top:60px;
 </ul>
 </nav>
 
-<!-- =========================
-        HERO SECTION
-========================= -->
 
 <section class="hero" id="home">
 <div class="hero-content">
@@ -413,9 +373,6 @@ margin-top:60px;
 </div>
 </section>
 
-<!-- =========================
-      OUR COLLECTION
-========================= -->
 
 <section id="models">
 <h2>Our Collection</h2>
@@ -448,26 +405,21 @@ margin-top:60px;
 </div>
 </section>
 
-<!-- =========================
-          FOOTER
-========================= -->
 <footer>
 <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+loginForm.addEventListener("submit", function(e){
+    e.preventDefault();
 
-<script>
+    document.getElementById("loginPopup").style.display = "none";
+    document.body.style.overflow = "auto";
 
-const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
-const supabaseKey = "sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey, {
-    auth: { persistSession: false }
+    alert("Welcome to Lexus!");
 });
 
-// ===============================
-// SHOW REGISTRATION POPUP
-// ===============================
+
+
 
 function showRegister(){
     document.getElementById("welcomePopup").style.display = "none";
@@ -481,9 +433,6 @@ function showLogin(){
     document.getElementById("loginPopup").style.display = "flex";
 }
 
-// ===============================
-// REGISTRATION FORM SUBMISSION
-// ===============================
 
 const registerForm = document.getElementById("registerForm");
 const messageEl = document.getElementById("message");
@@ -512,15 +461,14 @@ registerForm.addEventListener("submit", async function(e){
         return;
     }
 
-    registerBtn.disabled = true;
-    registerBtn.textContent = "Registering...";
+   
+   registerForm.addEventListener("submit", function(e){
+    e.preventDefault();
 
-    const { data, error } = await supabaseClient.auth.signUp({
-        email: email,
-        password: password,
-        options: {
-            data: { full_name: fullname }
-        }
+    alert("Registration successful!");
+
+    document.getElementById("registerPopup").style.display = "none";
+    document.body.style.overflow = "auto";
     });
 
     registerBtn.disabled = false;
@@ -540,10 +488,6 @@ registerForm.addEventListener("submit", async function(e){
         document.body.style.overflow = "auto";
     }, 1800);
 });
-
-// ===============================
-// LOGIN FORM SUBMISSION
-// ===============================
 
 const loginForm = document.getElementById("loginForm");
 const loginMessageEl = document.getElementById("loginMessage");
@@ -584,9 +528,6 @@ loginForm.addEventListener("submit", async function(e){
     }, 1200);
 });
 
-// ===============================
-// SMOOTH SCROLLING
-// ===============================
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function(e){
