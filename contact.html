@@ -267,16 +267,44 @@ Mon–Fri: 8AM – 6PM</p>
 <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 </footer>
 
+<!-- Supabase Library -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-function sendForm(e){
-e.preventDefault();
+const supabaseUrl = "https://xzyvxtviczcbzuluzhmd.supabase.co";
+const supabaseKey = "sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
 
-let popup = document.getElementById("popup");
-popup.style.display = "block";
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-setTimeout(()=>{
-popup.style.display = "none";
-}, 2500);
+async function sendForm(e) {
+    e.preventDefault();
+
+    const name = document.querySelector('input[type="text"]').value;
+    const email = document.querySelector('input[type="email"]').value;
+    const message = document.querySelector("textarea").value;
+
+    const { error } = await supabase
+        .from("contacts")
+        .insert([
+            {
+                name: name,
+                email: email,
+                message: message
+            }
+        ]);
+
+    if (error) {
+        alert("Error: " + error.message);
+        return;
+    }
+
+    const popup = document.getElementById("popup");
+    popup.style.display = "block";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+        document.querySelector("form").reset();
+    }, 2500);
 }
 </script>
 
