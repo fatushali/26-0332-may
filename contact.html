@@ -21,7 +21,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* 🌌 ANIMATED LUXURY BACKGROUND */
+/* ANIMATED BACKGROUND */
 body::before{
 content:"";
 position:fixed;
@@ -51,6 +51,7 @@ backdrop-filter:blur(10px);
 border-bottom:2px solid #d86c9a;
 position:sticky;
 top:0;
+z-index:10;
 }
 
 .logo{
@@ -72,8 +73,17 @@ text-decoration:none;
 transition:0.3s;
 }
 
-.nav-links a:hover{
+.nav-links a:hover, .nav-links a:focus-visible{
 color:#d86c9a;
+}
+
+.nav-toggle{
+display:none;
+background:none;
+border:none;
+color:white;
+font-size:28px;
+cursor:pointer;
 }
 
 /* HEADER */
@@ -100,7 +110,7 @@ gap:40px;
 padding:50px;
 }
 
-/* 💎 INFO CARD */
+/* INFO CARD */
 .contact-info{
 background:rgba(26,26,29,0.9);
 padding:40px;
@@ -119,6 +129,20 @@ color:#d86c9a;
 margin-bottom:20px;
 }
 
+.contact-info p{
+margin-bottom:15px;
+line-height:1.5;
+}
+
+.contact-info a{
+color:#d86c9a;
+text-decoration:none;
+}
+
+.contact-info a:hover, .contact-info a:focus-visible{
+text-decoration:underline;
+}
+
 /* FORM CARD */
 .contact-form{
 background:rgba(26,26,29,0.9);
@@ -132,12 +156,22 @@ transition:0.3s;
 transform:translateY(-5px);
 }
 
-/* INPUTS */
+/* LABELS + INPUTS */
+label{
+display:block;
+font-size:14px;
+color:#ccc;
+margin-bottom:6px;
+}
+
+.field{
+margin-bottom:18px;
+}
+
 input, textarea{
 width:100%;
 padding:15px;
-margin-bottom:15px;
-border:none;
+border:1px solid #2a2a2d;
 border-radius:8px;
 background:#111;
 color:white;
@@ -147,6 +181,32 @@ transition:0.3s;
 
 input:focus, textarea:focus{
 box-shadow:0 0 15px #d86c9a;
+border-color:#d86c9a;
+}
+
+input:invalid:not(:placeholder-shown){
+border-color:#e0546f;
+}
+
+textarea{
+resize:vertical;
+min-height:120px;
+}
+
+.error-text{
+color:#e0546f;
+font-size:13px;
+margin-top:6px;
+min-height:16px;
+}
+
+/* Honeypot field - hidden from real users, visible to bots that fill every field */
+.hp-field{
+position:absolute;
+left:-9999px;
+width:1px;
+height:1px;
+overflow:hidden;
 }
 
 /* BUTTON */
@@ -160,30 +220,81 @@ cursor:pointer;
 transition:0.3s;
 width:100%;
 font-size:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
 }
 
-button:hover{
+button:hover:not(:disabled){
 background:#c25584;
 transform:scale(1.05);
 }
 
-/* 🎉 SUCCESS POPUP */
-.popup{
+button:disabled{
+opacity:0.7;
+cursor:not-allowed;
+transform:none;
+}
+
+.spinner{
+width:16px;
+height:16px;
+border:2px solid rgba(255,255,255,0.4);
+border-top-color:#fff;
+border-radius:50%;
+animation:spin 0.7s linear infinite;
+display:none;
+}
+
+button[aria-busy="true"] .spinner{
+display:inline-block;
+}
+
+@keyframes spin{
+to{transform:rotate(360deg);}
+}
+
+/* FORM-LEVEL STATUS MESSAGE */
+.form-status{
+margin-top:15px;
+font-size:14px;
+text-align:center;
+min-height:20px;
+}
+
+.form-status.success{color:#6fd88a;}
+.form-status.error{color:#e0546f;}
+
+/* SUCCESS POPUP */
+.popup-overlay{
 position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+inset:0;
+background:rgba(0,0,0,0.6);
+display:none;
+align-items:center;
+justify-content:center;
+z-index:100;
+}
+
+.popup{
 background:#1a1a1d;
-padding:30px;
+padding:30px 40px;
 border-radius:15px;
 text-align:center;
-display:none;
 box-shadow:0 0 40px #d86c9a55;
+max-width:90%;
 }
 
 .popup h2{
 color:#d86c9a;
 margin-bottom:10px;
+}
+
+.popup button{
+margin-top:20px;
+width:auto;
+padding:10px 25px;
 }
 
 /* FOOTER */
@@ -197,10 +308,32 @@ margin-top:50px;
 
 /* MOBILE */
 @media(max-width:768px){
+
 .contact-container{
 grid-template-columns:1fr;
 padding:20px;
 }
+
+.nav-toggle{
+display:block;
+}
+
+.nav-links{
+position:absolute;
+top:100%;
+left:0;
+right:0;
+flex-direction:column;
+background:rgba(0,0,0,0.95);
+padding:20px 30px;
+gap:15px;
+display:none;
+}
+
+.nav-links.open{
+display:flex;
+}
+
 }
 
 </style>
@@ -212,7 +345,9 @@ padding:20px;
 <nav>
 <div class="logo">LEX<span>U</span>S</div>
 
-<ul class="nav-links">
+<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">&#9776;</button>
+
+<ul class="nav-links" id="navLinks">
 <li><a href="index.html">Home</a></li>
 <li><a href="models.html">Models</a></li>
 <li><a href="gallery.html">Gallery</a></li>
@@ -232,8 +367,8 @@ padding:20px;
 <div class="contact-info">
 <h2>Get In Touch</h2>
 
-<p><strong>Email:</strong> info@lexus.com</p>
-<p><strong>Phone:</strong> +1 (800) 255-3987</p>
+<p><strong>Email:</strong> <a href="mailto:info@lexus.com">info@lexus.com</a></p>
+<p><strong>Phone:</strong> <a href="tel:+18002553987">+1 (800) 255-3987</a></p>
 
 <p><strong>Address:</strong><br>
 Lexus Headquarters, Texas, USA</p>
@@ -246,11 +381,36 @@ Mon–Fri: 8AM – 6PM</p>
 
 <h2>Send Message</h2>
 
-<form onsubmit="sendForm(event)">
-<input type="text" placeholder="Full Name" required>
-<input type="email" placeholder="Email Address" required>
-<textarea placeholder="Your Message" required></textarea>
-<button type="submit">Send Message</button>
+<form id="contactForm" novalidate>
+
+<div class="field">
+<label for="fullName">Full Name</label>
+<input type="text" id="fullName" name="fullName" autocomplete="name" required>
+</div>
+
+<div class="field">
+<label for="emailAddress">Email Address</label>
+<input type="email" id="emailAddress" name="emailAddress" autocomplete="email" required>
+</div>
+
+<div class="field">
+<label for="messageText">Your Message</label>
+<textarea id="messageText" name="messageText" required></textarea>
+</div>
+
+<!-- Honeypot: real users never see or fill this; bots often do -->
+<div class="hp-field" aria-hidden="true">
+<label for="companyWebsite">Website</label>
+<input type="text" id="companyWebsite" name="companyWebsite" tabindex="-1" autocomplete="off">
+</div>
+
+<button type="submit" id="submitBtn">
+<span class="spinner" aria-hidden="true"></span>
+<span id="submitLabel">Send Message</span>
+</button>
+
+<div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
 </form>
 
 </div>
@@ -258,9 +418,12 @@ Mon–Fri: 8AM – 6PM</p>
 </section>
 
 <!-- POPUP -->
-<div class="popup" id="popup">
-<h2>Message Sent ✅</h2>
+<div class="popup-overlay" id="popupOverlay">
+<div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
+<h2 id="popupTitle">Message Sent</h2>
 <p>We will contact you shortly.</p>
+<button type="button" id="popupClose">Close</button>
+</div>
 </div>
 
 <footer>
@@ -276,36 +439,102 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-async function sendForm(e) {
-    e.preventDefault();
+// --- Mobile nav toggle ---
+const navToggle = document.getElementById("navToggle");
+const navLinks = document.getElementById("navLinks");
 
-    const name = document.querySelector('input[type="text"]').value;
-    const email = document.querySelector('input[type="email"]').value;
-    const message = document.querySelector("textarea").value;
+navToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+});
 
+// --- Popup helpers ---
+const popupOverlay = document.getElementById("popupOverlay");
+const popupClose = document.getElementById("popupClose");
+
+function showPopup() {
+  popupOverlay.style.display = "flex";
+  popupClose.focus();
+}
+
+function hidePopup() {
+  popupOverlay.style.display = "none";
+}
+
+popupClose.addEventListener("click", hidePopup);
+popupOverlay.addEventListener("click", (e) => {
+  if (e.target === popupOverlay) hidePopup();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && popupOverlay.style.display === "flex") hidePopup();
+});
+
+// --- Form handling ---
+const form = document.getElementById("contactForm");
+const submitBtn = document.getElementById("submitBtn");
+const submitLabel = document.getElementById("submitLabel");
+const formStatus = document.getElementById("formStatus");
+
+const nameInput = document.getElementById("fullName");
+const emailInput = document.getElementById("emailAddress");
+const messageInput = document.getElementById("messageText");
+const honeypotInput = document.getElementById("companyWebsite");
+
+function setStatus(message, type) {
+  formStatus.textContent = message;
+  formStatus.className = "form-status" + (type ? " " + type : "");
+}
+
+function setLoading(isLoading) {
+  submitBtn.disabled = isLoading;
+  submitBtn.setAttribute("aria-busy", isLoading ? "true" : "false");
+  submitLabel.textContent = isLoading ? "Sending..." : "Send Message";
+}
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  setStatus("", "");
+
+  // Honeypot check: if this hidden field got filled, silently drop it
+  if (honeypotInput.value.trim() !== "") {
+    form.reset();
+    return;
+  }
+
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const message = messageInput.value.trim();
+
+  if (!name || !email || !message) {
+    setStatus("Please fill in all fields.", "error");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
     const { error } = await supabase
-        .from("contacts")
-        .insert([
-            {
-                name: name,
-                email: email,
-                message: message
-            }
-        ]);
+      .from("contacts")
+      .insert([{ name, email, message }]);
 
     if (error) {
-        alert("Error: " + error.message);
-        return;
+      setStatus("Something went wrong. Please try again.", "error");
+      console.error("Supabase insert error:", error.message);
+      return;
     }
 
-    const popup = document.getElementById("popup");
-    popup.style.display = "block";
+    form.reset();
+    setStatus("", "");
+    showPopup();
 
-    setTimeout(() => {
-        popup.style.display = "none";
-        document.querySelector("form").reset();
-    }, 2500);
-}
+  } catch (err) {
+    setStatus("Network error. Please check your connection and try again.", "error");
+    console.error("Unexpected error:", err);
+
+  } finally {
+    setLoading(false);
+  }
+});
 </script>
 
 </body>
