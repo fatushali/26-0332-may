@@ -525,11 +525,20 @@ Explore Models
 <p>&copy; 2026 Lexus. All Rights Reserved.</p>
 
 </footer>
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-/* =========================
-        SHOW POPUPS
-========================= */
+<script>
+  const SUPABASE_URL = "https://xzyvxtviczcbzuluzhmd.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);      
+
+
 
 function showRegister(){
 
@@ -560,46 +569,85 @@ const loginMessage=document.getElementById("loginMessage");
 /* =========================
         REGISTER
 ========================= */
+registerForm.addEventListener("submit", async function(e){
 
-registerForm.addEventListener("submit",function(e){
+    e.preventDefault();
 
-e.preventDefault();
+    const fullname = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-const fullname=document.getElementById("fullname").value.trim();
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
-const confirm=document.getElementById("confirmPassword").value;
+    message.className = "";
+    message.textContent = "";
 
-message.className="";
-message.textContent="";
+    if(fullname === ""){
+        message.textContent = "Please enter your full name.";
+        message.className = "error";
+        return;
+    }
 
-if(fullname===""){
-message.textContent="Enter your full name.";
-message.className="error";
-return;
-}
+    if(password !== confirmPassword){
+        message.textContent = "Passwords do not match.";
+        message.className = "error";
+        return;
+    }
 
-if(password!==confirm){
-message.textContent="Passwords do not match.";
-message.className="error";
-return;
-}
+    if(password.length < 6){
+        message.textContent = "Password must be at least 6 characters.";
+        message.className = "error";
+        return;
+    }
 
-if(password.length<6){
-message.textContent="Password must be at least 6 characters.";
-message.className="error";
-return;
-}
+    const registerBtn = document.getElementById("registerBtn");
 
-message.textContent="Registration successful!";
-message.className="success";
+    registerBtn.disabled = true;
+    registerBtn.textContent = "Creating account...";
 
-setTimeout(function(){
+    try {
 
-document.getElementById("registerPopup").style.display="none";
-document.body.style.overflow="auto";
+        const { data, error } = await supabaseClient.auth.signUp({
 
-},1200);
+            email: email,
+            password: password,
+
+            options: {
+                data: {
+                    full_name: fullname
+                }
+            }
+
+        });
+
+        if(error){
+            throw error;
+        }
+
+        console.log("Supabase registration:", data);
+
+        message.textContent = "Account created successfully!";
+        message.className = "success";
+
+        registerBtn.textContent = "Registered ✓";
+
+        setTimeout(function(){
+
+            document.getElementById("registerPopup").style.display = "none";
+            document.body.style.overflow = "auto";
+
+        }, 1500);
+
+    } catch(error) {
+
+        console.error("Registration error:", error);
+
+        message.textContent = error.message;
+        message.className = "error";
+
+        registerBtn.disabled = false;
+        registerBtn.textContent = "Register";
+
+    }
 
 });
 
