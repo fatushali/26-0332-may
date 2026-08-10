@@ -7,134 +7,158 @@
 
 <style>
 
-body{
-margin:0;
-overflow:hidden;
-font-family:Arial;
-color:white;
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial;
+    color: white;
 
-/* 🚗 LEXUS LUXURY BACKGROUND */
-background:
-linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
-url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80");
+    /* LEXUS LUXURY BACKGROUND */
+    background:
+        linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=2000&q=80");
 
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 /* NAV */
-nav{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:60px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 20px;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(10px);
-z-index:10;
-border-bottom:2px solid #d86c9a;
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+    border-bottom: 2px solid #d86c9a;
 }
 
-.logo{
-font-weight:bold;
-font-size:20px;
+.logo {
+    font-weight: bold;
+    font-size: 20px;
 }
-.logo span{color:#d86c9a;}
 
-.nav a{
-color:white;
-margin-left:15px;
-text-decoration:none;
+.logo span {
+    color: #d86c9a;
+}
+
+.nav a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
 }
 
 /* 3D SCENE */
-#scene{
-width:100%;
-height:100vh;
-perspective:1200px;
-display:flex;
-justify-content:center;
-align-items:center;
+#scene {
+    width: 100%;
+    height: 100vh;
+    perspective: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-/* ✨ glow floor effect */
-background:radial-gradient(circle at center, rgba(216,108,154,0.08), transparent 60%);
+    /* Glow floor effect */
+    background: radial-gradient(
+        circle at center,
+        rgba(216,108,154,0.08),
+        transparent 60%
+    );
 }
 
 /* SHOWROOM WRAPPER */
-.room{
-position:relative;
-width:400px;
-height:250px;
-transform-style:preserve-3d;
-animation:rotateRoom 12s linear infinite;
+.room {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    transform-style: preserve-3d;
+    animation: rotateRoom 12s linear infinite;
 }
 
-@keyframes rotateRoom{
-0%{transform:rotateY(0deg);}
-100%{transform:rotateY(360deg);}
+@keyframes rotateRoom {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
 }
 
 /* CAR IMAGE CARDS */
-.car{
-position:absolute;
-width:220px;
-height:140px;
-background:#1a1a1d;
-border-radius:12px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.5);
-cursor:pointer;
-transition:0.3s;
+.car {
+    position: absolute;
+    width: 220px;
+    height: 140px;
+    background: #1a1a1d;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-.car img{
-width:100%;
-height:100%;
-object-fit:cover;
+.car img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.car:hover{
-transform:scale(1.1);
+.car:hover {
+    transform: scale(1.1);
 }
 
 /* POSITION IN 3D CIRCLE */
-.car:nth-child(1){transform:rotateY(0deg) translateZ(350px);}
-.car:nth-child(2){transform:rotateY(90deg) translateZ(350px);}
-.car:nth-child(3){transform:rotateY(180deg) translateZ(350px);}
-.car:nth-child(4){transform:rotateY(270deg) translateZ(350px);}
+.car:nth-child(1) {
+    transform: rotateY(0deg) translateZ(350px);
+}
+
+.car:nth-child(2) {
+    transform: rotateY(90deg) translateZ(350px);
+}
+
+.car:nth-child(3) {
+    transform: rotateY(180deg) translateZ(350px);
+}
+
+.car:nth-child(4) {
+    transform: rotateY(270deg) translateZ(350px);
+}
 
 /* MODAL */
-.modal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-display:none;
-justify-content:center;
-align-items:center;
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
 }
 
-.box{
-background:#1a1a1d;
-padding:20px;
-border-radius:10px;
-text-align:center;
+.box {
+    background: #1a1a1d;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
 
-button{
-margin-top:10px;
-padding:10px;
-background:#d86c9a;
-border:none;
-color:white;
-cursor:pointer;
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #d86c9a;
+    border: none;
+    color: white;
+    cursor: pointer;
 }
 
 </style>
@@ -144,89 +168,111 @@ cursor:pointer;
 
 <!-- NAV -->
 <nav>
-<div class="logo">LEX<span>US</span></div>
-<div class="nav">
-<a href="#">Home</a>
-<a href="#">Models</a>
-<a href="#">Gallery</a>
-</div>
+    <div class="logo">LEX<span>US</span></div>
+
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="#">Models</a>
+        <a href="#">Gallery</a>
+    </div>
 </nav>
 
 <!-- 3D ROOM -->
 <div id="scene">
 
-<div class="room" id="room">
+    <div class="room" id="room">
 
-<div class="car" onclick="openCar('LC500','image/pink-Ic500.jpg')">
-<img src="image/pink-Ic500.jpg">
-</div>
+        <div class="car" onclick="openCar('LC500', 'image/pink-Ic500.jpg')">
+            <img src="image/pink-Ic500.jpg">
+        </div>
 
-<div class="car" onclick="openCar('GX SUV','image/gx-red-f.jpg')">
-<img src="image/gx-red-f.jpg">
-</div>
+        <div class="car" onclick="openCar('GX SUV', 'image/gx-red-f.jpg')">
+            <img src="image/gx-red-f.jpg">
+        </div>
 
-<div class="car" onclick="openCar('RC F','image/red-rc-f.jpg')">
-<img src="image/red-rc-f.jpg">
-</div>
+        <div class="car" onclick="openCar('RC F', 'image/red-rc-f.jpg')">
+            <img src="image/red-rc-f.jpg">
+        </div>
 
-<div class="car" onclick="openCar('LX 570','image/beig-Ix570.jpg')">
-<img src="image/beig-Ix570.jpg">
-</div>
+        <div class="car" onclick="openCar('LX 570', 'image/beig-Ix570.jpg')">
+            <img src="image/beig-Ix570.jpg">
+        </div>
 
-</div>
+    </div>
 
 </div>
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-<div class="box">
-<h2 id="title"></h2>
-<img id="bigImg" style="width:250px;border-radius:10px;">
-<p>Luxury Lexus Model</p>
-<button onclick="buy()">Buy</button>
-<button onclick="closeModal()">Close</button>
-</div>
+
+    <div class="box">
+
+        <h2 id="title"></h2>
+
+        <img
+            id="bigImg"
+            style="width:250px;border-radius:10px;"
+        >
+
+        <p>Luxury Lexus Model</p>
+
+        <button onclick="buy()">Buy</button>
+
+        <button onclick="closeModal()">Close</button>
+
+    </div>
+
 </div>
 
 <script>
 
-/* ROTATION CONTROL (mouse drag) */
+/* ROTATION CONTROL */
 let room = document.getElementById("room");
 let isDown = false;
 let startX;
 let rotation = 0;
 
-document.addEventListener("mousedown",(e)=>{
-isDown = true;
-startX = e.clientX;
+document.addEventListener("mousedown", (e) => {
+    isDown = true;
+    startX = e.clientX;
 });
 
-document.addEventListener("mouseup",()=>{
-isDown = false;
+document.addEventListener("mouseup", () => {
+    isDown = false;
 });
 
-document.addEventListener("mousemove",(e)=>{
-if(!isDown) return;
+document.addEventListener("mousemove", (e) => {
 
-let move = e.clientX - startX;
-rotation += move * 0.2;
-room.style.transform = `rotateY(${rotation}deg)`;
-startX = e.clientX;
+    if (!isDown) return;
+
+    let move = e.clientX - startX;
+
+    rotation += move * 0.2;
+
+    room.style.transform = `rotateY(${rotation}deg)`;
+
+    startX = e.clientX;
 });
 
 /* MODAL */
-function openCar(name,img){
-document.getElementById("title").innerText = name;
-document.getElementById("bigImg").src = img;
-document.getElementById("modal").style.display="flex";
+function openCar(name, img) {
+
+    document.getElementById("title").innerText = name;
+
+    document.getElementById("bigImg").src = img;
+
+    document.getElementById("modal").style.display = "flex";
 }
 
-function closeModal(){
-document.getElementById("modal").style.display="none";
+function closeModal() {
+
+    document.getElementById("modal").style.display = "none";
 }
 
-function buy(){
-alert("Purchase Successful (Demo Mode)");
+function buy() {
+
+    alert("Purchase Successful (Demo Mode)");
+
 }
 
 </script>
