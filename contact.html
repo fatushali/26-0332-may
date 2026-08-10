@@ -1,65 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEXUS | Contact Us</title>
+
+<title>LEXUS | Home</title>
 
 <style>
 
-/* RESET */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
+scroll-behavior:smooth;
 }
+
+
+/* =========================
+        BODY
+========================= */
 
 body{
-background:#0f0f10;
-color:white;
+background:linear-gradient(135deg,#ffe6f0,#fff7fb,#ffeef6);
+color:#333;
 overflow-x:hidden;
+overflow:hidden;
 }
 
-/* ANIMATED BACKGROUND */
+
+/* =========================
+        BACKGROUND
+========================= */
+
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
+
 background:
-radial-gradient(circle at 20% 20%, #d86c9a33, transparent 40%),
-radial-gradient(circle at 80% 30%, #ffffff10, transparent 45%),
-radial-gradient(circle at 40% 80%, #d86c9a22, transparent 50%);
-animation:moveBg 8s infinite alternate;
+radial-gradient(circle at 20% 20%,#ff7eb355,transparent 40%),
+radial-gradient(circle at 80% 30%,#ffd6e855,transparent 50%),
+radial-gradient(circle at 40% 80%,#ffb6d555,transparent 55%);
+
 z-index:-1;
+animation:glow 10s infinite alternate;
 }
 
-@keyframes moveBg{
-from{transform:scale(1);}
-to{transform:scale(1.2);}
+
+@keyframes glow{
+
+from{
+transform:scale(1);
 }
 
-/* NAVBAR */
+to{
+transform:scale(1.1);
+}
+
+}
+
+
+/* =========================
+        POPUPS
+========================= */
+
+#welcomePopup,
+#registerPopup,
+#loginPopup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+background:rgba(0,0,0,.7);
+
+z-index:9999;
+}
+
+
+#registerPopup,
+#loginPopup{
+display:none;
+}
+
+
+.popup-content{
+background:white;
+width:90%;
+max-width:500px;
+
+padding:40px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:0 15px 40px rgba(0,0,0,.3);
+
+animation:popup .6s ease;
+}
+
+
+@keyframes popup{
+
+from{
+opacity:0;
+transform:scale(.7);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+.popup-content h1{
+color:#ff4f9a;
+font-size:40px;
+margin-bottom:15px;
+}
+
+
+.popup-content p{
+color:#666;
+margin-bottom:25px;
+font-size:18px;
+}
+
+
+.welcome-actions{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+}
+
+
+.popup-btn{
+background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
+
+color:white;
+
+border:none;
+
+padding:14px 35px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:.3s;
+}
+
+
+.popup-btn:hover{
+transform:scale(1.05);
+}
+
+
+.switch-link{
+margin-top:15px;
+font-size:14px;
+color:#666;
+}
+
+
+.switch-link a{
+color:#ff4f9a;
+font-weight:bold;
+cursor:pointer;
+text-decoration:none;
+}
+
+
+.switch-link a:hover{
+text-decoration:underline;
+}
+
+
+#registerForm input,
+#loginForm input{
+width:100%;
+padding:15px;
+margin:10px 0;
+
+border:2px solid #ffd6e8;
+
+border-radius:10px;
+
+font-size:16px;
+
+outline:none;
+}
+
+
+#message,
+#loginMessage{
+margin-top:15px;
+font-weight:bold;
+min-height:20px;
+}
+
+
+.error{
+color:#d6336c;
+}
+
+
+.success{
+color:#2f9e44;
+}
+
+
+/* =========================
+        NAVBAR
+========================= */
+
 nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 padding:20px 50px;
-background:rgba(0,0,0,0.6);
+
+background:rgba(255,255,255,.8);
+
 backdrop-filter:blur(10px);
-border-bottom:2px solid #d86c9a;
+
+border-bottom:2px solid #ff7eb3;
+
 position:sticky;
+
 top:0;
-z-index:10;
+
+z-index:1000;
 }
+
 
 .logo{
 font-size:30px;
 font-weight:bold;
 }
 
-.logo span{color:#d86c9a;}
+
+.logo span{
+color:#ff4f9a;
+}
+
 
 .nav-links{
 display:flex;
@@ -67,476 +270,753 @@ list-style:none;
 gap:25px;
 }
 
+
 .nav-links a{
-color:white;
 text-decoration:none;
-transition:0.3s;
+color:#444;
+font-weight:bold;
+transition:.3s;
 }
 
-.nav-links a:hover, .nav-links a:focus-visible{
-color:#d86c9a;
+
+.nav-links a:hover{
+color:#ff4f9a;
 }
 
-.nav-toggle{
-display:none;
-background:none;
-border:none;
-color:white;
-font-size:28px;
-cursor:pointer;
-}
 
-/* HEADER */
-.header{
+/* =========================
+        HERO SECTION
+========================= */
+
+.hero{
+height:90vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
 text-align:center;
-padding:60px 20px;
+
+background:
+
+linear-gradient(
+rgba(255,255,255,.35),
+rgba(255,255,255,.45)
+),
+
+url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+
+background-position:center;
 }
 
-.header h1{
-font-size:50px;
-color:#d86c9a;
-text-shadow:0 0 20px #d86c9a55;
+
+.hero-content{
+max-width:700px;
+padding:20px;
 }
 
-.header p{
-color:#ccc;
-}
 
-/* CONTACT LAYOUT */
-.contact-container{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:40px;
-padding:50px;
-}
-
-/* INFO CARD */
-.contact-info{
-background:rgba(26,26,29,0.9);
-padding:40px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-transition:0.3s;
-}
-
-.contact-info:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 40px rgba(216,108,154,0.3);
-}
-
-.contact-info h2{
-color:#d86c9a;
+.hero-content h1{
+font-size:70px;
+color:#ff4f9a;
 margin-bottom:20px;
 }
 
-.contact-info p{
-margin-bottom:15px;
-line-height:1.5;
+
+.hero-content p{
+font-size:22px;
+margin-bottom:30px;
+color:#444;
 }
 
-.contact-info a{
-color:#d86c9a;
-text-decoration:none;
-}
 
-.contact-info a:hover, .contact-info a:focus-visible{
-text-decoration:underline;
-}
-
-/* FORM CARD */
-.contact-form{
-background:rgba(26,26,29,0.9);
-padding:40px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-transition:0.3s;
-}
-
-.contact-form:hover{
-transform:translateY(-5px);
-}
-
-/* LABELS + INPUTS */
-label{
-display:block;
-font-size:14px;
-color:#ccc;
-margin-bottom:6px;
-}
-
-.field{
-margin-bottom:18px;
-}
-
-input, textarea{
-width:100%;
-padding:15px;
-border:1px solid #2a2a2d;
-border-radius:8px;
-background:#111;
-color:white;
-outline:none;
-transition:0.3s;
-}
-
-input:focus, textarea:focus{
-box-shadow:0 0 15px #d86c9a;
-border-color:#d86c9a;
-}
-
-input:invalid:not(:placeholder-shown){
-border-color:#e0546f;
-}
-
-textarea{
-resize:vertical;
-min-height:120px;
-}
-
-.error-text{
-color:#e0546f;
-font-size:13px;
-margin-top:6px;
-min-height:16px;
-}
-
-/* Honeypot field - hidden from real users, visible to bots that fill every field */
-.hp-field{
-position:absolute;
-left:-9999px;
-width:1px;
-height:1px;
-overflow:hidden;
-}
-
-/* BUTTON */
-button{
-background:#d86c9a;
-color:white;
-border:none;
-padding:15px 30px;
-border-radius:8px;
-cursor:pointer;
-transition:0.3s;
-width:100%;
-font-size:16px;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:10px;
-}
-
-button:hover:not(:disabled){
-background:#c25584;
-transform:scale(1.05);
-}
-
-button:disabled{
-opacity:0.7;
-cursor:not-allowed;
-transform:none;
-}
-
-.spinner{
-width:16px;
-height:16px;
-border:2px solid rgba(255,255,255,0.4);
-border-top-color:#fff;
-border-radius:50%;
-animation:spin 0.7s linear infinite;
-display:none;
-}
-
-button[aria-busy="true"] .spinner{
+.btn{
 display:inline-block;
+
+padding:15px 35px;
+
+background:linear-gradient(90deg,#ff7eb3,#ff4f9a);
+
+color:white;
+
+text-decoration:none;
+
+border-radius:30px;
+
+font-weight:bold;
+
+transition:.3s;
 }
 
-@keyframes spin{
-to{transform:rotate(360deg);}
+
+.btn:hover{
+transform:translateY(-5px);
+
+box-shadow:0 10px 20px rgba(255,105,180,.3);
 }
 
-/* FORM-LEVEL STATUS MESSAGE */
-.form-status{
-margin-top:15px;
-font-size:14px;
+
+/* =========================
+        SECTIONS
+========================= */
+
+section{
+padding:80px 40px;
 text-align:center;
-min-height:20px;
 }
 
-.form-status.success{color:#6fd88a;}
-.form-status.error{color:#e0546f;}
 
-/* SUCCESS POPUP */
-.popup-overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.6);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:100;
+section h2{
+font-size:42px;
+color:#ff4f9a;
+margin-bottom:40px;
 }
 
-.popup{
-background:#1a1a1d;
-padding:30px 40px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 0 40px #d86c9a55;
-max-width:90%;
-}
 
-.popup h2{
-color:#d86c9a;
-margin-bottom:10px;
-}
+/* =========================
+        FOOTER
+========================= */
 
-.popup button{
-margin-top:20px;
-width:auto;
-padding:10px 25px;
-}
-
-/* FOOTER */
 footer{
+background:#ff4f9a;
+
+color:white;
+
 text-align:center;
-padding:20px;
-background:#1a1a1d;
-color:#aaa;
-margin-top:50px;
+
+padding:25px;
+
+margin-top:60px;
 }
 
-/* MOBILE */
-@media(max-width:768px){
-
-.contact-container{
-grid-template-columns:1fr;
-padding:20px;
-}
-
-.nav-toggle{
-display:block;
-}
-
-.nav-links{
-position:absolute;
-top:100%;
-left:0;
-right:0;
-flex-direction:column;
-background:rgba(0,0,0,0.95);
-padding:20px 30px;
-gap:15px;
-display:none;
-}
-
-.nav-links.open{
-display:flex;
-}
-
-}
 
 </style>
+
 </head>
+
 
 <body>
 
-<!-- NAV -->
-<nav>
-<div class="logo">LEX<span>U</span>S</div>
 
-<button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle navigation menu">&#9776;</button>
+<!-- =========================
+        WELCOME POPUP
+========================= -->
 
-<ul class="nav-links" id="navLinks">
-<li><a href="index.html">Home</a></li>
-<li><a href="models.html">Models</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="contact.html">Contact</a></li>
-</ul>
-</nav>
+<div id="welcomePopup">
 
-<!-- HEADER -->
-<section class="header">
-<h1>Contact Lexus</h1>
-<p>Luxury support, anytime you need it.</p>
-</section>
+<div class="popup-content">
 
-<!-- CONTACT -->
-<section class="contact-container">
+<h1>Welcome to Lexus</h1>
 
-<div class="contact-info">
-<h2>Get In Touch</h2>
+<p>Pursuit of Perfection</p>
 
-<p><strong>Email:</strong> <a href="mailto:info@lexus.com">info@lexus.com</a></p>
-<p><strong>Phone:</strong> <a href="tel:+18002553987">+1 (800) 255-3987</a></p>
 
-<p><strong>Address:</strong><br>
-Lexus Headquarters, Texas, USA</p>
+<div class="welcome-actions">
 
-<p><strong>Hours:</strong><br>
-Mon–Fri: 8AM – 6PM</p>
-</div>
+<button
+class="popup-btn"
+onclick="showRegister()">
 
-<div class="contact-form">
+Register
 
-<h2>Send Message</h2>
-
-<form id="contactForm" novalidate>
-
-<div class="field">
-<label for="fullName">Full Name</label>
-<input type="text" id="fullName" name="fullName" autocomplete="name" required>
-</div>
-
-<div class="field">
-<label for="emailAddress">Email Address</label>
-<input type="email" id="emailAddress" name="emailAddress" autocomplete="email" required>
-</div>
-
-<div class="field">
-<label for="messageText">Your Message</label>
-<textarea id="messageText" name="messageText" required></textarea>
-</div>
-
-<!-- Honeypot: real users never see or fill this; bots often do -->
-<div class="hp-field" aria-hidden="true">
-<label for="companyWebsite">Website</label>
-<input type="text" id="companyWebsite" name="companyWebsite" tabindex="-1" autocomplete="off">
-</div>
-
-<button type="submit" id="submitBtn">
-<span class="spinner" aria-hidden="true"></span>
-<span id="submitLabel">Send Message</span>
 </button>
 
-<div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+<button
+class="popup-btn"
+onclick="showLogin()">
+
+Login
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+        REGISTER POPUP
+========================= -->
+
+<div id="registerPopup">
+
+<div class="popup-content">
+
+<h1>Create Account</h1>
+
+
+<form id="registerForm">
+
+<input
+type="text"
+id="fullname"
+placeholder="Full Name"
+required
+>
+
+
+<input
+type="email"
+id="email"
+placeholder="Email"
+required
+>
+
+
+<input
+type="password"
+id="password"
+placeholder="Password"
+required
+>
+
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required
+>
+
+
+<button
+class="popup-btn"
+type="submit"
+id="registerBtn">
+
+Register
+
+</button>
 
 </form>
 
+
+<p id="message"></p>
+
+
+<p class="switch-link">
+
+Already have an account?
+
+<a onclick="showLogin()">
+Login
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+        LOGIN POPUP
+========================= -->
+
+<div id="loginPopup">
+
+<div class="popup-content">
+
+<h1>Login</h1>
+
+
+<form id="loginForm">
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Email"
+required
+>
+
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+required
+>
+
+
+<button
+class="popup-btn"
+type="submit"
+id="loginBtn">
+
+Login
+
+</button>
+
+</form>
+
+
+<p id="loginMessage"></p>
+
+
+<p class="switch-link">
+
+Need an account?
+
+<a onclick="showRegister()">
+Register
+</a>
+
+</p>
+
+</div>
+
+</div>
+
+
+<!-- =========================
+        NAVIGATION BAR
+========================= -->
+
+<nav>
+
+<div class="logo">
+
+LEX<span>U</span>S
+
+</div>
+
+
+<ul class="nav-links">
+
+<li>
+<a href="index.html">
+Home
+</a>
+</li>
+
+<li>
+<a href="gallery.html">
+Gallery
+</a>
+</li>
+
+<li>
+<a href="contact.html">
+Contact
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+
+<!-- =========================
+        HERO SECTION
+========================= -->
+
+<section
+class="hero"
+id="home"
+>
+
+<div class="hero-content">
+
+<h1>
+Pursuit of Perfection
+</h1>
+
+
+<p>
+Experience luxury, innovation and performance with the world's finest Lexus vehicles.
+</p>
+
+
 </div>
 
 </section>
 
-<!-- POPUP -->
-<div class="popup-overlay" id="popupOverlay">
-<div class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle">
-<h2 id="popupTitle">Message Sent</h2>
-<p>We will contact you shortly.</p>
-<button type="button" id="popupClose">Close</button>
-</div>
-</div>
+
+<!-- =========================
+        FOOTER
+========================= -->
 
 <footer>
-<p>&copy; 2026 Lexus. All Rights Reserved.</p>
+
+<p>
+&copy; 2026 Lexus. All Rights Reserved.
+</p>
+
 </footer>
 
-<!-- Supabase Library -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-const SUPABASE_URL = "https://bzqmhzzgxpwvwmqxefze.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR_ANON_KEY_HERE";
 
-const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
+<script>
+
+const SUPABASE_URL =
+"https://xzyvxtviczcbzuluzhmd.supabase.co";
+
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_aGMop_F69AutFWMGhMQWjg_GeXDzwml";
+
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_PUBLISHABLE_KEY
 );
-// --- Mobile nav toggle ---
-const navToggle = document.getElementById("navToggle");
-const navLinks = document.getElementById("navLinks");
 
-navToggle.addEventListener("click", () => {
-  const isOpen = navLinks.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-});
 
-// --- Popup helpers ---
-const popupOverlay = document.getElementById("popupOverlay");
-const popupClose = document.getElementById("popupClose");
+/* =========================
+        SHOW REGISTER
+========================= */
 
-function showPopup() {
-  popupOverlay.style.display = "flex";
-  popupClose.focus();
+function showRegister(){
+
+document.getElementById(
+"welcomePopup"
+).style.display="none";
+
+
+document.getElementById(
+"loginPopup"
+).style.display="none";
+
+
+document.getElementById(
+"registerPopup"
+).style.display="flex";
+
 }
 
-function hidePopup() {
-  popupOverlay.style.display = "none";
+
+/* =========================
+        SHOW LOGIN
+========================= */
+
+function showLogin(){
+
+document.getElementById(
+"welcomePopup"
+).style.display="none";
+
+
+document.getElementById(
+"registerPopup"
+).style.display="none";
+
+
+document.getElementById(
+"loginPopup"
+).style.display="flex";
+
 }
 
-popupClose.addEventListener("click", hidePopup);
-popupOverlay.addEventListener("click", (e) => {
-  if (e.target === popupOverlay) hidePopup();
-});
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && popupOverlay.style.display === "flex") hidePopup();
-});
 
-// --- Form handling ---
-const form = document.getElementById("contactForm");
-const submitBtn = document.getElementById("submitBtn");
-const submitLabel = document.getElementById("submitLabel");
-const formStatus = document.getElementById("formStatus");
+/* =========================
+        GET ELEMENTS
+========================= */
 
-const nameInput = document.getElementById("fullName");
-const emailInput = document.getElementById("emailAddress");
-const messageInput = document.getElementById("messageText");
-const honeypotInput = document.getElementById("companyWebsite");
+const registerForm =
+document.getElementById("registerForm");
 
-function setStatus(message, type) {
-  formStatus.textContent = message;
-  formStatus.className = "form-status" + (type ? " " + type : "");
+
+const loginForm =
+document.getElementById("loginForm");
+
+
+const message =
+document.getElementById("message");
+
+
+const loginMessage =
+document.getElementById("loginMessage");
+
+
+/* =========================
+        REGISTER
+========================= */
+
+registerForm.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+
+const fullname =
+document.getElementById(
+"fullname"
+).value.trim();
+
+
+const email =
+document.getElementById(
+"email"
+).value.trim();
+
+
+const password =
+document.getElementById(
+"password"
+).value;
+
+
+const confirmPassword =
+document.getElementById(
+"confirmPassword"
+).value;
+
+
+message.className="";
+message.textContent="";
+
+
+if(fullname === ""){
+
+message.textContent =
+"Please enter your full name.";
+
+message.className =
+"error";
+
+return;
+
 }
 
-function setLoading(isLoading) {
-  submitBtn.disabled = isLoading;
-  submitBtn.setAttribute("aria-busy", isLoading ? "true" : "false");
-  submitLabel.textContent = isLoading ? "Sending..." : "Send Message";
+
+if(password !== confirmPassword){
+
+message.textContent =
+"Passwords do not match.";
+
+message.className =
+"error";
+
+return;
+
 }
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  setStatus("", "");
 
-  // Honeypot check: if this hidden field got filled, silently drop it
-  if (honeypotInput.value.trim() !== "") {
-    form.reset();
-    return;
-  }
+if(password.length < 6){
 
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const message = messageInput.value.trim();
+message.textContent =
+"Password must be at least 6 characters.";
 
-  if (!name || !email || !message) {
-    setStatus("Please fill in all fields.", "error");
-    return;
-  }
+message.className =
+"error";
 
-  setLoading(true);
+return;
 
-  try {
-    const { error } = await supabase
-      .from("contacts")
-      .insert([{ name, email, message }]);
+}
 
-    if (error) {
-      setStatus("Something went wrong. Please try again.", "error");
-      console.error("Supabase insert error:", error.message);
-      return;
-    }
 
-    form.reset();
-    setStatus("", "");
-    showPopup();
+const registerBtn =
+document.getElementById(
+"registerBtn"
+);
 
-  } catch (err) {
-    setStatus("Network error. Please check your connection and try again.", "error");
-    console.error("Unexpected error:", err);
 
-  } finally {
-    setLoading(false);
-  }
+registerBtn.disabled=true;
+
+registerBtn.textContent =
+"Creating account...";
+
+
+try{
+
+const {data,error} =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:fullname
+}
+}
+
 });
+
+
+if(error){
+
+throw error;
+
+}
+
+
+console.log(
+"Supabase registration:",
+data
+);
+
+
+message.textContent =
+"Account created successfully!";
+
+
+message.className =
+"success";
+
+
+registerBtn.textContent =
+"Registered ✓";
+
+
+setTimeout(function(){
+
+document.getElementById(
+"registerPopup"
+).style.display="none";
+
+
+document.body.style.overflow="auto";
+
+},1500);
+
+
+}
+
+catch(error){
+
+console.error(
+"Registration error:",
+error
+);
+
+
+message.textContent =
+error.message;
+
+
+message.className =
+"error";
+
+
+registerBtn.disabled=false;
+
+
+registerBtn.textContent =
+"Register";
+
+}
+
+});
+
+
+/* =========================
+        LOGIN
+========================= */
+
+loginForm.addEventListener(
+"submit",
+function(e){
+
+e.preventDefault();
+
+
+const email =
+document.getElementById(
+"loginEmail"
+).value.trim();
+
+
+const password =
+document.getElementById(
+"loginPassword"
+).value.trim();
+
+
+loginMessage.className="";
+
+loginMessage.textContent="";
+
+
+if(
+email === "" ||
+password === ""
+){
+
+loginMessage.textContent =
+"Please enter your email and password.";
+
+loginMessage.className =
+"error";
+
+return;
+
+}
+
+
+loginMessage.textContent =
+"Login successful!";
+
+
+loginMessage.className =
+"success";
+
+
+setTimeout(function(){
+
+document.getElementById(
+"loginPopup"
+).style.display="none";
+
+
+document.body.style.overflow="auto";
+
+},1000);
+
+});
+
+
+/* =========================
+        SMOOTH SCROLL
+========================= */
+
+document
+.querySelectorAll('a[href^="#"]')
+.forEach(anchor=>{
+
+anchor.addEventListener(
+"click",
+function(e){
+
+e.preventDefault();
+
+
+const target =
+document.querySelector(
+this.getAttribute("href")
+);
+
+
+if(target){
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
+
+});
+
+});
+
+
 </script>
 
+
 </body>
+
 </html>
